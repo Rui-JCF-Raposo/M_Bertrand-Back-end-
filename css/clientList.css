@@ -1,0 +1,237 @@
+:root {
+  --main-orange: #df662a;
+  --main-gray: #e7e7e7;
+}
+
+a {
+  color: rgb(93, 144, 185);
+  text-decoration: none;
+}
+
+.clientList-showcase {
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  background-image: url("../img/clientLoggedIn/clientList_showcase.jpg");
+  background-position: center;
+  background-size: cover;
+  height: 270px;
+  margin-bottom: 20px;
+}
+
+.clientList-info {
+  font-size: 1.8rem;
+}
+
+#client-list {
+  padding: 10px 30px;
+  margin-bottom: 100px;
+}
+
+#client-list .container {
+  max-width: 1280px; 
+  margin: 0 auto;
+}
+
+.createNewList {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin-top: 30px;
+}
+
+.createNewList button {
+  margin-right: 20px;
+  font-size: 1.4rem;
+  background-color: var(--main-orange);
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 1px 3px 10px rgba(51, 51, 51, 0.418);
+  cursor: pointer;
+}
+
+.createNewList button:hover {
+  background-color: var(--main-gray);
+  color: rgb(0,0,0);
+}
+
+.createNewList img {
+  width: 60px;
+  height: 60px;
+}
+
+.test-list {
+  margin-top: 30px;
+}
+
+.list-name {
+  color: #333;
+  font-weight: 300;
+}
+
+.test-list header{
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--main-gray);
+  padding: 15px;
+  font-size: 1.6rem;
+  cursor: pointer;
+}
+
+.test-list header span {
+  color: var(--main-orange);
+}
+
+.test-list header img {
+  width: 15px;
+  height: 15px;
+}
+
+.list-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(182, 181, 181);
+  padding: 15px;
+}
+
+.list-options div:first-child {
+  display: flex;
+}
+
+.list-options div:first-child > div:first-child {
+  padding-right: 15px;
+  border-right: 1px solid #333;
+  cursor: pointer;
+}
+
+.list-options div:first-child > div:last-child {
+  padding-left: 15px;
+  cursor: pointer;
+}
+
+.list-options img {
+  width: 25px;
+  height: 25px;
+}
+
+.share-list a {
+  display: flex;
+  align-items: center;
+  color: rgb(0,0,0);
+  text-decoration: none;
+  font-size: 1.8rem;
+}
+
+.share-list span {
+  margin-right: 15px;
+  font-weight: 500;
+}
+
+.list-books {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-flow: row wrap;
+}
+
+.list-books .book-box {
+  margin-top: 40px;
+  flex: 0 50%;
+}
+
+.list-books .book-box:nth-child(2n + 2) {
+  border-left: 1px solid rgb(169, 169, 169);
+}
+
+.list-books .book-box img{
+  width: 180px;
+  height: 280px;
+}
+
+.list-books .book-box button {
+  width: 80%;
+  padding: 15px 0px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  font-size: 1.8rem;
+}
+
+.list-item-buy {
+  margin-top: 20px;
+  background-color: var(--main-orange);
+  color: #fff;
+}
+
+.list-item-buy:hover {
+  background-color: rgb(0,0,0)
+}
+
+.list-item-reserve:hover {
+  background-color: var(--main-gray);
+}
+
+
+.list-container-effect {
+  animation-name: listEffect;
+  animation-fill-mode: forwards;
+  animation-duration: 1s;
+}
+
+@keyframes listEffect {
+  from{opacity: 0%}
+  to{opacity: 100%}
+}
+
+.list-books .book-box .remove-list-item img{
+  position: absolute;
+  top: -10px;
+  left: -20px;
+  width: 50px;
+  height: 50px;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.book-coment {
+  width: 80%;
+  min-height: 70px;
+  font-size: 1.4rem;
+  padding: 10px;
+}
+
+.list-books .book-box .save-comment {
+  width: 30%;
+  margin-top: 10px;
+  background-color: var(--main-orange);
+  color: #fff;
+}
+
+.save-btn-effect {
+  animation-name: saveBtnEffect;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes saveBtnEffect {
+  from{height: 0%}
+}
+
+.clientList-items {
+  color: var(--main-orange);
+}
+
+/*---------------------------------------------*/
+/*-------------MEDIA QUERIES-------------------*/
+/*---------------------------------------------*/
+
+@media screen and (max-width: 860px) {
+  .list-books .book-box {
+    flex: 0 100%;
+    border-right: none !important;
+    border-left: none !important;
+  }
+}

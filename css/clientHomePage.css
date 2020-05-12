@@ -1,0 +1,266 @@
+:root {
+  --main-orange: #df662a;
+  --main-gray: #e7e7e7;
+}
+
+.p-relative {
+  position: relative;
+}
+
+main {
+  margin-left: 270px;
+  margin-top: 86px;
+  background-image: none;
+}
+
+.login-confirm-icon {
+  display: block;
+  top: -70px;
+  right: -20px;
+  position: absolute;
+}
+
+.d-none {
+  display: none;
+}
+
+.login-confirm-icon img {
+  width: 40px;
+  height: 40px;
+}
+
+#showcase {
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  background-image: url("../img/clientLoggedIn/books-showcase.jpg");
+  background-position: center;
+  background-size: cover;
+  height: 270px;
+  margin-bottom: 20px;
+}
+
+#showcase h1 {
+  margin-left: 50px;
+  padding: 20px 40px;
+  font-size: 5rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  background-color: rgba(255, 255, 255, 0.646);
+  color: #000;
+}
+
+#client-todos {
+  padding: 30px;
+}
+
+#client-todos .todos {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+#client-todos p,
+.clientList-info {
+  font-size: 2rem;
+  margin-left: 10px;
+}
+
+.todo-box {
+  display: flex;
+  align-items: center;
+  position: relative;
+  flex: 1 33.33%;
+  background-color: var(--main-gray);
+  border: 10px solid #fff;
+  padding: 15px;
+  height: 150px;
+}
+
+.todo-box a {
+  width: 100%;
+  text-decoration: none;
+  color: #000;
+}
+
+.todo-box a div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.todo-title {
+  width: 100%;
+  font-size: 2rem;
+  text-transform: uppercase;
+  font-weight: 300;
+}
+
+.todo-box .img-container img{
+  width: 60px;
+  height: 60px;
+  margin-right: 30px;
+}
+
+.todo-box .icon-container img{
+  right: 10px;
+  bottom: 20px;
+  width: 15px;
+  height: 15px;
+}
+
+.welcome-user {
+  background-color: var(--main-gray);
+  color: #333;
+  font-weight: 500;
+}
+
+.welcome-user:hover {
+  color: #333!important;
+}
+
+.menu-list a {
+  text-decoration: none;
+  color: rgb(0, 0, 0);  
+}
+
+.menu-list a:hover {
+  color: var(--main-orange);
+}
+
+.add-modal {
+  position: fixed;
+  z-index: 99999;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--main-gray);
+  margin-top: -87px;
+}
+
+.add-to-list-modal {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column wrap;
+  width: 1000px;
+  min-height: 500px;
+  padding: 50px;
+  background-color: #fff;
+  color: #fff;
+  box-shadow: 1px 3px 10px rgba(51, 51, 51, 0.399);
+}
+
+.categories-body .add-to-list-modal header {
+  width: 90%;
+  margin-top: -40px;
+  margin-bottom: 40px;
+}
+
+.add-to-list-modal img {
+  width: 20px;
+  height: 20px;
+}
+
+.add-to-list-modal p {
+  font-size: 1.6rem;
+  color: var(--main-orange);
+}
+
+.add-to-list-modal .create-list {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.add-to-list-modal  h1 {
+  color: #333;
+}
+
+
+.add-to-list-modal button {
+  width: 400px;
+  padding: 15px 0;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 3px;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.list-item-btn {
+  background-color: var(--main-orange);
+  color: #fff;
+}
+
+.add-to-list-modal .create-new-list {
+  background-color: #fff;
+  border: 1px solid var(--main-orange);
+  color: var(--main-orange);
+}
+
+.add-modal-brand {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;;
+}
+
+.modal-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column wrap;
+}
+
+.modal-info img {
+  width: 50px;
+  height: 50px;
+}
+
+.userLists {
+  display: flex;
+  flex-direction: column !important;
+}
+/*---------------------------------------------------------*/
+/*---------------------MEDIA QUERIES-----------------------*/
+/*---------------------------------------------------------*/
+@media screen and (max-width: 1200px) {
+  #showcase h1 {
+    margin-left: 0;
+  }
+}
+
+
+@media screen and (max-width: 760px) {
+  
+  main {
+    margin-left: 0px;
+    margin-top: 14px;
+  }
+
+  #slider {
+    margin-top: 0;
+  }
+
+  .categories-responsive {
+    display: block;
+  }
+
+  .categories-col-10 {
+    margin-top: 120px;
+  }
+
+  #showcase {
+    height: 350px;
+  }
+  
+  #showcase h1 {
+    margin-left: 0;
+    margin-top: 190px;
+    background-color: rgba(255, 255, 255, 0.632);
+  }
+}

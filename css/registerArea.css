@@ -1,0 +1,137 @@
+:root {
+  --main-orange: #df662a;
+  --main-gray: #e7e7e7;
+}
+
+#register {
+  width: 60%;
+  margin: 0 auto;
+}
+
+.register-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;  
+}
+
+.register-info h1 {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 400;
+}
+
+.register-info span {
+  background-color:  var(--main-gray);
+  font-size: 2.5rem;
+  padding: 5px 10px;
+  border-radius: 1px; 
+}
+
+.register-info .register-section-active {
+  background-color: var(--main-orange);
+  color: #fff;
+}
+
+#Form-register {
+  position: relative;
+}
+
+#Form-register input {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 10px 15px;
+  font-size: 1.6rem;
+  font-weight: 400;
+  letter-spacing: .5px;
+}
+
+#Form-register button {
+  width: 100%;
+}
+
+.info-icon {
+  position: relative;
+  width: 50px;
+  left: 590px;
+  bottom: 55px;
+}
+
+
+.info-icon img {
+  width: 30px;
+  height: 30px;
+}
+
+.info-box {
+  display: none;
+  position: absolute;
+  width: 300px;
+  padding: 40px;
+  top: -100px;
+  right: -60px;
+  background-color: var(--main-gray);
+  cursor: pointer;
+}
+
+.info-box p {
+  font-size: 1.6rem;
+}
+
+.info-box img {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  width: 30px;
+  height: 30px;
+}
+
+.register-step-2 {
+  display: none;
+}
+
+.register-step-2 p {
+  margin-top: -10px;
+  font-size: 1.8rem;
+}
+
+.termsAndConditions {
+  width: 200px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.termsAndConditions input {
+  margin-left: -50px;
+  margin-right: -35px;
+  height: 30px;
+}
+
+.termsAndConditions a {
+  text-decoration: none; 
+  color: #333;
+  font-size: 1.4rem;
+}
+
+.invalid-message,
+.register-step-2 .invalid-message {
+  display: none;
+  position: relative;
+  margin-top: 0;
+  background-color: rgb(247, 186, 137);
+  color: #333;
+  font-weight: 500;
+  font-size: 1.8rem;
+  padding: 13px;
+}
+
+.invalid-message span {
+  position: absolute;
+  top: -5px;
+  left: 30px;
+  background-color: rgb(247, 186, 137);
+  width: 15px;
+  height: 15px;
+  transform: rotate(45deg);
+}
+

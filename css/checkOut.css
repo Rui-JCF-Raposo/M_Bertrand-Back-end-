@@ -1,0 +1,348 @@
+:root {
+    --main-orange: #df662a;
+    --main-gray: #e7e7e7;
+}
+
+#checkOutPages {
+    margin-left: 0;
+}
+
+.checkOutSteps {
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: rgb(0, 0, 0);
+    color: #FFF; 
+}
+
+.separateSteps:nth-child(1) {
+    clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
+}
+
+.separateSteps:nth-child(2) {
+    clip-path: polygon(90% 0, 100% 50%, 89% 100%, 0% 100%, 11% 50%, 0% 0%);
+    padding-left: 40px;
+}
+
+.separateSteps:nth-child(3){
+    clip-path: polygon(90% 0, 100% 50%, 89% 100%, 0% 100%, 11% 50%, 0% 0%);
+    padding-left: 35px;
+}
+
+.separateSteps {
+    position: relative;
+    padding: 22px 20px;
+}
+
+.separateSteps a {
+    text-decoration: none;
+    margin-right: 10px;
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: #fff;
+    background-color: rgb(0,0,0);
+    padding: 22px 35px;
+}
+
+.activeStep {
+    background-color: var(--main-gray);
+}
+
+.activeStep a{
+    color: #333;
+    background-color: var(--main-gray);
+} 
+
+.separateArrow {
+    position: absolute;
+    right: -32px;
+    top: -1px;
+    width: 62px;
+    height: 70px;
+}
+
+#checkOut-products-info header img {
+    width: 60px;
+    height: 60px;
+}
+
+#checkOut-products-info .container {
+    max-width: 1280px;
+    padding: 50px 30px;
+    margin: 0 auto;
+}
+
+#checkOut-products-info header{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+#checkOut-products-info header div:nth-child(2) {
+    display: flex;
+    flex-flow: column wrap;
+    margin-left: 25px;
+}
+
+#checkOut-products-info header span:first-child {
+    font-size: 2rem;
+    font-weight: 500;
+    margin-bottom: 7px;
+}
+
+#checkOut-products-info header span {
+    font-size: 1.8rem;
+    font-weight: 300;
+}
+
+/*-----------------------------------------------------------------------*/
+/*-------------------CHECKOUT TABLE--------------------------------------*/
+/*-----------------------------------------------------------------------*/
+.checkOut-table {
+    width: 100%;
+    margin-top: 40px;
+    font-size: 1.8rem;
+    border-bottom: 1px solid rgb(0,0,0);
+    border-collapse: collapse;
+    border-spacing: 50px 10px !important;
+}
+
+.checkOut-table thead {
+    background-color: var(--main-gray);
+}
+
+.checkOut-table thead tr th {
+    text-align: left;
+    font-weight: 400;
+    padding: 15px 20px;
+}
+
+.book-cover-img {
+    width: 150px;
+    height: 190px;
+    padding: 20px;
+}
+
+.checkOut-table th:first-child,
+.table-product-row td:first-child {
+    flex: 0 60%;
+}
+
+.checkOut-table th:nth-child(2),
+.table-product-row td:nth-child(2) {
+    flex: 0 30%;
+    text-align: center;
+}
+
+.checkOut-table th:last-child,
+.table-product-row td:last-child {
+    flex: 0 10%;
+    text-align: right;
+    padding-right: 20px;
+}
+
+.table-product-row td:last-child {
+    font-size: 2.5rem;
+}
+
+.table-product-row td:first-child {
+    display: flex;
+}
+
+.table-book-info {
+    padding: 20px;
+}
+
+.table-book-info div:first-child {
+    display: flex;
+    flex-direction: column;
+}
+
+.table-book-name {
+    font-weight: 500;
+}
+
+.deliver-time {
+    margin-top: 5px;
+    font-size:1.6rem;
+    font-weight: 300;
+    color: var(--main-orange);
+}
+
+.table-book-edit {
+    margin-top: 20px;
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+.table-book-edit span {
+    text-decoration: underline;
+    padding-right: 5px;
+    cursor: pointer;
+}
+
+.table-book-edit span:first-child {
+    border-right: 1px solid rgb(0,0,0);
+}
+
+
+.checkOut-controls img{
+    width: 25px;
+    height: 15px;
+    cursor: pointer;
+}
+
+.book-box-quanitity {
+    padding: 15px 20px;
+    background-color: var(--main-gray);
+    border: none;
+    font-size: 2.5rem;
+}
+
+.checkOut-table .table-product-footer {
+    padding-bottom: 20px !important;
+}
+
+.checkOut-table .table-product-footer td{
+    justify-content: flex-end;
+    text-align: right;
+    font-size: 2.5rem;
+    padding-bottom: 15px;
+}
+
+.checkOut-deliver-conditions {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-size: 1.6rem;
+    font-weight: 300;
+    text-align: right;
+}
+
+.checkOut-deliver-conditions div {
+    margin-bottom: 20px;
+}
+
+.checkOut-deliver-conditions a{
+    text-transform: uppercase;
+    color: rgb(0,0,0);
+    font-weight: 500;
+}
+
+.continue-to-order {
+    width:  50%;
+    padding: 10px;
+    margin-bottom: 15px;
+    font-size: 2rem;
+    font-weight: 400;
+    border: none;
+    border-radius: 1px;
+    cursor: pointer;
+    float: right;
+    background-color: #df662a;
+    color: #FFF;
+    text-transform: uppercase;
+}
+
+.continue-to-order:hover {
+    background-color: rgb(0,0,0);
+}
+
+.clearfix {
+    clear: both;
+}
+
+/*---------------------------------------------------------------*/
+/*-----------------------MEDIA QUERIES---------------------------*/
+/*---------------------------------------------------------------*/
+@media screen and (max-width: 780px) {
+
+    #checkOutPages {
+        margin-top: 80px;
+    }
+
+    #checkOutPages .separateSteps {
+        display: none;
+        clip-path: none;
+    }
+
+    #checkOutPages .activeStep {
+        display: block;
+        flex: 0 100%;
+        margin-top: 10px;
+        padding-left: 0px;
+        background-color: rgb(0,0,0);
+        color: #FFF;
+    }
+
+    #checkOutPages .activeStep a {
+        background-color: rgb(0,0,0);
+        color: #FFF;
+    }
+
+    .checkOut-table th:nth-child(2),
+    .checkOut-table td:nth-child(2) {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 580px) {
+    .checkOut-table th:nth-child(3),
+    .checkOut-table td:nth-child(3) {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 505px) {
+    nav ul{
+        padding-top: 7px;
+        padding-bottom: 15px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    nav {
+        padding-top: 0px;
+    }
+
+    .checkOutSteps {
+        margin-top: 98px !important;
+    }
+
+    #checkOut-products-info header {
+        flex-flow: column wrap;
+        text-align: center;
+        margin-top: -15px;
+    }
+
+    #checkOut-products-info header img {
+        margin: 0 0 10px 16px;
+    }
+
+    .table-product-row td:first-child {
+        flex-flow: column wrap;
+        align-items: center;
+        text-align: center;
+    }
+
+    .table-book-edit {
+        display: flex;
+        flex-flow: column wrap;
+    }
+
+    .table-book-edit span:first-child {
+        border: none;
+        margin-bottom: 5px;
+    }
+    
+    .checkOut-deliver-conditions {
+        margin-bottom: 20px;
+        text-align: center;
+    } 
+
+    .continue-to-order {
+        width: 100%;
+    }
+
+}

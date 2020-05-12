@@ -1,0 +1,245 @@
+:root {
+  --main-orange: #df662a;
+  --main-gray: #e7e7e7;
+}
+
+main {
+  background-image: url("../img/client-area-imgs/client-area-img1.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  letter-spacing: .5px;
+}
+
+/*--------------------------------------------------------------------*/
+/*-------------------------HEADER-------------------------------------*/
+/*--------------------------------------------------------------------*/
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  padding-bottom: 30px;
+  border-bottom: 1px solid rgb(128, 128, 128);
+}
+
+.close-icon {
+  width: 20px;
+  height: 20px;
+  margin-top: 15px;
+  cursor: pointer;
+}
+
+#client-area,
+#register-area {
+  max-width: 1100px;
+  padding: 50px 70px;
+  background-color: rgba(255, 255, 255, 0.968);
+  margin: 0 auto;
+}
+
+.brand {
+  align-items: center;
+  
+}
+
+.brand h1 {
+  font-size: 3rem;
+}
+
+.brand img {
+  width: 100px;
+  height: 100px;
+  margin-left: -10px;
+}
+
+/*---------------------------------------------------------------------*/
+/*--------------------------CLIENT ZONE--------------------------------*/
+/*---------------------------------------------------------------------*/
+.client-zone {
+  margin-top: 30px;
+  padding: 0 20px; 
+}
+
+.client-acess {
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
+  padding: 0 10px;
+}
+
+.welcome-message {
+  font-weight: 300;
+  font-size: 1.8rem;
+  margin-top: 20px;
+}
+
+.login-col-50 {
+  flex: 1 50%;
+  border-right: 1px solid rgb(128, 128, 128);
+  margin-top: 0;
+  font-size: 1.4rem;
+} 
+
+.client-zone .login-title,
+.client-zone .register-title {
+  margin-bottom: 0;
+  font-weight: 600;
+  font-size: 1.8rem;
+}
+
+#Form-login div{
+  display: flex;
+  flex-direction: column;
+}
+
+#Form-login input{
+  margin-bottom: 15px;
+  padding: 10px 15px;
+  width: 350px;
+  font-size: 1.6rem;
+  font-weight: 400;
+  letter-spacing: .5px;
+  border: 1px solid rgb(203, 203, 134);
+  color: rgb(92, 72, 51);
+  border-radius: 1px;
+  background-color: lightgoldenrodyellow;
+}
+
+#Form-login button,
+.registerBtn {
+  width: 350px;
+  padding: 10px;
+  margin-bottom: 15px;
+  font-size: 2rem;
+  font-weight: 400;
+  border: none;
+  border-radius: 1px;
+  cursor: pointer;
+}
+
+#Form-login .login-enter,
+.registerBtn {
+  background-color: var(--main-orange);
+  color: #fff;
+}
+
+#Form-login .login-enter:hover,
+.registerBtn:hover {
+  background-color: #333;
+}
+
+#Form-login .recover-password {
+  color: rgb(92, 92, 92);
+  background-color: white;
+  border: 1px solid #333;
+}
+
+.register-col-50 {
+  flex: 1 50%;
+}
+
+.login-col-50 p,
+.register-col-50 p {
+  margin-top: 0;
+}
+
+.register-container {
+  width: 80%;
+  margin: 0 70px;
+}
+
+.register-container p {
+  font-size: 1.4rem;
+}
+
+.security-info {
+  margin-top: 95px;
+}
+
+.security-info p:first-child {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.security-info p:last-child {
+  font-weight: 300;
+}
+
+.client-help img{
+  width: 30px;
+  height: 30px;
+  margin: 0 10px 0 30px;
+}
+
+.client-help a {
+  display: flex;
+  align-items: center;
+  font-size: 1.6rem;
+  font-weight:  500;
+  color: #333;
+  text-decoration: none;
+}
+
+/*--------------------INVALID MESSAGES------------------*/
+.invalid-message {
+  width: 100%;
+}
+
+.login-invalid {
+  width: 350px;
+  font-weight: 400;
+}
+
+
+/*------------------------------------------------------*/
+/*--------------------Media queries---------------------*/
+/*------------------------------------------------------*/
+@media screen and (max-width: 1200px) {
+  .client-acess {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .login-col-50 {
+    width: 100%;
+    border: none;
+  }
+
+  .register-col-50 {
+    width: 100%;
+  }
+
+  .register-container {
+    width: 100%;
+    margin: 20px 0;
+  }
+
+  .register-container button {
+    width: 100%;
+  }
+
+  .register-container div:first-child {
+    background-color: rgb(223, 223, 223);
+    padding: 10px 20PX;
+  }
+
+  #Form-login input {
+    width: 100%;
+  }
+
+  #Form-login button {
+    width: 100%;
+  }
+
+  .security-info {
+    margin-top: 55px;
+    margin-bottom: 40px;
+  }
+}
+
+
+
+
+
