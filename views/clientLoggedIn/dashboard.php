@@ -15,7 +15,7 @@
     <?php require("templates/mainNav.php"); ?>    
     <?php require("templates/categoriesNav.php"); ?>
 
-    <main>
+    <main id="dashboard-main">
         <div id="showcase">
             <h1>A minha livraria MYPROJECT</h1>
         </div>

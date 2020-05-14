@@ -15,7 +15,7 @@
     <?php require("templates/mainNav.php"); ?>
     <?php require("templates/categoriesNav.php"); ?>
 
-    <main>
+    <main id="wishlists-main">
         <div class="clientList-showcase"></div>
         <section id="client-list">
             <div class="container">

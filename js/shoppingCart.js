@@ -7,11 +7,22 @@ if(!scriptRunned) {
     
     books = [];
 
+
+    let pathPreFix = "../";
+    if(
+        window.location.href === "http://localhost/M_Bertrand-Back-end-/home" ||
+        window.location.href === "http://localhost/M_Bertrand-Back-end-/dashboard" ||
+        window.location.href === "http://localhost/M_Bertrand-Back-end-/wishlists" 
+    ) {
+        pathPreFix = "";
+    } 
+
     function getBooks() {
-        fetch("../controllers/requests.php?getSession", {method: "GET"})
+        fetch(pathPreFix + "controllers/shoppingcart.php?getSession", {method: "GET"})
             .then(response => response.json())
             .then(data => {
-                books = data
+                books = data;
+                addShopcartFooter();
             })
     }
 
@@ -25,11 +36,15 @@ if(!scriptRunned) {
         categoriesBuyBtns.forEach((buyBtn) => {
             buyBtn.addEventListener("click", async (e) => {
                 const bookId = e.target.parentNode.parentNode.dataset.id;
+                if(bookRepetition(bookId)) {
+                    alert("Already on shopping cart");
+                    return;
+                }
                 const book = await getBookFromDB(bookId);
                 //addBookToShopCartMenu(book);
                 addBookToShopcart(book);
-                // Send data to back-end to add shopcart to SESSION
-                fetch("../controllers/requests.php?addBook=true", {
+                //Send data to back-end to add shopcart to SESSION
+                fetch("../controllers/shoppingcart.php?addBook=true", {
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json'
@@ -39,6 +54,15 @@ if(!scriptRunned) {
                 });
             });
         });
+    }
+
+    function bookRepetition(bookId) {
+        for(let book of books) {
+            if(book.book_id === bookId) {
+                return true;
+            }
+        }
+        return false;
     }
 
     const getBookFromDB = (id) => {
@@ -166,7 +190,7 @@ if(!scriptRunned) {
         const shopcartFooterTotalItems = document.querySelector(".shoppcart-total-items");
         shopcartFooterTotalItems.textContent = totalItems;
         // Make fetch do php to update book quantity session
-        fetch("../controllers/requests.php?updateSession&quantity=add&id="+bookId);
+        fetch("../controllers/shoppingcart.php?updateSession&quantity=add&id="+bookId);
     }
 
     function updateMinusQuantity(e) {
@@ -180,7 +204,7 @@ if(!scriptRunned) {
             const shopcartFooterTotalItems = document.querySelector(".shoppcart-total-items");
             shopcartFooterTotalItems.textContent = totalItems;
             // Make fetch do php to update book quantity session
-            fetch("../controllers/requests.php?updateSession&quantity=remove&id="+bookId);
+            fetch("../controllers/shoppingcart.php?updateSession&quantity=remove&id="+bookId);
         }
     }
 
@@ -198,7 +222,7 @@ if(!scriptRunned) {
         const shopcartFooterTotalItems = document.querySelector(".shoppcart-total-items");
         shopcartFooterTotalItems.textContent = totalItems;
         // Remove Book From Session
-        fetch("../controllers/requests.php?sessionRemove&id="+bookId);
+        fetch("../controllers/shoppingcart.php?sessionRemove&id="+bookId);
     }
     /*-------------------------Managing Shopping Cart Items-----------------------------*/
     /*----------------------------------------------------------------------------------*/
@@ -296,6 +320,7 @@ if(!scriptRunned) {
     shopCartManagementEvents();
 
 } else {
+
     buyBookEvent();
 }
 

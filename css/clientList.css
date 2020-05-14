@@ -8,6 +8,10 @@ a {
   text-decoration: none;
 }
 
+#wishlists-main{
+    margin-top: 60px;
+}
+
 .clientList-showcase {
   display: flex;
   justify-content: start;

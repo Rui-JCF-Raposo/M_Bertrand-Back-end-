@@ -1,5 +1,12 @@
 <?php
     $pathFix = isset($url_parts[3]) ? "../" : "";
+    
+    $shopcartTotalItems = "";
+    if(isset($_SESSION["shopcart_books"])) {
+        foreach($_SESSION["shopcart_books"] as $book) {
+            $shopcartTotalItems += $book["quantity"];
+        }
+    }
 ?>
 
 <nav>
@@ -74,10 +81,24 @@
                 LIVRARIAS
             </li>
             <li class="menu-cesto">
+                 <div class="shopcart-items-quantitiy"><?=$shopcartTotalItems?></div>
                 <img src="<?= $pathFix ?>icons/shopping-cart.svg" alt="shop-cart" class="menu-icon">
                 CESTO
                 <ul class="cesto-dropdown menu-dropdown">
-                    <li>O cesto de compras está vazio</li>
+                <li class="chest-state <?=isset($_SESSION["shopcart_books"]) ? "hide":""?>">O cesto de compras está vazio</li>
+                    <li class="shopcart-container <?=!isset($_SESSION["shopcart_books"]) ? "hide":""?>">
+                        <?php if(isset($_SESSION["shopcart_books"])) { 
+                            foreach($_SESSION["shopcart_books"] as $book) { 
+                                require("templates/shopcartBookBox.php");
+                            } 
+                        } ?>
+                    </li>
+                    <li class="shopcart-checkout">
+                        <?php if(isset($_SESSION["shopcart_books"])) {
+                                //require("templates/shopcartFooter.php");
+                            } 
+                        ?>
+                    </li>
                 </ul>
             </li>
             <li class="menu-list">

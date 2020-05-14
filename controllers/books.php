@@ -9,9 +9,11 @@
     require("models/wishlist.php");
     $model = new Wishlist();
 
-    // Checking if url containes /book/id
-    if(isset($url_parts[4]) &&  filter_var($url_parts[4], FILTER_VALIDATE_INT)) {
-        $book_id = $url_parts[4];
+    // Checking if url containes /book/id for get book by id
+    if(isset($url_parts[3]) &&  filter_var($url_parts[3], FILTER_VALIDATE_INT)) {
+        $book_id = $url_parts[3];
+        $book = $model->getBookById($book_id);
+        echo json_encode($book);
     }
 
     
@@ -26,5 +28,6 @@
         case "ebooks": require("views/categories/ebooks.php"); break;
         case "textbooks": require("views/categories/textbooks.php"); break;
     }
+
     
 

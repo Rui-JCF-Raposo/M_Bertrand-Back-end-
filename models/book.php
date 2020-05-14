@@ -16,4 +16,15 @@
             return $data;
 
         }
+
+        public function getBookById($id) 
+        {
+
+            $query = $this->db->prepare("SELECT * FROM books WHERE book_id = ?");
+            $query->execute([(int)$id]);
+            $data = $query->fetch(PDO::FETCH_ASSOC);
+            
+            return $data;
+
+        }
     }

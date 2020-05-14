@@ -5,8 +5,13 @@
     <div class="book-box" data-id="<?=$book["book_id"]?>">
         <div class="book-img-wrapper">
             <img class="book-image" src="<?=$book["cover"]?>">
-        <div class="add-to-shoppcart">CESTO</div>
-        <div class="add-to-list">LISTA</div>
+        <?php if(isset($_SESSION["user"])) { ?>
+            <div class="add-to-shoppcart">CESTO</div>
+            <div class="add-to-list">LISTA</div>
+        <?php } else { ?>
+            <a href="<?=BASE_PATH."login"?>" class="add-to-shoppcart">CESTO</a>
+            <a href="<?=BASE_PATH."login"?>" class="add-to-list">LISTA</a>
+        <?php } ?>
         <div class="book-price"><?=$book["price"]?>€</div>
         <?php if($controller === "wishlists") { ?>
             <div class="remove-list-item">
