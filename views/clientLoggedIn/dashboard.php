@@ -1,3 +1,10 @@
+<?php 
+
+    if(!isset($_SESSION["user"])) {
+        header("Location: ".BASE_PATH."login");
+    }
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 

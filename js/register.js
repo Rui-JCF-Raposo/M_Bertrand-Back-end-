@@ -212,7 +212,7 @@ avanceBtn.addEventListener("click", () => {
       
       //Reset Form
       //RegisterForm.reset();
-      alert("Successful registered");
+      //alert("Successful registered");
       //Hiding invalid messages
       RegisterValidations.hidePasswordDontMatch();
       return;

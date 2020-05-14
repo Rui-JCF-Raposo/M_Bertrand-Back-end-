@@ -62,9 +62,9 @@
                         <div>
                             <input type="text" name="userName" placeholder="nome">
                             <p class="invalid-message empty-name">Por favor, para avançar, indique o seu nome. <span></span></p>
-                            <input type="password" name="password" placeholder="password">
+                            <input type="password" name="password" placeholder="password" minlength="6" maxlength="20">
                             <p class="invalid-message empty-password">Por favor, para avançar, indique uma password. <span></span></p>
-                            <input type="password" name="passwordConfirm" placeholder="confirmar password">
+                            <input type="password" name="passwordConfirm" placeholder="confirmar password" minlength="6" maxlength="20">
                             <p class="invalid-message empty-password-2">Por favor, para avançar, confirme a passord. <span></span></p>
                             <p class="invalid-message password-dont-match">As passwords não são idênticas. <span></span></p>
                             <div class="termsAndConditions">

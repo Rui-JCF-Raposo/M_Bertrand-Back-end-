@@ -29,8 +29,8 @@
                         <p>Se já está registado ou é leitor MYPROJECT.</p>
                         <form id="Form-login" method="POST" action="<?=BASE_PATH."users"?>">
                             <div>
-                                <input type="text" name="userEmail" placeholder="login">
-                                <input type="password" name="password" placeholder="password">
+                                <input type="text" name="userEmail" placeholder="email...">
+                                <input type="password" name="password" placeholder="password...">
                                 <p class="invalid-message invalid-data login-invalid">Os dados inseridos estão incorretos</p>
                             </div>
                             <div>
