@@ -9,9 +9,9 @@
         }
     }
 
-    $controller = $url_parts[4];
+    $controller = $url_parts[2];
 
-    $pathFix = isset($url_parts[5]) ? "../": "";
+    $pathFix = isset($url_parts[3]) ? "../": "";
 
 ?>
 <head>

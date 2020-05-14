@@ -1,3 +1,6 @@
+<?php 
+    $category = $url_parts[3];
+?>
 <div class="add-modal d-none">
     <div class="add-to-list-modal">
         <header>
@@ -9,17 +12,19 @@
                 </div>
             </div>
             <div>
-                <a href="#" class="close-add-modal">
-                    <img class="close-icon" src="../../../icons/close.svg" alt="close client area">
+                <a href="<?=BASE_PATH."books/".$category?>" class="close-add-modal">
+                    <img class="close-icon" src="../icons/close.svg" alt="close client area">
                 </a>
             </div>
         </header> <!-- end header -->
         <div class="modal-info">
-            <img src="../../../icons/clientLoggenIn_Icons/wish-list.svg" alt="">
+            <img src="../icons/clientLoggenIn_Icons/wish-list.svg" alt="">
             <h1>ADICIONAR À LISTA DE DEJOS</h1>
         </div>
         <div class="userLists">
-            <button class="list-item-btn">A minha lista</button>
+            <?php foreach($wishlists as $list) { ?> 
+                <button class="list-item-btn" data-listid="<?=$list["list_id"]?>"><?=$list["name"]?></button>
+            <?php } ?>
         </div>
         <button class="create-new-list">CRIAR NOVA LISTA</button>
     </div>

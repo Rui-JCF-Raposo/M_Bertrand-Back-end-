@@ -7,14 +7,14 @@
     // print_r($url_parts);
     
     /*
-        $url_parts[4] === controller;
-        $url_parts[5] === section/action;
+        $url_parts[2] === controller;
+        $url_parts[3] === section/action;
     */
 
-    $controllers = ["home", "login", "register", "wishlists", "books", "dashboard"];
+    $controllers = ["home", "login", "register", "users","wishlists", "books", "dashboard"];
 
-    if(in_array($url_parts[4], $controllers)) {
-        $controller = $url_parts[4];
+    if(in_array($url_parts[2], $controllers)) {
+        $controller = $url_parts[2];
     }
 
     require("./controllers/".$controller.".php");

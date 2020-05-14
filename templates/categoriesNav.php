@@ -1,6 +1,6 @@
 <?php 
 
-    if(isset($url_parts[5])) {
+    if(isset($url_parts[3])) {
         
         $healthActiveSate = "";
         $itActiveSate = "";
@@ -8,7 +8,7 @@
         $ebooksActiveSate = "";
         $textbooksActiveSate = "";
     
-        $category = $url_parts[5];
+        $category = $url_parts[3];
     
         switch($category) {
             case "health": $healthActiveSate = "active-category"; break;

@@ -162,7 +162,7 @@ const addModal = document.querySelector(".add-modal");
 setTimeout(function () {
     const addToList = document.querySelectorAll(".add-to-list");
     addToList.forEach(function (addItem) {
-        genarateUserListsButtons();
+        //genarateUserListsButtons();
         addItem.addEventListener("click", function (e) {
             addModal.classList.remove("d-none");
             const bookId = Number(e.target.parentNode.parentNode.dataset.id);

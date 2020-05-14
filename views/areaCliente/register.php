@@ -28,7 +28,7 @@
                         <span>2</span>
                     </div>
                 </div> <!-- end register info -->
-                <form id="Form-register" method="GET" action="clientLoggedIn/clientHomePage.html">
+                <form id="Form-register" method="POST" action="<?=BASE_PATH."users"?>">
                     <div class="register-step-1">
                         <input type="text" name="email" placeholder="email" required>
                         <div class="invalid-fields">
@@ -73,6 +73,7 @@
                             </div>
                             <p class="invalid-message termsAndConditions-conirm">Tem de aceitar os nossos termos & condições</p>
                         </div>
+                        <input type="hidden" name="register_send">
                         <button type="submit" class="registerBtn">REGISTAR</button>
                     </div>
                 </form>
