@@ -1,0 +1,44 @@
+
+
+            users
+                user_id;
+                name;
+                email;
+                password;
+                card_number;
+                join_date;
+                active;
+            
+            whislists
+                list_id;
+                user_id;
+                name;
+                created_at;
+                udated_at;
+                active;
+
+            wishlist_books
+                list_id;
+                book_id;
+                user_id;
+
+            wishList_comments
+                comment_id
+                user_id;
+                list_id;
+                book_id;
+                content;
+
+            orders
+                order_id;
+                user_id;
+                paid;
+                order_date;
+                delivered_date;
+                active;
+
+            orders_details
+                order_detail_id;
+                order_id;
+                book_id;
+
