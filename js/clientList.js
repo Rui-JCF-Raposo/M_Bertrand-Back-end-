@@ -89,26 +89,26 @@ class DisplayWishList {
           <div class="test-list">
               <header>
                 <div class="list-name" data-listname="${list}">
-                  ${list}</span> <span class="clientList-items">(1)</span>
+                  ${list}</span> <span class="clientList-items">(0)</span>
                 </div>
                 <div class="openList-icon">
-                  <img src="../icons/clientList_Icons/down-chevron.svg" alt="open list icon">
+                  <img src="icons/clientList_Icons/down-chevron.svg" alt="open list icon">
                 </div>
               </header>
               <div class="list-container">
                 <div class="list-options">
                   <div>
                     <div class="edit">
-                      <img src="../icons/clientList_Icons/pencil.svg" alt="edit icon">
+                      <img src="icons/clientList_Icons/pencil.svg" alt="edit icon">
                     </div>
                     <div class="delete">
-                      <img src="../icons/clientList_Icons/recycle-bin.svg" alt="delete icon">
+                      <img src="icons/clientList_Icons/recycle-bin.svg" alt="delete icon">
                     </div>
                   </div>
                   <div class="share-list">
                     <a href="#">
                       <span>Partilhar a Lista</span>
-                      <img src="../icons/clientList_Icons/photo-symbol-to-share-with-right-arrow.svg"
+                      <img src="icons/clientList_Icons/photo-symbol-to-share-with-right-arrow.svg"
                         alt="share list icon">
                     </a>
                   </div>
@@ -142,7 +142,7 @@ function toggleShowList() {
 
     //loop to ajust closed list icons
     listIcons.forEach((icon) => {
-        icon.src = "../icons/clientList_Icons/right-chevron.svg";
+        icon.src = "icons/clientList_Icons/right-chevron.svg";
     });
 
     //Loop to toggle list close/open
@@ -154,12 +154,12 @@ function toggleShowList() {
                 listContainer.style.display = "none";
                 listContainer.classList.remove("list-container-effect");
                 isListOpen = false;
-                listIcon.src = "../icons/clientList_Icons/right-chevron.svg";
+                listIcon.src = "icons/clientList_Icons/right-chevron.svg";
             } else {
                 listContainer.classList.add("list-container-effect");
                 listContainer.style.display = "block";
                 isListOpen = true;
-                listIcon.src = "../icons/clientList_Icons/down-chevron.svg";
+                listIcon.src = "icons/clientList_Icons/down-chevron.svg";
             }
         });
     });
@@ -211,7 +211,19 @@ function enableListEdit() {
                     listName.innerHTML = `${newName} <span class="clientList-items">(${listItemsQuantity})</span>`;
                     // send new wishlist data to php, it needs the list id to
                     const listId = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.dataset.listid;
-                    fetch("../controllers/wishlists.php?wishlist=edit&name=" + newName + "&list_id=" + listId)
+                    newName, listId;
+                    const listData = {
+                        list_id: listId,
+                        name: newName
+                    }
+                    fetch(window.location.href + "/edit", {
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        method: "POST",
+                        body: JSON.stringify(listData)
+                    });
                 }
             });
         });
@@ -229,8 +241,7 @@ function enableRemoveList() {
                 const list = e.target.parentNode.parentNode.parentNode.parentNode.parentNode;
                 list.remove();
                 const listId = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.dataset.listid;
-                fetch("../controllers/wishlists.php?wishlist=remove&list_id=" + listId);
-                // send wishlist data to php, it needs the list id to remove
+                fetch(window.location.href + "/remove/" + listId, {method: "GET"});
             });
         });
     }
@@ -268,7 +279,14 @@ if(createListBtn) {
         enableCommentSaveBtns();
         enableRemoveBook();
         importShopcartScript();
-        fetch("../controllers/wishlists.php?wishlist=add&name=" + listName)
+        fetch(window.location.href + "/add", {
+            headers: {
+                'Accept': 'text/html',
+                'Content-Type': 'text/html'
+            },
+            method: "POST",
+            body: listName
+        });
     });
     
     toggleShowList();

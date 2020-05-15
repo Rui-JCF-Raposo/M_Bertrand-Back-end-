@@ -18,7 +18,7 @@
 
     
     $books = $model->getBooks();
-    $wishlists = $model->getLists();
+    $wishlists = $model->getLists($_SESSION["user"]["user_id"]);
     
     $category = $url_parts[3];
     switch($category) {

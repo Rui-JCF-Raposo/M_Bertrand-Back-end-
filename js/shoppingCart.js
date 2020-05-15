@@ -28,7 +28,7 @@ if(!scriptRunned) {
 
     getBooks();
 
-    buyBookEvent();
+    //buyBookEvent();
 
 
     function buyBookEvent() {

@@ -209,7 +209,14 @@ createNewListBtns.forEach(function (createBtn) {
         }
         if (newListName != "") {
             genarateUserListsButtons(newListName);
-            fetch("../controllers/wishlists.php?wishlist=add&name=" + newListName)
+            fetch("http://localhost/M_Bertrand-Back-end-/wishlists/add", {
+                headers: {
+                    'Accept': 'text/html',
+                    'Content-Type': 'text/html'
+                },
+                method: "POST",
+                body: newListName
+            });
         }
     });
 });

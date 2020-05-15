@@ -28,10 +28,11 @@
                     <img src="icons/wishlist.svg" alt="wish list icon">
                 </div>
                 <div id="clientLists">
-                    <div class="test-list">
-
-                        <div class="list-books"></div>
-                    </div>
+                    <?php 
+                        foreach($wishlists as $list) {
+                            require("templates/list.php");
+                        }
+                    ?>
                 </div> <!-- end test list -->
             </div> <!-- end client lists -->
             </div> <!-- end container -->
