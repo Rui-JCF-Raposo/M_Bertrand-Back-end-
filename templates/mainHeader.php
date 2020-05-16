@@ -18,9 +18,7 @@
             case "textbooks": $title = "Escolares"; break;
         }
     }
-
-    $controller = $url_parts[2];
-
+    
     $pathFix = isset($url_parts[3]) ? "../": "";
 
 ?>

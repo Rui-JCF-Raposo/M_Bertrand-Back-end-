@@ -28,7 +28,7 @@
                         <span>2</span>
                     </div>
                 </div> <!-- end register info -->
-                <form id="Form-register" method="POST" action="<?=BASE_PATH."users"?>">
+                <form id="Form-register" method="POST" action="<?=BASE_PATH."access/register"?>">
                     <div class="register-step-1">
                         <input type="text" name="email" placeholder="email" required>
                         <div class="invalid-fields">

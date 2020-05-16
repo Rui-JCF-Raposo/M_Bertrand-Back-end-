@@ -37,7 +37,7 @@
                                 <p>LOGIN</p>
                             </a>
                         <?php } else { ?>
-                            <a href="<?= BASE_PATH . "users/logout" ?>">
+                            <a href="<?= BASE_PATH . "access/logout" ?>">
                                 <img src="<?= $pathFix ?>icons/sign-out-alt-solid.svg" alt="user logout">
                                 <p>LOGOUT</p>
                             </a>

@@ -36,5 +36,10 @@
             $shoppcartModel->removeShopcartBookQuantity($_GET["id"]);
         }
     }
+
+
+    //http://localhost/M_Bertrand-Back-end-/controllers/shoppingcart.php?updateSession&quantity=add&id=39
+
+    //http://localhost/controllers/shoppingcart.php?updateSession&quantity=remove&id=39
     
     

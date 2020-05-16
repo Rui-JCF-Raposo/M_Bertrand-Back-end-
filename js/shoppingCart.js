@@ -180,6 +180,11 @@ if(!scriptRunned) {
 
     }
 
+    let preFix = ""
+    if(window.location.href ==! "http://localhost/M_Bertrand-Back-end-/") {
+        preFix = "http://localhost/M_Bertrand-Back-end-/";
+    }
+
     function updateMoreQuantity(e) {
         const bookId = e.target.parentNode.parentNode.parentNode.parentNode.dataset.bookid;
         const bookPrice = Number(e.target.parentNode.parentNode.parentNode.firstElementChild.firstElementChild.firstElementChild.nextElementSibling.textContent.replace("€", ""));
@@ -190,7 +195,7 @@ if(!scriptRunned) {
         const shopcartFooterTotalItems = document.querySelector(".shoppcart-total-items");
         shopcartFooterTotalItems.textContent = totalItems;
         // Make fetch do php to update book quantity session
-        fetch("../controllers/shoppingcart.php?updateSession&quantity=add&id="+bookId);
+        fetch(preFix+"controllers/shoppingcart.php?updateSession&quantity=add&id="+bookId);
     }
 
     function updateMinusQuantity(e) {
@@ -204,7 +209,8 @@ if(!scriptRunned) {
             const shopcartFooterTotalItems = document.querySelector(".shoppcart-total-items");
             shopcartFooterTotalItems.textContent = totalItems;
             // Make fetch do php to update book quantity session
-            fetch("../controllers/shoppingcart.php?updateSession&quantity=remove&id="+bookId);
+            let preFix = ""
+            fetch(preFix+"controllers/shoppingcart.php?updateSession&quantity=remove&id="+bookId);
         }
     }
 
@@ -222,7 +228,7 @@ if(!scriptRunned) {
         const shopcartFooterTotalItems = document.querySelector(".shoppcart-total-items");
         shopcartFooterTotalItems.textContent = totalItems;
         // Remove Book From Session
-        fetch("../controllers/shoppingcart.php?sessionRemove&id="+bookId);
+        fetch(preFix+"controllers/shoppingcart.php?sessionRemove&id="+bookId);
     }
     /*-------------------------Managing Shopping Cart Items-----------------------------*/
     /*----------------------------------------------------------------------------------*/

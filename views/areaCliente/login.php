@@ -27,7 +27,7 @@
                     <div class="login-col-50">
                         <p class="login-title">Entrar na livraria MYPROJECT online</p>
                         <p>Se já está registado ou é leitor MYPROJECT.</p>
-                        <form id="Form-login" method="POST" action="<?=BASE_PATH."users"?>">
+                        <form id="Form-login" method="POST" action="<?=BASE_PATH."access/login"?>">
                             <div>
                                 <input type="text" name="userEmail" placeholder="email...">
                                 <input type="password" name="password" placeholder="password...">

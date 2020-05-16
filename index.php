@@ -14,7 +14,7 @@
         $url_parts[3] === section/action;
     */
 
-    $controllers = ["home", "login", "register", "users","wishlists", "books", "dashboard"];
+    $controllers = ["home", "access","login", "register", "users","wishlists", "books", "dashboard"];
 
     if(in_array($url_parts[2], $controllers)) {
         $controller = $url_parts[2];
