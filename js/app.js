@@ -189,14 +189,31 @@ closeModals.forEach((modal) => {
 
 const usersListDiv = document.querySelector(".userLists");
 
-function genarateUserListsButtons(listName) {
+async function genarateUserListsButtons(listName) {
     if (usersListDiv) {
         usersListDiv.innerHTML;
         const button = document.createElement("button");
         button.classList.add("list-item-btn");
         button.textContent = listName;
         usersListDiv.appendChild(button);
+        const last_id = await getLastListId()
+        console.log(last_id.list_id);
+        button.dataset.listid = last_id.list_id;
+        addBookToWishlistFromModal();
     }
+}
+
+
+function getLastListId() {
+    return new Promise((resolve, reject) => {
+        fetch("http://localhost/M_Bertrand-Back-end-/wishlists/getLastId")
+            .then(res => res.json())
+            .then(data => resolve(data))
+            .catch(err => reject(err))
+        ;
+        
+    })
+;
 }
 
 const createNewListBtns = document.querySelectorAll(".create-new-list");
@@ -208,7 +225,6 @@ createNewListBtns.forEach(function (createBtn) {
             return;
         }
         if (newListName != "") {
-            genarateUserListsButtons(newListName);
             fetch("http://localhost/M_Bertrand-Back-end-/wishlists/add", {
                 headers: {
                     'Accept': 'text/html',
@@ -216,10 +232,12 @@ createNewListBtns.forEach(function (createBtn) {
                 },
                 method: "POST",
                 body: newListName
-            });
+            }).then(genarateUserListsButtons(newListName));
         }
+    
     });
 });
+
 
 
 // function makeBooksStorage() {

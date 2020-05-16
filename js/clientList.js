@@ -299,6 +299,9 @@ const createListBtn = document.querySelector(".create-list-btn");
 if(createListBtn) {
     createListBtn.addEventListener("click", async function () {
         const listName = prompt("List Name");
+        if(listName === "" || listName === null) {
+            return;
+        }
         await fetch(window.location.href + "/add", {
             headers: {
                 'Accept': 'text/html',
@@ -333,9 +336,10 @@ if(createListBtn) {
 
 
 
-const addFromModalBtns = document.querySelectorAll(".list-item-btn");
-
-const addBookToWishlistFromModal = () => {
+let addFromModalBtns = document.querySelectorAll(".list-item-btn");
+let addBookToWishlistFromModal = () => {
+    let addFromModalBtns = document.querySelectorAll(".list-item-btn");
+    console.log("Rep works");
     addFromModalBtns.forEach((addButton) => {
         addButton.addEventListener("click", (e) => {
             const list_id = Number(e.target.dataset.listid);
@@ -361,5 +365,7 @@ const addBookToWishlistFromModal = () => {
 if(addFromModalBtns) {
     addBookToWishlistFromModal();
 }
+
+
 
 
