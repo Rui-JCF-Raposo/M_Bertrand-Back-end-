@@ -2,7 +2,7 @@
     $controller = $url_parts[2];
 ?>
 <?php if(isset($book)) { ?>
-    <div class="book-box" data-id="<?=$book["book_id"]?>">
+    <div class="book-box" data-id="<?=$book["book_id"]?>" data-listId="<?=isset($book["list_id"]) ? $book["list_id"]:""?>">
         <div class="book-img-wrapper">
             <img class="book-image" src="<?=$book["cover"]?>">
         <?php if(isset($_SESSION["user"])) { ?>
@@ -15,7 +15,7 @@
         <div class="book-price"><?=$book["price"]?>€</div>
         <?php if($controller === "wishlists") { ?>
             <div class="remove-list-item">
-                <img src="../../../icons/clientList_Icons/x-button.svg">
+                <img src="icons/clientList_Icons/x-button.svg">
             </div>
         <?php } ?>
         </div>

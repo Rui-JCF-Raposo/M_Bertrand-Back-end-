@@ -29,8 +29,12 @@
                 </div>
                 <div id="clientLists">
                     <?php 
-                        foreach($wishlists as $list) {
-                            require("templates/list.php");
+                        if(!empty($wishlists)) {
+                            
+                            foreach($wishlists as $list) {
+                                require("templates/list.php");
+                            }
+                            
                         }
                     ?>
                 </div> <!-- end test list -->

@@ -1,7 +1,12 @@
+<?php 
+    
+    $wishlist_books = $model->getWishlistBooks($_SESSION["user"]["user_id"], $list["list_id"]);
+
+?>
 <div class="test-list" data-listId="<?=$list["list_id"]?>">
     <header>
         <div class="list-name" data-listname="<?=$list["name"]?>">
-        <?=$list["name"]?></span> <span class="clientList-items">(0)</span>
+        <?=$list["name"]?></span> <span class="clientList-items">(<?=count($wishlist_books)?>)</span>
         </div>
         <div class="openList-icon">
             <img src="icons/clientList_Icons/down-chevron.svg" alt="open list icon">
@@ -25,6 +30,12 @@
                 </a>
             </div>
         </div>
-        <div class="list-books" data-listname="<?=$list["name"]?>"></div>
+        <div class="list-books" data-listname="<?=$list["name"]?>">
+            <?php 
+                foreach($wishlist_books as $book) {
+                    require("templates/book.php");
+                }
+            ?>
+        </div>
     </div>
 </div> <!-- end test list -->

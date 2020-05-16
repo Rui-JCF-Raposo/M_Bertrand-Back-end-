@@ -83,10 +83,10 @@ class DisplayWishList {
         listBooksContainer.innerHTML += bookHtml;
     }
 
-    addList = (list) => {
+    addList = (list, list_id) => {
         let listsContainer = document.getElementById("clientLists");
         const listHtml = `
-          <div class="test-list">
+          <div class="test-list" data-listId="${list_id}">
               <header>
                 <div class="list-name" data-listname="${list}">
                   ${list}</span> <span class="clientList-items">(0)</span>
@@ -171,7 +171,22 @@ function enableRemoveBook() {
             const spanItems = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.previousElementSibling.firstElementChild.querySelector("span");
             console.log("Book remove clicked");
             book.parentNode.parentNode.parentNode.remove();
+            const book_id = book.parentNode.parentNode.parentNode.dataset.id;
+            const list_id = book.parentNode.parentNode.parentNode.dataset.listid;
+            console.log("List id:> ", list_id);
             spanItems.textContent = "(" + (Number(spanItems.textContent[1]) - 1) + ")";
+            const book_data = {
+                book_id: book_id,
+                list_id: list_id
+            }
+            fetch(window.location.href+"/removeBook", {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: "POST",
+                body: JSON.stringify(book_data)
+            });
         });
     });
 }
@@ -230,6 +245,18 @@ function enableListEdit() {
     }
 }
 
+function getLastId() {
+    return new Promise((resolve, reject) => {
+        fetch(window.location.href + "/getLastId")
+            .then(res => res.json())
+            .then(data => resolve(data))
+            .catch(err => reject(err))
+        ;
+        
+    })
+;
+}
+
 function enableRemoveList() {
 
     const removeListBtns = document.querySelectorAll(".delete");
@@ -270,16 +297,9 @@ function importShopcartScript() {
 const createListBtn = document.querySelector(".create-list-btn");
 
 if(createListBtn) {
-    createListBtn.addEventListener("click", function () {
+    createListBtn.addEventListener("click", async function () {
         const listName = prompt("List Name");
-        wishList.addList(listName);
-        toggleShowList();
-        enableListEdit();
-        enableRemoveList();
-        enableCommentSaveBtns();
-        enableRemoveBook();
-        importShopcartScript();
-        fetch(window.location.href + "/add", {
+        await fetch(window.location.href + "/add", {
             headers: {
                 'Accept': 'text/html',
                 'Content-Type': 'text/html'
@@ -287,6 +307,21 @@ if(createListBtn) {
             method: "POST",
             body: listName
         });
+        const last_id = await getLastId();
+        list_id = last_id.list_id;
+        //To don't repeat previous ID
+        // if(firstListAdd) {
+        //     list_id++;
+        //     firstListAdd = false;
+        // }
+        console.log(list_id); 
+        wishList.addList(listName, list_id);
+        toggleShowList();
+        enableListEdit();
+        enableRemoveList();
+        enableCommentSaveBtns();
+        enableRemoveBook();
+        importShopcartScript();
     });
     
     toggleShowList();
@@ -295,6 +330,7 @@ if(createListBtn) {
     enableCommentSaveBtns();
     enableRemoveBook();
 }
+
 
 
 const addFromModalBtns = document.querySelectorAll(".list-item-btn");
@@ -306,7 +342,18 @@ const addBookToWishlistFromModal = () => {
             const book_id = Number(JSON.parse(sessionStorage.getItem("bookToAddToWishList")));
             console.log("Book Id -> ", book_id);
             console.log("List Id -> ", list_id);
-            fetch("../controllers/wishlists.php?add_book="+book_id+"&to_wishlist="+list_id);
+            const book_data = {
+                book_id: book_id,
+                list_id: list_id 
+            }
+            fetch("http://localhost/M_Bertrand-Back-end-/wishlists/addBook", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(book_data)
+            });
+            alert("Book Added to list");
         });
     });
 }
@@ -314,4 +361,5 @@ const addBookToWishlistFromModal = () => {
 if(addFromModalBtns) {
     addBookToWishlistFromModal();
 }
+
 

@@ -41,11 +41,7 @@
 
         public function edit($data) 
         {
-            if(!isset($data["last_id"])) {
-                $lastData = $this->getLastListId();
-                $data["list_id"] = $lastData["list_id"];
-            }
-            
+               
             $data = $this->sanitizer($data);
 
             if(!empty($data["name"])) {
@@ -71,7 +67,8 @@
 
         }
 
-        public function getLastListId() {
+        public function getLastListId() 
+        {
             
             $query = $this->db->prepare("
                 SELECT list_id
@@ -85,7 +82,7 @@
         
         }
 
-        public function remove($id) {
+        public function removeList($id) {
 
             if(empty($id)) {    
                 return false;
@@ -101,4 +98,108 @@
             return $rowsAffected;
 
         } 
+
+        public function addBook($data) 
+        {
+
+            if(
+                !empty($data["book_id"]) && 
+                !empty($data["list_id"]) && 
+                is_numeric($data["list_id"]) && 
+                is_numeric($data["list_id"]) &&
+                $data["book_id"] > 0 && 
+                $data["list_id"] > 0  
+            ) {
+
+                $query = $this->db->prepare("
+                    INSERT INTO wishlist_books
+                    (list_id, book_id, user_id)
+                    VALUES(?, ?, ?)
+                ");
+
+                $query->execute([
+                    (int)$data["list_id"],
+                    (int)$data["book_id"],
+                    (int)$data["user_id"],
+                ]);
+
+                $rowsAffected = $query->rowCount();
+                return $rowsAffected;
+
+            } else {
+                return false;
+            }
+
+        }
+
+        public function getWishlistBooks($user_id, $list_id) 
+        {
+
+            if(
+                !empty($user_id) &&
+                !empty($list_id) &&
+                is_numeric($user_id) &&
+                is_numeric($list_id) &&
+                $user_id > 0 &&
+                $list_id > 0
+            ) {
+
+            }
+            
+            $query = $this->db->prepare("
+                SELECT 
+                    wb.book_id, wb.list_id, b.title, b.author, b.cover, b.price 
+                FROM 
+                    wishlist_books AS wb
+                INNER JOIN 
+                    books AS b USING(book_id)
+                WHERE 
+                    user_id = ? AND list_id = ?
+
+            ");
+
+            $query->execute([
+                $user_id, 
+                $list_id
+            ]);
+
+            $data = $query->fetchAll(PDO::FETCH_ASSOC);
+
+            return $data;
+        }
+
+        public function removeBook($data) 
+        {
+            $data = $this->sanitizer($data);
+
+            if(
+                !empty($data["book_id"]) &&
+                !empty($data["list_id"]) &&
+                !empty($data["user_id"]) &&
+                is_numeric($data["book_id"]) &&
+                is_numeric($data["list_id"]) &&
+                is_numeric($data["user_id"])  &&
+                $data["book_id"] > 0 &&
+                $data["list_id"] > 0 &&
+                $data["user_id"] > 0  
+            ) {
+
+                $query = $this->db->prepare("
+                    DELETE FROM wishlist_books 
+                    WHERE user_id = ? AND list_id = ? AND book_id = ?
+                ");
+
+                $query->execute([
+                    $data["user_id"],
+                    $data["list_id"],
+                    $data["book_id"],
+                ]);
+
+                $rowsAffected = $query->rowCount();
+                return $rowsAffected;
+
+            } else {
+                return false;
+            }
+        }
     }

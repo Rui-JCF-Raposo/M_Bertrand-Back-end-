@@ -18,6 +18,8 @@
 
     if(in_array($url_parts[2], $controllers)) {
         $controller = $url_parts[2];
+    } else {
+        $controller = "home";
     }
 
     require("./controllers/".$controller.".php");
