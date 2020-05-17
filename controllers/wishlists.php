@@ -84,6 +84,32 @@
                     die("400 Bad Request");
                 }
 
+            } else if($action === "addComment") {
+
+                $data = json_decode(file_get_contents("php://input"), true);
+                $data["user_id"] = $_SESSION["user"]["user_id"];
+
+                if(empty($data["comment"])) {
+                    $result = $model->removeComment($data);
+                } else {
+
+                    $modelAction = $model->checkIfNewCommentOrEdit($data);
+                    if($modelAction === "new" ) {
+                        $result = $model->addComment($data);
+                    } else if($modelAction === "edit") {
+                        $result = $model->editComment($data);
+                    } 
+                
+                }
+
+                if(!$result) {
+                    header("HTTP/1.1 400 Bad Request");
+                    die("400 Bad Request");
+                } else {
+                    header("HTTP/1.1 202 Accepted");
+                    die("202 Accepted");
+                }
+
             }
             
         } 

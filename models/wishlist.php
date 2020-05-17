@@ -202,4 +202,152 @@
                 return false;
             }
         }
+
+        public function addComment($data) {
+
+            $data = $this->sanitizer($data);
+
+            if(
+                !empty($data["book_id"]) &&
+                !empty($data["list_id"]) &&
+                !empty($data["comment"]) &&
+                filter_var($data["comment"], FILTER_SANITIZE_STRING) &&
+                is_numeric($data["book_id"]) &&
+                is_numeric($data["list_id"]) && 
+                $data["book_id"] > 0 &&
+                $data["list_id"] > 0
+            ) {
+
+                $query = $this->db->prepare("
+                    INSERT INTO wishlist_comments
+                    (user_id, list_id, book_id, content)
+                    VALUES(?, ?, ?, ?)
+                ");
+                
+                $result = $query->execute([
+                    $data["user_id"],
+                    $data["list_id"],
+                    $data["book_id"],
+                    $data["comment"],
+                ]);
+
+                return $result;
+
+
+            } else {
+                return false;
+            }
+
+        }
+
+        public function editComment($data)
+        {   
+
+            $data = $this->sanitizer($data);
+
+            if(
+                !empty($data["book_id"]) &&
+                !empty($data["list_id"]) &&
+                !empty($data["comment"]) &&
+                filter_var($data["comment"], FILTER_SANITIZE_STRING) &&
+                is_numeric($data["book_id"]) &&
+                is_numeric($data["list_id"]) && 
+                $data["book_id"] > 0 &&
+                $data["list_id"] > 0
+            ) {
+
+                $query = $this->db->prepare("
+                    UPDATE wishlist_comments
+                    SET content = ?
+                    WHERE user_id = ? AND list_id = ? AND book_id = ?
+                ");
+
+                $result = $query->execute([
+                    $data["comment"],
+                    $data["user_id"],
+                    $data["list_id"],
+                    $data["book_id"]
+                ]);
+
+                return $result;
+
+            } else {
+                return false;
+            }
+        }
+
+        public function removeComment($data) 
+        {
+
+            $data = $this->sanitizer($data);
+
+            if(
+                empty($data["comment"]) &&
+                !empty($data["list_id"]) &&
+                !empty($data["book_id"]) &&
+                is_numeric($data["book_id"]) &&
+                is_numeric($data["list_id"]) && 
+                $data["book_id"] > 0 &&
+                $data["list_id"] > 0
+            ) {
+
+                $query = $this->db->prepare("
+                    DELETE FROM wishlist_comments
+                    WHERE user_id = ? AND list_id = ? AND book_id = ? 
+                ");
+
+                $result = $query->execute([
+                    $data["user_id"],
+                    $data["list_id"],
+                    $data["book_id"]
+                ]);
+
+                return $result;
+
+
+            } else {
+                return false;
+            }
+
+        }
+
+        public function checkIfNewCommentOrEdit($data) 
+        {
+
+            if(
+                !empty($data["book_id"]) && 
+                !empty($data["list_id"]) && 
+                !empty($data["user_id"]) && 
+                is_numeric($data["book_id"]) && 
+                is_numeric($data["user_id"]) && 
+                is_numeric($data["list_id"]) 
+            ) 
+                {
+                
+                $query = $this->db->prepare("
+                    SELECT comment_id
+                    FROM wishlist_comments
+                    WHERE book_id = ? AND list_id = ? AND user_id = ?
+                ");
+
+                $query->execute([
+                    $data["book_id"],
+                    $data["list_id"],
+                    $data["user_id"] 
+                ]);
+
+                $result = $query->fetch(PDO::FETCH_ASSOC);
+
+                if(!empty($result)) {
+                    return "edit";
+                } else {
+                    return "new";
+                }
+
+
+            } else {
+                return false;
+            }
+
+        }
     }

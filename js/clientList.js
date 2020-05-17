@@ -204,10 +204,30 @@ function enableCommentSaveBtns() {
             currentSaveBtn.classList.remove("d-none");
         });
         //Event to hide save btn
-        comment.addEventListener("blur", (e) => {
-            const currentSaveBtn = e.target.nextElementSibling;
-            currentSaveBtn.classList.add("save-btn-effect");
-            currentSaveBtn.classList.add("d-none");
+        // comment.addEventListener("blur", (e) => {
+        //     const currentSaveBtn = e.target.nextElementSibling;
+        //     currentSaveBtn.classList.add("save-btn-effect");
+        //     currentSaveBtn.classList.add("d-none");
+        // });
+    });
+
+    saveBtns.forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+            const comment = e.target.previousElementSibling.value;
+            const book_id = e.target.parentElement.dataset.id;
+            const list_id = e.target.parentElement.dataset.listid;
+            const book_data = {
+                book_id: book_id,
+                list_id: list_id,
+                comment: comment
+            }
+            fetch(window.location.href+"/addComment", {
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                method: "POST",
+                body: JSON.stringify(book_data)
+            });
         });
     });
 }
