@@ -26,7 +26,7 @@
         <?php if($controller === "wishlists") { ?>
             <button type="button" class="list-item-buy">COMPRAR</button>
             <button type="button" class="list-item-reserve">RESERVAR</button>
-            <textarea class="book-coment" placeholder="Inserir comentário" data-id="<?=$book["book_id"]?>"></textarea>
+            <textarea class="book-coment" placeholder="Inserir comentário" data-id="<?=$book["book_id"]?>"><?= isset($comment) ? $comment:""?></textarea>
             <button type="button" class="save-comment d-none">GRAVAR</button>
         <?php } ?>
     </div>

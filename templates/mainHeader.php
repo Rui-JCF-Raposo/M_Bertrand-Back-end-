@@ -6,6 +6,7 @@
             case "register": $title = "Registo"; break;
             case "dashboard": $title = "Área de Cliente"; break;
             case "wishlists": $title = "Listas de Desejos"; break;
+            case "checkout": $title = "Encomendar"; break;
         }
     }
 
@@ -50,6 +51,10 @@
     <?php } ?>
     <?php if($controller === "register" || $controller === "login") {?>
         <link rel="stylesheet" href="<?=$pathFix?>css/clientArea.css">
+    <?php } ?>
+    <?php if($controller === "checkout") { ?>
+        <link rel="stylesheet" href="<?=$pathFix?>css/checkOut.css">
+        <script src="<?=$pathFix?>js/checkOut.js" defer></script>
     <?php } ?>
     <script src="<?=$pathFix?>js/app.js" defer></script>
 </head>

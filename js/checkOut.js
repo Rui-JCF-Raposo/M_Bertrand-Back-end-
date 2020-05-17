@@ -8,14 +8,35 @@ if(sessionStorage.getItem("users")) {
 
 const deliverTime = ["ENTREGA EM 24 HORAS", "ENTREGA IMEDIATA"];
 
-function genarateCheckOutProducts() {
+let books = [];
+
+function getBooks() {
+    return new Promise((resolve, reject) => {
+        fetch("../controllers/shoppingcart.php?getSession", {method: "GET"})
+            .then(response => response.json())
+            .then(data => {
+                resolve(books = data);
+                console.log(books);
+            })
+            .catch(err => reject(err))
+    });
+}
+
+
+async function genarateCheckOutProducts() {
+    await getBooks();
     let ebook = "";
     const checkOutProductsOutput = document.querySelector(".checkOut-products-output");
     let html = "";
     let html2 = "";
-    for(let i = 0; i < activeUser_CheckOut.shoppcart.length; i++) {
-        let deliverTimeSelected = deliverTime[Math.floor(Math.random() * 2)];
-        console.log(deliverTimeSelected);
+    let totalPrice = 0;;
+    for(let i = 0; i < books.length; i++) {
+        let deliverTimeSelected;
+        if(books[i].category === "ebooks") {
+            deliverTimeSelected = deliverTime[1];
+        } else {
+            deliverTimeSelected = deliverTime[0];
+        }
         if(deliverTimeSelected == "ENTREGA IMEDIATA") {
             ebook ="(eBook)";
         }
@@ -23,43 +44,50 @@ function genarateCheckOutProducts() {
             <tr class="table-product-row">
                 <td>
                     <div>
-                        <img class="book-cover-img"src="${activeUser_CheckOut.shoppcart[i].book.cover}" alt="book cover">
+                        <img class="book-cover-img" src="${books[i].cover}" alt="book cover">
                     </div>
                     <div class="table-book-info">
                         <div>
-                            <span class="table-book-name">${activeUser_CheckOut.shoppcart[i].book.title} ${ebook}</span>
+                            <span class="table-book-name"> ${books[i].title} ${ebook}</span>
                             <span class="deliver-time">${deliverTimeSelected}</span>
                         </div>
                         <div class="table-book-edit">
-                            <span>REMOVER DO CESTO</span>
-                            <span>ENVIAR PARA A LISTA</span>
+                            <a href="http://localhost/M_Bertrand-Back-end-/controllers/shoppingcart.php?sessionRemove&id=${books[i].book_id}&origin=checkout">
+                                <span>REMOVER DO CESTO</span>
+                            </a>
                         </div>
                     <div>
                 </td>
                 <td>
                     <div class="checkOut-controls">
-                        <img class="minus-quantity" src="../../../icons/clientLoggenIn_Icons/shopCart/minus.svg" alt="minus icon">
-                        <span class="book-box-quanitity">${activeUser_CheckOut.shoppcart[i].quantity}</span>
-                        <img class="more-quantity" src="../../../icons/clientLoggenIn_Icons/shopCart/add.svg" alt="plus icon">
+                        <a href="http://localhost/M_Bertrand-Back-end-/controllers/shoppingcart.php?updateSession&quantity=remove&id=${books[i].book_id}&origin=checkout">
+                            <img class="minus-quantity" src="../icons/clientLoggenIn_Icons/shopCart/minus.svg" alt="minus icon">
+                        </a>
+                        <span class="book-box-quanitity">${books[i].quantity}</span>
+                        <a href="http://localhost/M_Bertrand-Back-end-/controllers/shoppingcart.php?updateSession&quantity=add&id=${books[i].book_id}&origin=checkout">
+                            <img class="more-quantity" src="../icons/clientLoggenIn_Icons/shopCart/add.svg" alt="plus icon">
+                        </a>
                     </div>
                 </td>
                 <td>
-                    ${activeUser_CheckOut.shoppcart[i].book.price}€
+                    ${books[i].price}€
                 </td>
             </tr>
         `;
         checkOutProductsOutput.innerHTML += html;
         ebook = "";
+        totalPrice += books[i].quantity * books[i].price
     }
     html2 = `
         <tr class="table-product-row table-product-footer">
             <td colspan="3"></td>
             <td colspan="">TOTAL</td>
-            <td class="checkOut-total">0</td>
+            <td class="checkOut-total">${totalPrice}€</td>
         </tr>
     `;
     checkOutProductsOutput.innerHTML += html2;
 }
+
 
 genarateCheckOutProducts();
 

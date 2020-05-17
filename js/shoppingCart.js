@@ -132,7 +132,9 @@ if(!scriptRunned) {
                     <span class="shoppcart-total-items">${totalItems}</span><span>ITENS/TOTAL</span>
                     <span class="shoppcart-total-price">${totalPrice}</span> € 
                 </div>
-                <button type="button" class="shoppcart-checkout">CHECKOUT</button>
+                <a class="checkout-anchor" href="/M_Bertrand-Back-end-/checkout/">
+                    <button type="button" class="shoppcart-checkout">CHECKOUT</button>
+                </a>
             </div>
         `
         shopCartFooterContainer.innerHTML = footerHtml;
@@ -181,7 +183,7 @@ if(!scriptRunned) {
     }
 
     let preFix = ""
-    if(window.location.href ==! "http://localhost/M_Bertrand-Back-end-/") {
+    if(window.location.href !== "http://localhost/M_Bertrand-Back-end-/") {
         preFix = "http://localhost/M_Bertrand-Back-end-/";
     }
 
@@ -209,7 +211,6 @@ if(!scriptRunned) {
             const shopcartFooterTotalItems = document.querySelector(".shoppcart-total-items");
             shopcartFooterTotalItems.textContent = totalItems;
             // Make fetch do php to update book quantity session
-            let preFix = ""
             fetch(preFix+"controllers/shoppingcart.php?updateSession&quantity=remove&id="+bookId);
         }
     }

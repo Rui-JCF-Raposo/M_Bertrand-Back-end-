@@ -179,13 +179,10 @@
 
 .table-book-edit span {
     text-decoration: underline;
-    padding-right: 5px;
     cursor: pointer;
+    color: #333;
 }
 
-.table-book-edit span:first-child {
-    border-right: 1px solid rgb(0,0,0);
-}
 
 
 .checkOut-controls img{

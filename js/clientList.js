@@ -228,6 +228,7 @@ function enableCommentSaveBtns() {
                 method: "POST",
                 body: JSON.stringify(book_data)
             });
+            e.target.classList.add("d-none");
         });
     });
 }

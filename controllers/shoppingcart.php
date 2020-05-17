@@ -26,7 +26,11 @@
 
     if(isset($_GET["sessionRemove"])) {
         $shoppcartModel->removeBookFromSession($_GET["id"]);
-        echo "Session remove worked";
+        if(isset($_GET["origin"]) && $_GET["origin"] === "checkout") {
+            header("Location: /M_Bertrand-Back-end-/checkout/");
+        } else {
+            echo "Session remove worked";
+        }
     }
 
     if(isset($_GET["updateSession"])) {
@@ -34,6 +38,10 @@
             $shoppcartModel->addShopcartBookQuantity($_GET["id"]);
         } else if($_GET["quantity"] === "remove") {
             $shoppcartModel->removeShopcartBookQuantity($_GET["id"]);
+        }
+
+        if(isset($_GET["origin"]) && $_GET["origin"] === "checkout") {
+            header("Location: /M_Bertrand-Back-end-/checkout/");
         }
     }
 

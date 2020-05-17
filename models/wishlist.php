@@ -154,7 +154,7 @@
                 INNER JOIN 
                     books AS b USING(book_id)
                 WHERE 
-                    user_id = ? AND list_id = ?
+                    wb.user_id = ? AND wb.list_id = ?
 
             ");
 
@@ -349,5 +349,29 @@
                 return false;
             }
 
+        }
+
+        public function getBookComment($user_id, $list_id, $book_id)
+        {   
+
+            $query = $this->db->prepare("
+                SELECT content
+                FROM wishlist_comments
+                WHERE user_id = ? AND list_id = ? AND book_id = ?
+            ");
+
+            $query->execute([
+                $user_id,
+                $list_id,
+                $book_id
+            ]);
+
+            $data = $query->fetch();
+
+            if($data) {
+                return $data["content"];
+            } else {
+                return false;
+            }
         }
     }

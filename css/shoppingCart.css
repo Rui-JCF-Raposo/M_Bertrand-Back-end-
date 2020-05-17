@@ -110,6 +110,10 @@
     margin: 15px 20px 15px 0;
 }
 
+.checkout-anchor {  
+    width: 100%;
+}
+
 .shoppcart-checkout {
     width: 100%;
     padding: 15px 0;

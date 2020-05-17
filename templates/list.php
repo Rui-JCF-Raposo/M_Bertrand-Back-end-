@@ -32,7 +32,10 @@
         </div>
         <div class="list-books" data-listname="<?=$list["name"]?>">
             <?php 
-                foreach($wishlist_books as $book) {
+            
+                foreach($wishlist_books as $book) 
+                {
+                    $comment = $model->getBookComment($_SESSION["user"]["user_id"], $list["list_id"], $book["book_id"]);
                     require("templates/book.php");
                 }
             ?>
