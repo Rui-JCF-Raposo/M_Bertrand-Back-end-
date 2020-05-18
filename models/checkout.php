@@ -12,7 +12,7 @@
             if(
                 empty($user_id) || 
                 !is_numeric($user_id) && 
-                !empty($books)
+                empty($books)
             ) {
                 return false;
             }

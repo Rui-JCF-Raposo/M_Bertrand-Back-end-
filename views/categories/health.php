@@ -13,7 +13,7 @@
         <section id="health-books">
             <?php 
                 foreach($books as $book) {
-                    if($book["category"] === "health") {
+                    if($book["category_name"] === "saude") {
                         require("templates/book.php");
                     }
                 }

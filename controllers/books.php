@@ -18,6 +18,7 @@
 
     
     $books = $model->getBooks();
+
     
     if(isset($_SESSION["user"])) {
         $wishlists = $model->getLists($_SESSION["user"]["user_id"]);

@@ -1,0 +1,5 @@
+
+
+
+            $finfo = finfo_open(FILEINFO_MIME_TYPE);
+            $detected_filetype = finfo_file($finfo, $_FILES["cv"]["tmp_name"]);

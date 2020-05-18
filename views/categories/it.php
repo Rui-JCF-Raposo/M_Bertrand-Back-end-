@@ -15,7 +15,7 @@
         <section id="it-books">
             <?php 
                 foreach($books as $book) {
-                    if($book["category"] === "it") {
+                    if($book["category_name"] === "it") {
                         require("templates/book.php");
                     }
                 }

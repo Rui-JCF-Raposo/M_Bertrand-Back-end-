@@ -14,7 +14,7 @@
         <section id="psychology-books">
             <?php 
                 foreach($books as $book) {
-                    if($book["category"] === "psychology") {
+                    if($book["category_name"] === "psicologia") {
                         require("templates/book.php");
                     }
                 }

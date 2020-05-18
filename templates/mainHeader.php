@@ -7,6 +7,7 @@
             case "dashboard": $title = "Área de Cliente"; break;
             case "wishlists": $title = "Listas de Desejos"; break;
             case "checkout": $title = "Encomendar"; break;
+            case "admin": $title = "Área administrativa"; break;
         }
     }
 

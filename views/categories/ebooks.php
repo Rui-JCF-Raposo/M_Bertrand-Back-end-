@@ -13,7 +13,7 @@
         <section id="ebooks-div">
             <?php 
                 foreach($books as $book) {
-                    if($book["category"] === "ebooks") {
+                    if($book["category_name"] === "ebooks") {
                         require("templates/book.php");
                     }
                 }

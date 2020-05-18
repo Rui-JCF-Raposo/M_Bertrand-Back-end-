@@ -12,7 +12,7 @@
         switch($category) {
             case "booksManaging": $booksActiveSate = "active-category"; break;
             case "usersManaging": $usersActiveSate = "active-category"; break;
-            case "ordersMananing": $ordersActiveSate = "active-category"; break;
+            case "ordersManaging": $ordersActiveSate = "active-category"; break;
         }
 
     }

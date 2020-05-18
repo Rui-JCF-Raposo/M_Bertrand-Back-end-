@@ -42,6 +42,8 @@
                     <hr class="menu-hr">
                     <li><a href="<?= BASE_PATH . "admin" ?>">Área Adminstrativa</a></li>
                     <hr class="menu-hr">
+                    <li><a href="<?= BASE_PATH . "home  " ?>">Área Pública</a></li>
+                    <hr class="menu-hr">
                     <li><a href="#">Dados Pessoais</a></li>
                     <hr class="menu-hr">
 

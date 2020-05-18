@@ -12,7 +12,7 @@
         
         <div class="add-book-container">
             <h1>Adicione um livro</h1>
-            <form method="POST" action="#" enctype="multipart/form-data">
+            <form method="POST" action="<?=BASE_PATH."admin/booksManaging/addBook"?>" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="name">Nome do livro</label>
                     <input type="text" id="name" name="name" class="form-control" required/>
@@ -40,7 +40,17 @@
                     </div>
                     <div class="form-group">
                         <label for="cover">Capa do livro</label>
-                        <input type="file" id="cover" name="cover" class="form-file" accept="image/*" required>
+                        <input type="file" id="cover" name="book_cover" class="form-file" accept="image/*" required>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-group price">
+                        <label for="pages">Páginas</label>
+                        <input type="number" id="pages" name="pages" class="form-control" min="1" max="10000" required/>
+                    </div>
+                    <div class="form-group stock">
+                        <label for="isbn">ISBN</label>
+                        <input type="number" id="isbn" name="isbn" class="form-control" min="0" max="9999999999999" required/>
                     </div>
                 </div>
                 <button type="submit" name="send">Adicionar</button>
@@ -49,7 +59,7 @@
 
         <div class="add-category-container">
             <h1>Adicione uma categoria</h1>
-            <form method="POST" action="#">
+            <form method="POST" action="<?=BASE_PATH."admin/booksManaging/addCategory"?>">
                 <div class="form-group">
                     <label for="newCategory">Nome da Categoria</label>
                     <input type="text" id="newCategory" name="newCategory" class="form-control" required/>
@@ -57,7 +67,6 @@
                 <button type="submit" name="send">Adicionar</button>
             </form>
         </div>
-
     
     </main>
 
