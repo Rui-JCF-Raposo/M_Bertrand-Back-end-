@@ -119,6 +119,9 @@ if(!scriptRunned) {
     }
 
     const addShopcartFooter = () => {
+
+        const cestStatus = document.querySelector(".chest-state");
+        const shopcartContainer = document.querySelector(".shopcart-container ");
         
         // Calculate shopcart total price
         const totalPrice = calculateShopcartTotalPrice();
@@ -137,7 +140,14 @@ if(!scriptRunned) {
                 </a>
             </div>
         `
-        shopCartFooterContainer.innerHTML = footerHtml;
+        if(totalPrice !== 0) {
+            cestStatus.classList.add("hide");
+            shopcartContainer.classList.remove("hide");
+            shopCartFooterContainer.innerHTML = footerHtml;
+        } else {
+            cestStatus.classList.remove("hide");
+            shopcartContainer.classList.add("hide");
+        }
     }
 
     const calculateShopcartTotalItems = () => {

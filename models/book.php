@@ -27,4 +27,15 @@
             return $data;
 
         }
+
+        public function getCategories() 
+        {
+
+            $query = $this->db->prepare("SELECT category AS category_name FROM books GROUP BY category");
+            $query->execute();
+            $data = $query->fetchAll(PDO::FETCH_ASSOC);
+            
+            return $data;
+
+        }
     }

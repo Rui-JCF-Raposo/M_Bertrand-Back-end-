@@ -33,6 +33,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="<?=$pathFix?>css/main.css">
     <link rel="stylesheet" href="<?=$pathFix?>css/shoppingCart.css">
+    <link rel="stylesheet" href="<?=$pathFix?>css/admin.css">
     <script src="<?=$pathFix?>js/shoppingCart.js" defer></script>
     <?php if($controller !== "home" && $controller !== "login" && $controller !== "register") { ?>
         <link rel="stylesheet" href="<?=$pathFix?>css/clientHomePage.css">

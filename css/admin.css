@@ -1,0 +1,84 @@
+.admin-zone {
+    margin-top: 120px;
+} 
+
+.admin-zone main{
+    padding-left: 50px;
+}
+
+.add-book-container {
+    width: 50%;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label,
+.form-group input,
+.add-book-container button,
+.add-category-container button {
+    font-size: 1.4rem;
+}
+
+.form-group label {
+    margin-bottom: 10px;
+    font-weight: rgb(116, 116, 116);
+}
+
+
+.form-group input {
+    padding: 7px 15px;
+    margin-bottom: 15px;
+}
+
+.add-book-container select {
+    padding: 5px 10px;
+}
+
+.price,
+.stock {
+    width: 20%;
+}
+
+.col-3 {
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.col-3 div:first-child,
+.col-3 div:nth-child(2) {
+    margin-right: 30px;
+}
+
+.add-book-container button {
+    background-color: rgb(71, 132, 182);
+}
+
+.add-category-container button {
+    margin-top: 10px;
+    background-color: rgb(218, 142, 2);
+}
+
+.add-book-container button,
+.add-category-container button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 4px;
+    color: #FFF;
+    cursor: pointer;
+    transition: background-color .1s ease;
+}
+
+.add-book-container button:hover,
+.add-category-container button:hover {
+    background-color: green;
+}
+
+.add-category-container {
+    margin-top: 50px;
+    width: 50%;
+}
