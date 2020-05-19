@@ -83,12 +83,17 @@ if(!scriptRunned) {
         books.push(book);
         
         const shopcartContainer = document.querySelectorAll(".shopcart-container")[0];
+
+        let coverPreFix = "";
+        if(book.cover.substring(0, 4) !== "http") {
+            coverPreFix = "../img/book-images/";
+        }
     
         const bookHtml = `
             <div>
                 <div class="shoppcart-book-box" data-bookid="${book.book_id}">
                     <div class="shoppcart-book-img">
-                        <img src="${book.cover}">
+                        <img src="${coverPreFix + book.cover}">
                     </div>
                     <div class="book-box-info">
                         <div>

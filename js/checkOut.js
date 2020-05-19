@@ -40,11 +40,17 @@ async function genarateCheckOutProducts() {
         if(deliverTimeSelected == "ENTREGA IMEDIATA") {
             ebook ="(eBook)";
         }
+
+        let coverPreFix = "";
+        if(books[i].cover.substring(0, 4) !== "http") {
+            coverPreFix = "../img/book-images/";
+        }
+
         html = `
             <tr class="table-product-row">
                 <td>
                     <div>
-                        <img class="book-cover-img" src="${books[i].cover}" alt="book cover">
+                        <img class="book-cover-img" src="${coverPreFix + books[i].cover}" alt="book cover">
                     </div>
                     <div class="table-book-info">
                         <div>

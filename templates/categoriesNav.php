@@ -1,24 +1,6 @@
 <?php 
-
-    if(isset($url_parts[3])) {
-        
-        $healthActiveSate = "";
-        $itActiveSate = "";
-        $psychologyActiveSate = "";
-        $ebooksActiveSate = "";
-        $textbooksActiveSate = "";
-    
-        $category = $url_parts[3];
-    
-        switch($category) {
-            case "health": $healthActiveSate = "active-category"; break;
-            case "it": $itActiveSate = "active-category"; break;
-            case "psychology": $psychologyActiveSate = "active-category"; break;
-            case "ebooks": $ebooksActiveSate = "active-category"; break;
-            case "textbooks": $textbooksActiveSate = "active-category"; break;
-        }
-
-    }
+     
+    $categoryActiveSate = "active-category";
 
 ?>
 
@@ -29,24 +11,16 @@
             <h1>LIVROS</h1>
         </a>
         <ul>
-            <li><a href="<?=BASE_PATH."books/health"?>" class="<?=$healthActiveSate?>">Saúde</a></li>
-            <hr class="categories-hr">
-            <li><a href="<?=BASE_PATH."books/it"?>" class="<?=$itActiveSate?>">IT</a></li>
-            <hr class="categories-hr">
-            <li><a href="<?=BASE_PATH."books/psychology"?>" class="<?=$psychologyActiveSate?>">Psicologia</a></li>
+            <?php foreach($categories as $category) { ?>
+                <li>
+                    <a 
+                        href="<?=BASE_PATH."books/".$category["category_name"]?>" 
+                        class="<?= $url_parts[3] == $category["category_name"] ? "active-category":"" ?>">
+                        <?=ucfirst($category["category_name"])?>
+                    </a>
+            </li>
+            <?php } ?>
         </ul>
-    </div>
-
-    <div class="ebooks">
-        <a href="<?=BASE_PATH."books/ebooks"?>" class="<?=$ebooksActiveSate?>">
-            <h1>EBOOKS</h1>
-        </a>
-    </div>
-
-    <div class="school-books">
-        <a href="<?=BASE_PATH."books/textbooks"?>" class="<?=$textbooksActiveSate?>">
-            <h1>LIVROS ESCOLARES</h1>
-        </a>
     </div>
 
     <?php if(!isset($_SESSION["user"])) { ?>

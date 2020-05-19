@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estado da Categoria</title>
+    <title>Administração de Livros</title>
     <link rel="stylesheet" href="../../css/main.css">    
     <link rel="stylesheet" href="../../css/checkOut.css">    
 </head>
@@ -19,10 +19,10 @@
             </div>
         </div>
         <div>
-        <?php if($created_category) { ?>
-            <h1>Criada com sucesso</h1>
+        <?php if((isset($created_category) && $created_category) || isset($book_created) && $book_created) { ?>
+            <h1>Criad<?=isset($created_category) ? "a":"o"?> com sucesso</h1>
         <?php } else { ?>
-            <h1>Erro ao criar categoria</h1>
+            <h1>Erro ao criar <?=isset($created_category) ? "categoria":"livro"?></h1>
         <?php } ?>
         </div>
         <div>

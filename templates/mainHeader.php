@@ -12,13 +12,8 @@
     }
 
     if(isset($url_parts[3]) && $url_parts[2] === "books") {
-        switch($url_parts[3]) {
-            case "health": $title = "Sáude"; break;
-            case "it": $title = "IT"; break;
-            case "psychology": $title = "Psicologia"; break;
-            case "ebooks": $title = "Ebooks"; break;
-            case "textbooks": $title = "Escolares"; break;
-        }
+        $category = $url_parts[3];
+        $title = ucfirst($category);
     }
     
     $pathFix = isset($url_parts[3]) ? "../": "";

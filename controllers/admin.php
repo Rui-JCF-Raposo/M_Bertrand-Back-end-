@@ -35,20 +35,18 @@
                 $action = $url_parts[4];
                 
                 if($action === "addBook") {
-
-                    /*
-                        Still doing addBook function in model;
-                    */
                    
                     $data = $_POST;
-                    $img_file = $_FILES["book_cover"];
-                    
+                    $img_file = $_FILES["book_cover"];                    
             
                     $result = $bookModel->createBook($data, $img_file);
-                    if($result) {
-                        echo "Validation Passed!";
+                    $result_2 = $bookModel->enableCategory($data["category"]);
+                    if($result && $result_2) {
+                        $book_created = true;
+                        require("templates/booksManagerMessage.php");
                     } else {
-                        echo "Validation Failed...";
+                        $book_created = false;
+                        require("templates/booksManagerMessage.php");
                     }
                     
                 }
@@ -58,7 +56,6 @@
                     $result = $bookModel->createCategory($_POST);
                     if($result) {
                         $created_category = true;
-                        $category_name = $_POST["newCategory"];
                         require("templates/booksManagerMessage.php");
                     } else {
                         $created_category = false;

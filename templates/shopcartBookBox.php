@@ -1,10 +1,20 @@
 <?php 
     $preFix = isset($url_parts[3]) ? "../":"";
+
+    if(substr($book["cover"], 0, 4) !== "http") {
+        $coverPrefix = "../img/book-images/";
+    } else {
+        $coverPrefix = "";
+    } 
+
+    if(!isset($url_parts[3]) && substr($book["cover"], 0, 4) !== "http") {
+        $coverPrefix = "img/book-images/";
+    }
 ?>
 <div>
     <div class="shoppcart-book-box" data-bookid="<?=$book["book_id"]?>">
         <div class="shoppcart-book-img">
-            <img src="<?=$book["cover"]?>">
+            <img src="<?=$coverPrefix.$book["cover"]?>" alt="book cover">
         </div>
         <div class="book-box-info">
             <div>

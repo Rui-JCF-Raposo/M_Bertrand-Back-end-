@@ -22,17 +22,17 @@
                     <input type="text" id="author" name="author" class="form-control" required/>
                 </div>
                 <div class="form-group">
-                    <label for="author">Categoria</label>
-                    <select name="" id="" id="author" name="author" class="form-control" required>
+                    <label for="category">Categoria</label>
+                    <select name="category" id="category" id="category" class="form-control" required>
                         <?php foreach($categories as $category) { ?>
-                            <option value="<?=$category["category_name"]?>"><?=$category["category_name"]?></option>
+                            <option value="<?=$category["category_id"]?>"><?=$category["category_name"]?></option>
                         <?php } ?>
                     </select>
                 </div>
                 <div class="col-3">
                     <div class="form-group price">
                         <label for="price">Price</label>
-                        <input type="number" id="price" name="price" class="form-control" min="1" max="10000" required/>
+                        <input type="number" id="price" name="price" class="form-control" step=".01" required/>
                     </div>
                     <div class="form-group stock">
                         <label for="stock">Stock</label>

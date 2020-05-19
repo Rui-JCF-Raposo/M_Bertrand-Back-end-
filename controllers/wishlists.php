@@ -32,6 +32,7 @@
                     die("202 Accepted");
                 } else {
                     header("HTTP/1.1 400 Bad Request");
+                    die("400 Bad Request");
                 }
 
             }  else if($action === "remove") {
@@ -116,6 +117,7 @@
     } else {
 
         $wishlists = $model->getLists($_SESSION["user"]["user_id"]);
+        $categories = $model->getCategories();
         require("views/clientLoggedIn/clientList/clientList.php");
     }
     

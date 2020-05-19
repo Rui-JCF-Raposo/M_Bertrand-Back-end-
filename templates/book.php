@@ -1,10 +1,21 @@
 <?php 
     $controller = $url_parts[2];
+
+    if(substr($book["cover"], 0, 4) !== "http") {
+        $coverPrefix = "../img/book-images/";
+    } else {
+        $coverPrefix = "";
+    } 
+
+    if(!isset($url_parts[3]) && substr($book["cover"], 0, 4) !== "http") {
+        $coverPrefix = "img/book-images/";
+    }
+
 ?>
 <?php if(isset($book)) { ?>
     <div class="book-box" data-id="<?=$book["book_id"]?>" data-listId="<?=isset($book["list_id"]) ? $book["list_id"]:""?>">
         <div class="book-img-wrapper">
-            <img class="book-image" src="<?=$book["cover"]?>">
+            <img class="book-image" src="<?=$coverPrefix.$book["cover"]?>" alt="book cover">
         <?php if(isset($_SESSION["user"])) { ?>
             <div class="add-to-shoppcart">CESTO</div>
             <div class="add-to-list">LISTA</div>

@@ -2,6 +2,7 @@
     
     $wishlist_books = $model->getWishlistBooks($_SESSION["user"]["user_id"], $list["list_id"]);
 
+
 ?>
 <div class="test-list" data-listId="<?=$list["list_id"]?>">
     <header>

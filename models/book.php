@@ -36,8 +36,9 @@
         {
 
             $query = $this->db->prepare("
-                SELECT category_id, category_name
+                SELECT category_id, category_name, active
                 FROM book_categories
+                WHERE active = 1
                 ORDER BY category_name ASC
             ");
             $query->execute();
@@ -59,7 +60,7 @@
                 $query = $this->db->prepare("
                     INSERT INTO book_categories
                     (category_name, active)
-                    VALUES(?, 1)
+                    VALUES(?, 0)
                 ");
 
                 $result = $query->execute([
@@ -96,44 +97,71 @@
                 $img_file["type"] === "image/png" 
             ) {
 
+
                 $finfo = finfo_open(FILEINFO_MIME_TYPE);
                 $detected_file = finfo_file($finfo, $_FILES["book_cover"]["tmp_name"]);
 
-                return true;
+            
+                if($detected_file === "image/jpeg") {
 
-
-                // if($detected_file === "image/jpeg") {
-
-                //     $file_ext = ".jpeg";
-                //     $newCoverName = substr(sha1(mt_rand(1000000000000, 9999999999999)), 1 , 30);
+                    $file_ext = ".jpeg";
+                    $newCoverName = substr(sha1(mt_rand(1000000000000, 9999999999999)), 1 , 30);
                     
-                // } else if($detected_file === "image/png") {
+                } else if($detected_file === "image/png") {
                     
-                //     $file_ext = ".png";
-                //     $newCoverName = substr(sha1(mt_rand(1000000000000, 9999999999999)), 1 , 30);
+                    $file_ext = ".png";
+                    $newCoverName = substr(sha1(mt_rand(1000000000000, 9999999999999)), 1 , 30);
                 
-                // } else {
-                //     return false;
-                // }
+                } else {
+                    return false;
+                }
 
-                // $tmp_file = $img_file["book_cover"]["tmp_name"];
-                // $dir = "../img/book-images/".$newCoverName.$file_ext;
-                // move_uploaded_file($tmp_file, $dir);
+                $tmp_file = $img_file["tmp_name"];
+                $dir = "img/book-images/".$newCoverName.$file_ext;
+                move_uploaded_file($tmp_file, $dir);
 
-                // $query = $this->db->prepare("
-                //     INSERT INTO books
-                //     ()
-                //     VALUES()
-                // ");
+                $query = $this->db->prepare("
+                    INSERT INTO books
+                    (title, author, cover, category, page_count, price, isbn)
+                    VALUES(?, ?, ?, ?, ?, ?, ?)
+                ");
 
+                $result = $query->execute([
+                    $data["name"],
+                    $data["author"],
+                    $newCoverName.$file_ext,
+                    $data["category"],
+                    $data["pages"],
+                    $data["price"],
+                    $data["isbn"]
+                ]);
 
-
-                return true;
+                return $result;
 
             } else {
                 return false;
             }
 
+
+        }
+
+        public function enableCategory($id) {
+
+            if(!empty($id) && is_numeric($id) && $id > 0) {
+
+                $updateQueery = $this->db->prepare("
+                        UPDATE book_categories
+                        SET active = 1
+                        WHERE category_id = ?
+                ");
+    
+                $result = $updateQueery->execute([$id]);
+    
+                return $result;
+
+            } else {
+                return false;
+            }
 
         }
 
