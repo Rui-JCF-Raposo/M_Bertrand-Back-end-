@@ -69,7 +69,7 @@
             ) {
 
                 $query = $this->db->prepare("
-                    SELECT user_id, name, email, password, card_number
+                    SELECT user_id, name, email, password, card_number, admin
                     FROM users
                     WHERE email = ?
                 ");

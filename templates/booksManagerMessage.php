@@ -19,10 +19,31 @@
             </div>
         </div>
         <div>
-        <?php if((isset($created_category) && $created_category) || isset($book_created) && $book_created) { ?>
-            <h1>Criad<?=isset($created_category) ? "a":"o"?> com sucesso</h1>
-        <?php } else { ?>
-            <h1>Erro ao criar <?=isset($created_category) ? "categoria":"livro"?></h1>
+        <?php if (isset($created_category) && $created_category === true) { ?>
+            <h2>Criada com sucesso</h2>
+        <?php  } else if (isset($created_category) && $created_category === false) {?>
+            <h2>Erro ao criar categoria</h2>
+        <?php ?>
+        <?php } if(isset($repetition) && $repetition === true) { ?>
+            <h2>Categoria já existente</h2>
+        <?php } ?>
+        <?php if((isset($book_created) && $book_created === true)) { ?>
+            <h2>Livro criado com sucesso</h2>
+        <?php } else if((isset($book_created) && $book_created === false)) { ?>
+            <h2>Erro ao criar livro</h2>
+        <?php } ?>
+        <?php if(isset($book_repetition) && $book_repetition === true) { ?>
+            <h2>O ISBN do Livro já existe</h2>
+        <?php } ?>
+        <?php if(isset($book_removed) && $book_removed === true) { ?>
+            <h2>Livro removido com sucesso</h2>
+        <?php } else if(isset($book_removed) && $book_removed === false) { ?>
+            <h2>Erro ao remover livro</h2>
+        <?php } ?>
+        <?php if(isset($category_removed) && $category_removed === true) { ?>
+            <h2>Categoria removida com sucesso</h2>
+        <?php } else if(isset($category_removed) && $category_removed === false) { ?>
+            <h2>Erro ao remover categoria</h2>
         <?php } ?>
         </div>
         <div>

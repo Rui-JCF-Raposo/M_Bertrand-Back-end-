@@ -29,7 +29,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="<?=$pathFix?>css/main.css">
     <link rel="stylesheet" href="<?=$pathFix?>css/shoppingCart.css">
-    <link rel="stylesheet" href="<?=$pathFix?>css/admin.css">
     <script src="<?=$pathFix?>js/shoppingCart.js" defer></script>
     <?php if($controller !== "home" && $controller !== "login" && $controller !== "register") { ?>
         <link rel="stylesheet" href="<?=$pathFix?>css/clientHomePage.css">
@@ -52,6 +51,10 @@
     <?php if($controller === "checkout") { ?>
         <link rel="stylesheet" href="<?=$pathFix?>css/checkOut.css">
         <script src="<?=$pathFix?>js/checkOut.js" defer></script>
+    <?php } ?>
+    <?php if($controller === "admin") { ?>
+        <link rel="stylesheet" href="<?=$pathFix?>css/admin.css">
+        <script src="<?=$pathFix?>js/admin.js" defer></script>
     <?php } ?>
     <script src="<?=$pathFix?>js/app.js" defer></script>
 </head>

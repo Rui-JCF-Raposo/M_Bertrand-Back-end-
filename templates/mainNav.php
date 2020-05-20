@@ -45,6 +45,10 @@
                     </li>
                     <hr class="menu-hr">
                     <li><a href="<?= BASE_PATH . "dashboard" ?>">Área de Cliente</a></li>
+                    <?php if( isset($_SESSION["user"]) && (int)$_SESSION["user"]["admin"] === 1 ) { ?>
+                        <hr class="menu-hr">
+                        <li><a href="<?= BASE_PATH . "admin" ?>">Área Administrativa</a></li>
+                    <?php  } ?>
                     <hr class="menu-hr">
                     <li><a href="#">Lista de Desejos</a></li>
                     <hr class="menu-hr">

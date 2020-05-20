@@ -11,7 +11,7 @@
             <h1>LIVROS</h1>
         </a>
         <ul>
-            <?php foreach($categories as $category) { ?>
+            <?php foreach($categories as $category) { if((int)$category["active"] === 1) {?>
                 <li>
                     <a 
                         href="<?=BASE_PATH."books/".$category["category_name"]?>" 
@@ -19,7 +19,7 @@
                         <?=ucfirst($category["category_name"])?>
                     </a>
             </li>
-            <?php } ?>
+            <?php } } ?>
         </ul>
     </div>
 

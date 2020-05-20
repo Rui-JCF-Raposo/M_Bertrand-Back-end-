@@ -6,7 +6,7 @@
         public function getBooks() {
             
             $query = $this->db->prepare("
-                SELECT * 
+                SELECT *
                 FROM books AS b
                 INNER JOIN book_categories AS bc ON(b.category = bc.category_id)
             ");
@@ -38,7 +38,6 @@
             $query = $this->db->prepare("
                 SELECT category_id, category_name, active
                 FROM book_categories
-                WHERE active = 1
                 ORDER BY category_name ASC
             ");
             $query->execute();
@@ -67,7 +66,10 @@
                     strtolower($data["newCategory"])
                 ]);
 
-                return $result;
+                $rowsAffected = $query->rowCount();
+                
+                return $rowsAffected;
+            
 
             } else {
                 return false;
@@ -93,10 +95,10 @@
                 !empty($data["author"]) && mb_strlen($data["author"]) >= 2 &&
                 is_numeric($data["price"]) && $data["price"] > 0 && $data["price"] <= 50000 && 
                 is_numeric($data["stock"]) && $data["stock"] > 0 && $data["stock"] <= 10000000 &&
+                !isset($img_file["error"]) &&
                 $img_file["type"] === "image/jpeg" ||
                 $img_file["type"] === "image/png" 
             ) {
-
 
                 $finfo = finfo_open(FILEINFO_MIME_TYPE);
                 $detected_file = finfo_file($finfo, $_FILES["book_cover"]["tmp_name"]);
@@ -136,7 +138,9 @@
                     $data["isbn"]
                 ]);
 
-                return $result;
+                $rowsAffected = $query->rowCount();
+
+                return $rowsAffected;
 
             } else {
                 return false;
@@ -145,7 +149,8 @@
 
         }
 
-        public function enableCategory($id) {
+        public function enableCategory($id) 
+        {
 
             if(!empty($id) && is_numeric($id) && $id > 0) {
 
@@ -164,5 +169,66 @@
             }
 
         }
+        
+        public function disableCategory($id) 
+        {
+
+            if(!empty($id) && is_numeric($id) && $id > 0) {
+
+                $updateQueery = $this->db->prepare("
+                        UPDATE book_categories
+                        SET active = 0
+                        WHERE category_id = ?
+                ");
+    
+                $result = $updateQueery->execute([$id]);
+    
+                return $result;
+
+            } else {
+                return false;
+            }
+
+        }
+
+        public function getCategoryByName($name) 
+        {
+
+            if(empty($name) || !is_string($name)) {
+                return false;
+            }
+
+            $query = $this->db->prepare("
+                SELECT category_id
+                FROM book_categories
+                WHERE category_name = ?
+            ");
+
+            $query->execute([$name]);
+
+            $result = $query->fetch(PDO::FETCH_ASSOC);
+
+            return $result["category_id"];
+
+        }
+
+        public function removeBook($id)
+        {
+
+            if(empty($id) && !is_numeric($id)) {
+                return false;
+            }
+
+            $query = $this->db->prepare("
+                DELETE FROM books
+                WHERE book_id = ?
+            ");
+
+            $result = $query->execute([$id]);
+
+            return $result;
+
+        }
+
 
     }

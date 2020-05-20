@@ -13,6 +13,7 @@
         <section id="ebooks-div">
             <?php 
                 foreach($books as $book) {
+
                     $category = $url_parts[3];
                     if($book["category_name"] === $category) {
                         require("templates/book.php");

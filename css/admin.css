@@ -1,3 +1,8 @@
+:root {
+    --main-orange: #df662a;
+    --main-gray: #e7e7e7;
+  }
+
 .admin-zone {
     margin-top: 120px;
 } 
@@ -6,9 +11,29 @@
     padding-left: 50px;
 }
 
-.add-book-container {
-    width: 50%;
+.add-book-container,
+.add-category-container,
+.remove-category-container,
+.remove-book-container  {
+    width: 60%;
+    background-color: var(--main-gray);
+    padding: 30px;
+    border-radius: 3px;
+    box-shadow: 0px 8px 10px rgba(57, 57, 57, 0.338);
+    margin-bottom: 50px;
 }
+
+.add-book-container h2,
+.add-category-container h2,
+.remove-category-container h2,
+.remove-book-container h2{
+    font-size: 2.1rem;
+    font-weight: normal;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgb(155, 155, 155);
+}
+
 
 .form-group {
     display: flex;
@@ -18,23 +43,29 @@
 .form-group label,
 .form-group input,
 .add-book-container button,
-.add-category-container button {
+.add-category-container button,
+.remove-category-container button,
+.remove-book-container button{
     font-size: 1.4rem;
 }
 
 .form-group label {
     margin-bottom: 10px;
-    font-weight: rgb(116, 116, 116);
+    font-weight: lighter;
 }
 
 
 .form-group input {
     padding: 7px 15px;
     margin-bottom: 15px;
+    color: rgb(52, 52, 52);
 }
 
-.add-book-container select {
+.add-book-container select,
+.remove-category-container select,
+.remove-book-container select {
     padding: 5px 10px;
+    margin-bottom: 15px;
 }
 
 .price,
@@ -58,13 +89,21 @@
 }
 
 .add-category-container button {
-    margin-top: 10px;
-    background-color: rgb(218, 142, 2);
+    background-color: rgb(206, 184, 13);
 }
 
+.remove-category-container button,
+.remove-book-container button{
+    background-color: rgb(215, 5, 5);
+}
+
+
 .add-book-container button,
-.add-category-container button {
+.add-category-container button,
+.remove-category-container button,
+.remove-book-container button {
     width: 100%;
+    margin-top: 10px;
     padding: 15px;
     border: none;
     border-radius: 4px;
@@ -78,7 +117,77 @@
     background-color: green;
 }
 
+.remove-category-container button:hover,
+.remove-book-container button:hover {
+    background-color: rgb(255, 4, 4);
+}
+
 .add-category-container {
     margin: 50px 0;
-    width: 50%;
+}
+
+
+@media screen and (max-width: 1400px) {
+    .add-book-container,
+    .add-category-container,
+    .remove-book-container,
+    .remove-category-container {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .add-book-container,
+    .add-category-container,
+    .remove-book-container,
+    .remove-category-container {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .add-book-container,
+    .add-category-container,
+    .remove-book-container,
+    .remove-category-container {
+        width: 100%;
+    }
+
+    .admin-zone main {
+        padding-left: 20px; 
+    }
+
+    .price,
+    .stock {
+        width: 15%;
+    }
+
+    .cover {
+        width: 60%;
+    }
+ 
+}
+
+
+  
+@media screen and (max-width: 760px) {
+    .add-book-container,
+    .add-category-container,
+    .remove-book-container,
+    .remove-category-container {
+        width: 100%;
+    }
+
+    .admin-zone main {
+        padding: 0 15px;
+    }
+
+    .price,
+    .stock {
+        width: 20%;
+    }
+
+    .cover {
+        width: 50%;
+    }
 }
