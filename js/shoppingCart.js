@@ -173,7 +173,7 @@ if(!scriptRunned) {
         let totalPrice = 0;
         for(let book of books) {
             totalPrice += book.price * book.quantity;
-            totalPrice = parseFloat(totalPrice);
+            totalPrice = Number(totalPrice.toFixed(2));
         }
         if(books.length < 1) {
             totalPrice = 0

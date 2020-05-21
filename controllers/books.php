@@ -23,15 +23,6 @@
     if(isset($_SESSION["user"])) {
         $wishlists = $model->getLists($_SESSION["user"]["user_id"]);
     }
-    
-    //$category = $url_parts[3];
-    // switch($category) {
-    //     case "health": require("views/categories/health.php"); break;
-    //     case "it": require("views/categories/it.php"); break;
-    //     case "psychology": require("views/categories/psychology.php"); break;
-    //     case "ebooks": require("views/categories/ebooks.php"); break;
-    //     case "textbooks": require("views/categories/textbooks.php"); break;
-    // }
 
     $category = $url_parts[3];
 

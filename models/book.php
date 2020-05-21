@@ -208,7 +208,12 @@
 
             $result = $query->fetch(PDO::FETCH_ASSOC);
 
-            return $result["category_id"];
+            if(isset($result["category_id"])) {
+                return $result["category_id"];
+            } else {
+                return false;
+            }
+
 
         }
 

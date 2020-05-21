@@ -39,7 +39,7 @@
         <script src="<?=$pathFix?>js/shoppingCart.js" defer></script>
         <?php } ?>
     <?php if($controller === "login") { ?>
-        <script src="<js/login.js" defer></script>
+        <script src="js/login.js" defer></script>
     <?php } ?>
     <?php if($controller === "register") { ?>
         <script src="js/register.js" defer></script>

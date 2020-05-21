@@ -797,7 +797,159 @@
   .d-block {
     display: block !important;
   }
-  
+
+    /*---------------------------------------------*/
+    /*-------------User data ----------------------*/
+    /*---------------------------------------------*/
+
+    #user-data {
+        width: 70%;
+        margin: 85px auto;
+        padding: 40px;
+        border-left: 1px solid rgba(51, 51, 51, 0.324);
+        border-right: 1px solid rgba(51, 51, 51, 0.324);
+        border-bottom: 1px solid rgba(51, 51, 51, 0.324);
+        box-shadow: 1px 3px 5px rgba(51, 51, 51, 0.262);
+        background-color: var(--main-gray);
+    }
+
+    #user-data header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        border-bottom: 1px solid rgb(36, 7, 7);
+    }
+
+    #user-data header div:first-child {
+        flex: 0 90%;
+    }
+
+    #user-data header div:last-child {
+        flex: 0 10%;
+        text-align: right;
+    }
+
+    #user-data h2 {
+        font-size: 1.6rem;
+        color: rgb(36, 7, 7);
+    }
+
+    #user-data header p {
+        font-size: 1.4rem;
+        padding-bottom: 20px;
+        color: rgb(36, 7, 7);
+    } 
+
+    .user-icon {
+        margin-right: 20px;
+        font-size: 2.3rem;
+        color: rgb(18, 36, 52);
+    }
+
+    .edit-data .edit-icon {
+        color: rgb(18, 36, 52);
+        cursor: pointer;
+    }
+
+    header .edit-icon {
+        font-size: 2.5rem;
+    } 
+
+    .edit-div {
+        padding: 10px;
+        margin-left: 5px;
+    }
+    .edit-data .edit-icon {
+        font-size: 1.3rem;
+    } 
+
+    .edit-data .edit-icon:hover {
+        color: rgb(27, 73, 113);
+    } 
+
+
+
+    .user-data-container {
+        display: flex;
+        flex-flow: row wrap;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .user-data-container div {
+        flex: 0 calc(50% - 2rem);
+        margin-right: 2rem;
+    }
+
+
+    .change-password-container div {
+        margin-bottom: 10px;
+    }
+
+    
+    .change-password-container label {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 1.4rem;
+        font-weight: bold;
+    }
+    
+    .change-password-container input{
+        width: 100%;
+        padding: 7px 10px;
+        font-size: 1.4rem;
+        border: none;
+        border-radius: 2px;
+    }
+
+    .change-password-container button {
+        margin-top: 10px;
+        width: 100%;
+        padding: 9px;
+        border: none;
+        border-radius: 2px;
+        color: var(--main-gray);
+        background-color: var(--main-orange);
+        cursor: pointer;
+        transition: background-color .1s ease;
+    }
+
+    .change-password-container button:hover {
+        background-color: #d54d0a;
+    }
+
+    .user-data-box div {
+        display: flex;
+        align-items: center;
+    }
+    
+    .user-data-box h3,
+    .change-password-container h3{
+        font-size: 1.6rem;
+    }
+
+    .user-data-box label {
+        margin-right: 5px;
+        font-weight: bold;
+    }
+
+    .user-data-box label, 
+    .user-data-box  p {
+        font-size: 1.4rem;
+    }
+
+    .user-data-box button {
+        position: relative;
+        z-index: 0;
+        padding: 3px;
+        cursor: pointer;
+    }
+    
+    .user-data-box .edit-icon {
+        position: relative;
+        z-index: -1;
+    }
+    
   /*---------------------------------------------*/
   /*-------------MEDIA QUERIES-------------------*/
   /*---------------------------------------------*/
@@ -932,13 +1084,17 @@
       right: 180px !important;
     }
   
-    #health-books,
+      #health-books,
       #it-books,
       #psychology-books,
       #ebooks-div,
       #text-books {
           margin-top: 50% !important;
       }
+
+      .user-data-container div {
+        flex: 0 100%;
+    }
   }
   
   @media screen and (max-width: 500px) {

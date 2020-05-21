@@ -12,7 +12,7 @@
         
         <div class="add-book-container">
             <h2>Adicione um livro</h2>
-            <form id="add-book-form"method="POST" action="<?=BASE_PATH."admin/booksManaging/addBook"?>" enctype="multipart/form-data">
+            <form id="add-book-form"method="POST" action="<?=BASE_PATH."admin/booksManaging"?>" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="name">Nome do livro</label>
                     <input type="text" id="name" name="name" class="form-control" required/>
@@ -53,13 +53,13 @@
                         <input type="number" id="isbn" name="isbn" class="form-control" min="0" max="9999999999999" required/>
                     </div>
                 </div>
-                <button type="submit" name="send">Adicionar</button>
+                <button type="submit" name="add-book">Adicionar</button>
             </form>
         </div>
 
         <div class="remove-book-container">
             <h2>Remova um livro</h2>
-            <form id="remove-book-form" method="POST" action="<?=BASE_PATH."admin/booksManaging/removeBook"?>">
+            <form id="remove-book-form" method="POST" action="<?=BASE_PATH."admin/booksManaging"?>">
                 <div class="form-group">
                     <label for="rm-book">Nome do Livro</label>
                     <select name="rm-book">
@@ -68,34 +68,34 @@
                         <?php } ?>
                     </select>
                 </div>
-                <button type="submit" name="send">Remover</button>
+                <button type="submit" name="remove-book">Remover</button>
             </form>
         </div>
 
         <div class="add-category-container">
             <h2>Adicione uma categoria</h2>
-            <form id="add-category-form" method="POST" action="<?=BASE_PATH."admin/booksManaging/addCategory"?>">
+            <form id="add-category-form" method="POST" action="<?=BASE_PATH."admin/booksManaging"?>">
                 <div class="form-group">
                     <label for="newCategory">Nome da Categoria</label>
                     <input type="text" id="newCategory" name="newCategory" class="form-control" required/>
                 </div>
-                <button type="submit" name="send">Adicionar</button>
+                <button type="submit" name="add-category">Adicionar</button>
             </form>
         </div>
 
 
         <div class="remove-category-container">
             <h2>Remova uma categoria</h2>
-            <form id="remove-category-form" method="POST" action="<?=BASE_PATH."admin/booksManaging/removeCategory"?>">
+            <form id="remove-category-form" method="POST" action="<?=BASE_PATH."admin/booksManaging"?>">
                 <div class="form-group">
                     <label for="rm-category">Nome da Categoria</label>
                     <select name="rm-category">
-                        <?php foreach($categories as $category) { ?>
+                        <?php foreach($categories as $category) { if((int)$category["active"] === 1) {?>
                             <option value="<?=$category["category_id"]?>"><?=$category["category_name"]?></option>
-                        <?php } ?>
+                        <?php } } ?>
                     </select>
                 </div>
-                <button type="submit" name="send">Remover</button>
+                <button type="submit" name="remove-category">Remover</button>
             </form>
         </div>
     

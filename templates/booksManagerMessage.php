@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administração de Livros</title>
-    <link rel="stylesheet" href="../../css/main.css">    
-    <link rel="stylesheet" href="../../css/checkOut.css">    
+    <link rel="stylesheet" href="../css/main.css">    
+    <link rel="stylesheet" href="../css/checkOut.css">    
 </head>
 <body id="success-order">
     <div class="message">
         <div class="brand-col-10">
             <div class="brand">
-                <img src="../../logo/book.svg" alt="logo">
+                <img src="../logo/book.svg" alt="logo">
                 <div class="brand-name">
                     <h1>MYPROJECT</h1>
                     <h1><span>Livreiros</span></h1>

@@ -29,8 +29,6 @@
             <li><a href="<?=BASE_PATH."admin/booksManaging"?>" class="<?=$booksActiveSate?>">Livros</a></li>
             <hr class="categories-hr">
             <li><a href="<?=BASE_PATH."admin/usersManaging"?>" class="<?=$usersActiveSate?>">Utilizadores</a></li>
-            <hr class="categories-hr">
-            <li><a href="<?=BASE_PATH."admin/ordersManaging"?>" class="<?=$ordersActiveSate?>">Encomendas</a></li>
         </ul>
     </div>
 

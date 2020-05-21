@@ -39,6 +39,23 @@
 
         }
 
+        public function getUsers() 
+        {
+
+            $query = $this->db->prepare("
+                SELECT  user_id, name, email, card_number, admin, active
+                FROM users
+            ");
+
+            $query->execute();
+            $data = $query->fetchAll(PDO::FETCH_ASSOC);
+
+            return $data;
+            
+
+
+        }
+
         public function getUser($id) 
         {
             
@@ -90,6 +107,30 @@
                 return false;
             }
 
+        }
+        
+        public function toggleBlockUser($user_id, $action) 
+        {
 
-        } 
+            if(empty($user_id) || !is_numeric($user_id)) {
+                return false;
+            }
+
+            if($action === "block") {
+                $active = 0;
+            } else if($action === "unblock") {
+                $active = 1;
+            }
+
+            $query = $this->db->prepare("
+                UPDATE users 
+                SET active = ?
+                WHERE user_id = ?
+            ");
+
+            $result = $query->execute([$active, $user_id]);
+
+            return $result;
+
+        }
     }

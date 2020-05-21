@@ -22,8 +22,8 @@ formsArray.forEach((form) => {
         switch(form.id) {
             case "add-book-form": resourceName = "adicionar o Livro"; break; 
             case "remove-book-form": resourceName = "remover o Livro"; break; 
-            case "add-category-form": resourceName = "adicionar Categoria"; break; 
-            case "remove-category-form": resourceName = "remover Categoria"; break; 
+            case "add-category-form": resourceName = "adicionar a Categoria"; break; 
+            case "remove-category-form": resourceName = "remover a Categoria"; break; 
         }
 
         const affirmative = confirm("Têm a certeza que pretende " + resourceName);

@@ -50,13 +50,13 @@
                         <li><a href="<?= BASE_PATH . "admin" ?>">Área Administrativa</a></li>
                     <?php  } ?>
                     <hr class="menu-hr">
-                    <li><a href="#">Lista de Desejos</a></li>
+                    <li><a href="<?=BASE_PATH."wishlists"?>">Lista de Desejos</a></li>
                     <hr class="menu-hr">
                     <li><a href="#">Ajuda</a></li>
                     <hr class="menu-hr">
                     <li><a href="#">Novo Registo</a></li>
                     <hr class="menu-hr">
-                    <li><a href="#">Dados Pessoais</a></li>
+                    <li><a href="<?=BASE_PATH."users/userData"?>">Dados Pessoais</a></li>
                     <hr class="menu-hr">
                     <li><a href="#">Encomendas</a></li>
                     <hr class="menu-hr">

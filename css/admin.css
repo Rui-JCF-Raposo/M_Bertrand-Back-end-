@@ -93,7 +93,8 @@
 }
 
 .remove-category-container button,
-.remove-book-container button{
+.remove-book-container button,
+.block-user {
     background-color: rgb(215, 5, 5);
 }
 
@@ -112,19 +113,97 @@
     transition: background-color .1s ease;
 }
 
+
 .add-book-container button:hover,
-.add-category-container button:hover {
+.add-category-container button:hover,
+.send-message-user:hover {
     background-color: green;
 }
 
 .remove-category-container button:hover,
-.remove-book-container button:hover {
-    background-color: rgb(255, 4, 4);
+.remove-book-container button:hover,
+.block-user:hover {
+    background-color: rgb(140, 2, 2);
 }
 
 .add-category-container {
     margin: 50px 0;
 }
+
+#users-info {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.user-box {
+    flex: 0 calc(33.33% - 2em);
+    margin-right: 2em;
+    margin-top: 20px;
+    padding: 20px;
+    text-align: center;
+    background-color: var(--main-gray);
+    box-sizing: border-box;
+    border-radius: 3px;
+    box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.16);
+}
+
+.user-options {
+    display: flex;
+}
+
+.user-box h2 {
+    font-weight: normal;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgb(155, 155, 155);
+}
+
+.user-box h2,
+.user-box p {
+    color: #333;
+}
+
+.user-box p {
+    font-size: 1.2rem;
+}
+
+.user-box span{
+    font-weight: lighter;
+}
+
+.user-box button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px 15px;
+    border: none;
+    border-right: 5px solid  var(--main-gray);
+    border-left: 5px solid  var(--main-gray);
+    border-radius: 5px;
+}
+
+.block-user,
+.send-message-user {
+    color: var(--main-gray);
+    cursor: pointer;
+}
+
+.user-box form {
+    width: 100%;
+}
+
+.send-message-user {
+    background-color: lightseagreen;
+}
+
+.unblock-user {
+    background-color: steelblue;
+    color: var(--main-gray);
+    cursor: pointer;
+}
+
+.unblock-user:hover {
+    background-color: rgb(55, 106, 148);
+}
+
 
 
 @media screen and (max-width: 1400px) {
