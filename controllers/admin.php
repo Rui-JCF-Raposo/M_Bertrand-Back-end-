@@ -1,8 +1,8 @@
 <?php
 
     if(!isset($_SESSION["user"]) || (int)$_SESSION["user"]["admin"] !== 1) {
-        header("HTTP/1.1 401 Unauthorized");
-        die("401 Unauthorized");
+        header("HTTP/1.1 403 Forbidden");
+        die("403 Forbidden");
     }
 
     if(isset($url_parts[3])) {
@@ -27,7 +27,7 @@
             $data = $_POST;
             $img_file = $_FILES["book_cover"];                    
             $rowsAffected = $bookModel->createBook($data, $img_file);
-            $result_2 = $bookModel->enableCategory($data["category"]);
+            $result_2 = $bookModel->enableCategory($data["category"], "create_book");
 
             if($rowsAffected > 0 && $result_2) {
                 $book_created = true;
@@ -67,11 +67,11 @@
             $category_id = $bookModel->getCategoryByName(strtolower($_POST["newCategory"]));
             if(!empty($category_id)) {
                 
-                $enabled = $bookModel->enableCategory($category_id);
+                $enabled = $bookModel->enableCategory($category_id, "crated_category");
                 if($enabled) {
-                    $created_category = true;
+                    $repetition = true;
                 } else {
-                    $created_category = false;
+                    $repetition = false;
                 }
                 
                 require("templates/booksManagerMessage.php");
@@ -100,11 +100,25 @@
                 die("400 Bad Request");
             }
 
-            $result = $bookModel->disableCategory($_POST["rm-category"]);
-            if($result) {
-                $category_removed = true;
-            } else {
-                $category_removed = false;
+            $books = $bookModel->getBooks();
+            $category_contains_books = false;
+
+            foreach($books as $book) {
+                if($book["category_id"] === $_POST["rm-category"]) {
+                    $category_contains_books = true;
+                    break;
+                }
+            }
+
+            if(!$category_contains_books) {
+                
+                $result = $bookModel->removeCategory($_POST["rm-category"]);
+                if($result) {
+                    $category_removed = true;
+                } else {
+                    $category_removed = false;
+                }
+
             }
 
             require("templates/booksManagerMessage.php");

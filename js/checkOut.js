@@ -88,7 +88,7 @@ async function genarateCheckOutProducts() {
         <tr class="table-product-row table-product-footer">
             <td colspan="3"></td>
             <td colspan="">TOTAL</td>
-            <td class="checkOut-total">${totalPrice}€</td>
+            <td class="checkOut-total">${totalPrice.toFixed(2)}€</td>
         </tr>
     `;
     checkOutProductsOutput.innerHTML += html2;

@@ -11,6 +11,7 @@
             if(
                 !empty($data["userName"]) && mb_strlen($data["userName"]) >= 2 &&
                 filter_var($data["email"], FILTER_VALIDATE_EMAIL) &&
+                mb_strlen($data["email"]) <= 254 &&
                 !empty($data["password"]) && !empty($data["passwordConfirm"]) &&
                 $data["password"] === $data["passwordConfirm"] &&
                 mb_strlen($data["password"]) >= 6 
@@ -131,6 +132,117 @@
             $result = $query->execute([$active, $user_id]);
 
             return $result;
+
+        }
+
+        public function updateUserName($name) 
+        {
+
+            $name = strip_tags(trim($name));
+
+            if(!empty($name) && is_string($name) && mb_strlen($name) > 2) {
+
+                $query = $this->db->prepare("
+                    UPDATE users
+                    SET name = ? 
+                    WHERE user_id = ?
+                ");
+                $result = $query->execute([$name, $_SESSION["user"]["user_id"]]);
+                return $result;
+
+            }
+        }
+
+        public function updateUserEmail($email) 
+        {
+            $email = strip_tags(trim($email));
+
+            if(
+                !empty($email) && 
+                is_string($email) && 
+                mb_strlen($email) <= 254 &&
+                filter_var($email, FILTER_VALIDATE_EMAIL)
+            ) {
+
+                $query = $this->db->prepare("
+                    UPDATE users
+                    SET email = ?
+                    WHERE user_id = ?
+                ");
+
+                $result = $query->execute([$email, $_SESSION["user"]["user_id"]]);
+
+                return $result;
+
+            }
+        }
+
+        public function updateUserCardNumber($card_number) 
+        {
+            
+            if(
+                !empty($card_number) && 
+                is_numeric($card_number) &&
+                mb_strlen($card_number) <= 10
+            ) {
+
+                $query = $this->db->prepare("
+                    UPDATE users
+                    SET card_number = ?
+                    WHERE user_id = ?
+                ");
+
+                $result = $query->execute([$card_number, $_SESSION["user"]["user_id"]]);
+
+                return $result;
+
+            }
+
+        }
+
+        public function updatePassword($data) 
+        {
+
+            if(
+                !empty($data["current_password"]) &&
+                !empty($data["new_password"]) &&
+                !empty($data["rep_new_password"]) &&
+                $data["new_password"] === $data["rep_new_password"] &&
+                mb_strlen($data["new_password"]) >= 6 &&
+                mb_strlen($data["rep_new_password"]) >= 6 
+            ) {
+                
+                $query = $this->db->prepare("
+                    SELECT password
+                    FROM users
+                    WHERE user_id = ?
+                ");
+
+                $query->execute([$_SESSION["user"]["user_id"]]);
+                $user = $query->fetch(PDO::FETCH_ASSOC);
+
+                if(password_verify($data["current_password"], $user["password"])) {
+                    
+                    $update_query = $this->db->prepare("
+                        UPDATE users
+                        SET password = ?
+                        WHERE user_id = ?
+                    ");
+
+                    $result = $update_query->execute([
+                        password_hash($data["new_password"], PASSWORD_DEFAULT),
+                        $_SESSION["user"]["user_id"]
+                    ]);
+
+                    return $result;
+                
+                } else {
+                    return false;
+                }
+
+            } else {
+                return false;
+            }
 
         }
     }

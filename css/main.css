@@ -928,7 +928,8 @@
         font-size: 1.6rem;
     }
 
-    .user-data-box label {
+    .user-data-box span {
+        font-size: 1.4rem;
         margin-right: 5px;
         font-weight: bold;
     }
@@ -948,6 +949,23 @@
     .user-data-box .edit-icon {
         position: relative;
         z-index: -1;
+    }
+
+    .user-data-container .password-error {
+        padding: 10px;
+        font-size: 1.3rem;
+        background-color: rgb(230, 202, 154);
+    }
+
+    .hide {
+        display: none;
+    }
+
+    /*------------------------------------------*/
+    /*---------------ORDERS PAGE----------------*/
+    /*------------------------------------------*/
+    #orders-main {
+        margin: 130px 0 0 300px;
     }
     
   /*---------------------------------------------*/
@@ -1054,13 +1072,17 @@
       right: 150px !important;
     }
   
-      #health-books,
-      #it-books,
-      #psychology-books,
-      #ebooks-div,
-      #text-books {
-          margin-top: 30% !important;
-      }
+    #health-books,
+    #it-books,
+    #psychology-books,
+    #ebooks-div,
+    #text-books {
+        margin-top: 30% !important;
+    }
+
+    #orders-main {
+        margin: 130px 20px 0 20px;
+    }
   
   }
   
@@ -1073,6 +1095,7 @@
           margin-top: 40% !important;
           justify-content: center;
       }
+      
   }
   
   @media screen and (max-width: 580px) {

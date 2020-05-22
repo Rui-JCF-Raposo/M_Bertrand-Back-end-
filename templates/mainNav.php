@@ -1,14 +1,13 @@
 <?php
     $pathFix = isset($url_parts[3]) ? "../" : "";
     
-    $shopcartTotalItems = "";
+    $shopcartTotalItems = 0;
     if(isset($_SESSION["shopcart_books"])) {
         foreach($_SESSION["shopcart_books"] as $book) {
-            $shopcartTotalItems += $book["quantity"];
+           $shopcartTotalItems += $book["quantity"];
         }
     }
 ?>
-
 <nav>
     <div class="brand-col-10">
         <div class="brand">
@@ -58,7 +57,7 @@
                     <hr class="menu-hr">
                     <li><a href="<?=BASE_PATH."users/userData"?>">Dados Pessoais</a></li>
                     <hr class="menu-hr">
-                    <li><a href="#">Encomendas</a></li>
+                    <li><a href="<?=BASE_PATH."orders"?>">Encomendas</a></li>
                     <hr class="menu-hr">
                     <li><a href="#">Trocas e Devoluçoes</a></li>
                     <hr class="menu-hr">

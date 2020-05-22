@@ -24,9 +24,9 @@
                 <div class="form-group">
                     <label for="category">Categoria</label>
                     <select name="category" id="category" id="category" class="form-control" required>
-                        <?php foreach($categories as $category) { ?>
+                        <?php foreach($categories as $category) { {?>
                             <option value="<?=$category["category_id"]?>"><?=$category["category_name"]?></option>
-                        <?php } ?>
+                        <?php } } ?>
                     </select>
                 </div>
                 <div class="col-3">
@@ -57,21 +57,6 @@
             </form>
         </div>
 
-        <div class="remove-book-container">
-            <h2>Remova um livro</h2>
-            <form id="remove-book-form" method="POST" action="<?=BASE_PATH."admin/booksManaging"?>">
-                <div class="form-group">
-                    <label for="rm-book">Nome do Livro</label>
-                    <select name="rm-book">
-                        <?php foreach($books as $book) { ?>
-                            <option value="<?=$book["book_id"]?>"><?=$book["title"]?></option>
-                        <?php } ?>
-                    </select>
-                </div>
-                <button type="submit" name="remove-book">Remover</button>
-            </form>
-        </div>
-
         <div class="add-category-container">
             <h2>Adicione uma categoria</h2>
             <form id="add-category-form" method="POST" action="<?=BASE_PATH."admin/booksManaging"?>">
@@ -83,6 +68,20 @@
             </form>
         </div>
 
+        <div class="remove-book-container">
+            <h2>Remova um livro</h2>
+            <form id="remove-book-form" method="POST" action="<?=BASE_PATH."admin/booksManaging"?>">
+                <div class="form-group">
+                    <label for="rm-book">Nome do Livro</label>
+                    <select name="rm-book">
+                        <?php foreach($books as $book) { ?>
+                            <option value="<?=$book["book_id"]?>"><?=$book["title"]?>  (<?=strtoupper($book["category_name"])?>)</option>
+                        <?php } ?>
+                    </select>
+                </div>
+                <button type="submit" name="remove-book">Remover</button>
+            </form>
+        </div>
 
         <div class="remove-category-container">
             <h2>Remova uma categoria</h2>
@@ -90,7 +89,7 @@
                 <div class="form-group">
                     <label for="rm-category">Nome da Categoria</label>
                     <select name="rm-category">
-                        <?php foreach($categories as $category) { if((int)$category["active"] === 1) {?>
+                        <?php foreach($categories as $category) { if((int)$category["removed"] === 0 ) {?>
                             <option value="<?=$category["category_id"]?>"><?=$category["category_name"]?></option>
                         <?php } } ?>
                     </select>

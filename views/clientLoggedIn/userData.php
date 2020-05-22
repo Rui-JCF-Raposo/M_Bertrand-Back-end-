@@ -1,17 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MY PROJECT - Meu Perfil</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Baskervville&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js">
-    <link rel="stylesheet" href="../css/main.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
-    <script src="../js/userData.js" defer></script>
-</head>
+
+<?php require("templates/mainHeader.php");?>
+
 <body>
     
     <?php require("templates/mainNav.php")?>
@@ -35,21 +26,23 @@
 
                 <div class="change-password-container">
                     <h3>Alterar Password</h3>
-                    <form method="POST" action="">
+                    <form method="POST" action="<?=BASE_PATH."users"?>">
                         <div>
                             <label for="current-password">Insira a password Atual</label>
-                            <input type="password" name="current-password" id="current-password">
+                            <input type="password" name="current_password" id="current-password" minlength="6" required>
                         </div>
                         <div>
                             <label for="new-password">Insira a nova password</label>
-                            <input type="password" name="new-password" id="new-password">
+                            <input type="password" name="new_password" id="new-password" minlength="6" required>
                         </div>
                         <div>
                             <label for="rep-new-password">Repita a nova password</label>
-                            <input type="password" name="rep-new-password" id="rep-new-password">
+                            <input type="password" name="rep_new_password" id="rep-new-password" minlength="6" required>
+                            <p class="password-error hide">As passwords não são idênticas...</p>
                         </div>
                         <div>
-                            <button type="submit" name="new-password">Alterar</button>
+                            <input type="hidden" name="change_password">
+                            <button type="submit">Alterar</button>
                         </div>
                     </form>
                 </div>
@@ -58,7 +51,7 @@
                     <h3>Altere os seus dados</h3>
                     <div>
                         <div>
-                            <label for="name">Nome: </label>
+                            <span data-name="name">Nome: </span>
                             <p id="name"><?=$_SESSION["user"]["name"]?></p>
                         </div>
                         <button class="edit-field">
@@ -67,7 +60,7 @@
                     </div>
                     <div>
                         <div>
-                            <label for="email">Email: </label>
+                            <span data-name="email">Email: </span>
                             <p id="email"><?=$_SESSION["user"]["email"]?></p>
                         </div>
                         <button class="edit-field">
@@ -76,8 +69,8 @@
                     </div>
                     <div>
                         <div>
-                            <label for="card">Cartão Bertrand: </label>
-                            <p id="cart"><?=$_SESSION["user"]["card_number"]?></p>
+                            <span data-name="card_number">Cartão Bertrand: </span>
+                            <p id="card"><?=(int)$_SESSION["user"]["card_number"] === 0 ? "Null":$_SESSION["user"]["card_number"] ?></p>
                         </div>
                         <button class="edit-field">
                             <i class="fas fa-pen edit-icon"></i>

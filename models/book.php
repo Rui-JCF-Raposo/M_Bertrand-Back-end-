@@ -9,6 +9,7 @@
                 SELECT *
                 FROM books AS b
                 INNER JOIN book_categories AS bc ON(b.category = bc.category_id)
+                ORDER BY category_name ASC
             ");
             $query->execute();
             $data = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -170,14 +171,13 @@
 
         }
         
-        public function disableCategory($id) 
+        public function removeCategory($id) 
         {
 
             if(!empty($id) && is_numeric($id) && $id > 0) {
 
                 $updateQueery = $this->db->prepare("
-                        UPDATE book_categories
-                        SET active = 0
+                        DELETE FROM book_categories
                         WHERE category_id = ?
                 ");
     
@@ -234,6 +234,5 @@
             return $result;
 
         }
-
 
     }

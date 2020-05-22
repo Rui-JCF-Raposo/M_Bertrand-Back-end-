@@ -45,6 +45,9 @@
         <?php } else if(isset($category_removed) && $category_removed === false) { ?>
             <h2>Erro ao remover categoria</h2>
         <?php } ?>
+        <?php if(isset($category_contains_books) && $category_contains_books) { ?>
+            <h2>Atenção, a categoria contém livros</h2>
+        <?php } ?>
         </div>
         <div>
             <a href="<?=BASE_PATH."admin/booksManaging"?>">

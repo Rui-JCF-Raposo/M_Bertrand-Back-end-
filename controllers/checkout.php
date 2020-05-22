@@ -1,7 +1,7 @@
 <?php
 
-    require("models/checkout.php");
-    $checkoutModel = new Checkout();
+    require("models/order.php");
+    $orderModel = new Order();
 
     if(isset($_GET["order"]) && $_GET["order"] === "true") {
         
@@ -20,8 +20,8 @@
         $user_id = $_SESSION["user"]["user_id"];
 
 
-        $order_id = $checkoutModel->createOrder($user_id, $books);
-        $result = $checkoutModel->createOrderDetails($order_id, $books);
+        $order_id = $orderModel->createOrder($user_id, $books);
+        $result = $orderModel->createOrderDetails($order_id, $books);
 
         if($result) {
             header("HTTP/1.1 202 Accepted");

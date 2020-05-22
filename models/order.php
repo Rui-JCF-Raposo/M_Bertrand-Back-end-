@@ -1,7 +1,7 @@
 <?php 
-    require("base.php");
+    require("book.php");
 
-    class Checkout extends Base {
+    class Order extends Book {
 
 
         public function createOrder($user_id, $books) 
@@ -83,5 +83,25 @@
             }
             return $total;
         }
+
+        public function getUserOrders() 
+        {
+
+            $query = $this->db->prepare("
+                SELECT 
+                    o.order_id, o.paid, o.order_date, o.delivered_date, o.price, o.active, od.book_id, od.quantity
+                FROM 
+                    orders AS o
+                INNER JOIN 
+                    orders_details AS od USING(order_id)
+                WHERE 
+                    user_id = ?
+            ");
+
+            $query->execute([$_SESSION["user"]["user_id"]]);
+            $data = $query->fetchAll(PDO::FETCH_ASSOC);
+            return $data;
+
+        }   
 
     }
