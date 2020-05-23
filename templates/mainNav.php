@@ -1,5 +1,8 @@
 <?php
     $pathFix = isset($url_parts[3]) ? "../" : "";
+    if(isset($url_parts[4])) {
+        $pathFix = "../../";
+    }
     
     $shopcartTotalItems = 0;
     if(isset($_SESSION["shopcart_books"])) {

@@ -1,6 +1,7 @@
 <?php
 if (isset($url_parts[2])) {
     switch ($url_parts[2]) {
+        case "": $title = "Página Inicial"; break;
         case "home": $title = "Página Inicial"; break;
         case "login": $title = "Login"; break;
         case "register": $title = "Registo"; break;
@@ -24,6 +25,9 @@ if (isset($url_parts[3]) && $url_parts[2] === "books") {
 }
 
 $pathFix = isset($url_parts[3]) ? "../" : "";
+if(isset($url_parts[4])) {
+    $pathFix = "../../";
+}
 
 ?>
 <head>
@@ -69,7 +73,12 @@ $pathFix = isset($url_parts[3]) ? "../" : "";
     <?php if ($controller === "orders" || $controller === "users") { ?>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
-        <script src="../js/userData.js" defer></script>
+    <?php } ?>
+    <?php if ($controller === "orders") { ?>
+        <link rel="stylesheet" href="<?= $pathFix ?>css/checkOut.css">
+        <script src="<?=$pathFix?>js/orders.js" defer></script>
+    <?php } else if ($controller === "users") { ?>
+        <script src="<?=$pathFix?>js/userData.js" defer></script>
     <?php } ?>
     <script src="<?= $pathFix ?>js/shoppingCart.js" defer></script>
     <script src="<?= $pathFix ?>js/clientList.js" defer></script>

@@ -89,19 +89,72 @@
 
             $query = $this->db->prepare("
                 SELECT 
-                    o.order_id, o.paid, o.order_date, o.delivered_date, o.price, o.active, od.book_id, od.quantity
+                    o.order_id, o.paid, o.order_date, o.delivered_date, o.price, o.active, od.book_id,
+                    SUM(od.quantity) AS quantity
                 FROM 
                     orders AS o
-                INNER JOIN 
+                LEFT JOIN 
                     orders_details AS od USING(order_id)
                 WHERE 
-                    user_id = ?
+                    user_id = ? AND o.active = 1
+                GROUP BY o.order_id
             ");
 
             $query->execute([$_SESSION["user"]["user_id"]]);
             $data = $query->fetchAll(PDO::FETCH_ASSOC);
             return $data;
 
-        }   
+        } 
+        
+        public function getOrderById($order_id) 
+        {
+
+            if(empty($order_id) || !is_numeric($order_id)) {
+                return false;
+            }
+
+            $query = $this->db->prepare("
+                SELECT 
+                    o.order_id, od.price, o.active, od.book_id, od.quantity, b.title, b.cover
+                FROM 
+                    orders AS o
+                INNER JOIN 
+                    orders_details AS od USING(order_id)
+                LEFT JOIN
+                    books as b USING(book_id)
+                WHERE 
+                    user_id = ? AND o.active = 1 AND o.order_id = ?
+            ");
+
+            $query->execute([
+                $_SESSION["user"]["user_id"],
+                $order_id
+            ]);
+
+            $data = $query->fetchAll(PDO::FETCH_ASSOC);
+
+            return $data;
+
+        }
+        
+        public function cancelOrder($order_id)
+        {
+
+            if(empty($order_id) || !is_numeric($order_id)) {
+                return false;
+            }
+
+            $query = $this->db->prepare("
+                UPDATE orders
+                SET active = 0
+                WHERE user_id = ? AND order_id = ?
+            ");
+
+            $query->execute([
+                $_SESSION["user"]["user_id"],
+                $order_id
+            ]);
+
+        }
 
     }

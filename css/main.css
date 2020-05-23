@@ -867,8 +867,6 @@
         color: rgb(27, 73, 113);
     } 
 
-
-
     .user-data-container {
         display: flex;
         flex-flow: row wrap;
@@ -881,12 +879,10 @@
         margin-right: 2rem;
     }
 
-
     .change-password-container div {
         margin-bottom: 10px;
     }
 
-    
     .change-password-container label {
         display: block;
         margin-bottom: 5px;
@@ -967,6 +963,81 @@
     #orders-main {
         margin: 130px 0 0 300px;
     }
+
+    #orders-main table {
+        width: 95%;
+        margin-bottom: 60px;
+        border-collapse: collapse;
+        text-align: center;
+    }
+
+    .see-details svg,
+    .cancel-order svg {
+        position: relative;
+        font-size: 1.4rem;
+        z-index: -1;
+    }
+
+    .see-details,
+    .cancel-order {
+        position: relative;
+        padding: 3px;
+        cursor: pointer;
+        z-index: 1;
+    }
+
+    .see-details {
+        color: rgb(38, 72, 99);
+    }
+
+    .cancel-order {
+        color: rgb(142, 1, 1);
+    }
+
+    #orders-main h2,
+    #order-details-main h2 {
+        font-size: 2rem;
+        font-weight: normal;
+    }
+
+    #orders-main tr {
+        border-bottom: 1px solid rgb(208, 208, 208);
+    }
+
+    #orders-main th {
+        font-size: 1.2rem;
+        padding: 15px;
+        border-right: 1px solid #FFF;
+        background-color: lightgoldenrodyellow;
+    }
+
+    #orders-main td {
+        padding: 10px;
+        font-size: 1.1rem;
+        border-right: 1px solid rgb(208, 208, 208);
+    }
+
+    #orders-main td:last-child {
+        border-right: none;
+    }
+
+    #order-details-main{
+        width: 70%;
+        margin: 140px 330px;
+    }
+
+    #order-details-main button {
+        position: relative;
+        left: 70%;
+        padding: 15px 30px;
+        font-size: 1.4rem;
+        border: none;
+        border-radius: 2px;
+        background-color: var(--main-orange);
+        color: var(--main-gray);
+        cursor: pointer;
+    }
+
     
   /*---------------------------------------------*/
   /*-------------MEDIA QUERIES-------------------*/
@@ -1007,6 +1078,35 @@
   
   }
   
+  @media screen and (max-width: 1140px) {
+
+    .od-price {
+        display: none;
+    }
+
+    #order-details-main {
+        width: 65%;
+    }
+
+  }
+
+  @media screen and (max-width: 980px) {
+    .require-date,
+    .order-number {
+        display: none;
+    }
+
+    #order-details-main{
+        width: 55%;
+    }
+
+    #order-details-main button {
+        left: 50%;
+    }
+
+  }
+
+  
   @media screen and (max-width: 870px) {
     .search-col-70 {
       display: none;
@@ -1039,6 +1139,11 @@
     .footer-box {
       text-align: center;
     }
+
+
+    #order-details-main button {
+        left: 30%;
+    }
   
   }
   
@@ -1048,7 +1153,7 @@
       width: 100%;
       height: 400px;
       margin-top: 76px;
-      z-index: 1;
+      z-index: 2;
       box-shadow:  1px 3px 10px rgba(51, 51, 51, 0.475);
     }
   
@@ -1083,6 +1188,16 @@
     #orders-main {
         margin: 130px 20px 0 20px;
     }
+
+    #order-details-main {
+        margin: 200px auto 0 auto;
+        width: 90% !important;
+    }
+
+    #order-details-main button {
+        left: 50%;
+    }
+
   
   }
   
@@ -1118,6 +1233,19 @@
       .user-data-container div {
         flex: 0 100%;
     }
+
+    .payment {
+        display: none;
+    }
+
+    #orders-main {
+        margin-left: 0;
+        margin-top: 120px;
+    }
+
+    #orders-main table {
+        width: 100%;
+    }
   }
   
   @media screen and (max-width: 500px) {
@@ -1139,6 +1267,10 @@
   
     nav .cliente-dropdown {
       right: 110px !important;
+    }
+
+    #order-details-main button {
+        left: 25%;
     }
   }
   

@@ -9,32 +9,43 @@
     <?php require("templates/categoriesNav.php") ?>
 
     <main id="orders-main">
-        <header>
-            <h2>Aqui encontram-se as suas encomendas <?=$_SESSION["user"]["name"]?></h2>    
-        </header>  
         <section>
-            <h2>Encomendas</h2>
+            <h2>As suas encomendas, estimado/a <?=$_SESSION["user"]["name"]?>.</h2>
             <table>
                 <tr>
-                    <th>Número de encomenda</th>
+                    <th class="order-number">Número de encomenda</th>
                     <th>Quantidade</th>
-                    <th>Pagamento</th>
-                    <th>Data de Requisição</th>
+                    <th class="payment">Pagamento</th>
+                    <th class="require-date">Data de Requisição</th>
                     <th>Data de entrega</th>
                     <th>Preço</th>
                     <th>Detalhes</th>
                     <th>Cancelar</th>
                 </tr>
                 <?php foreach($orders as $order) { ?>
-                    <tr>
-                        <td><?=$order["order_id"]?></td>
+                    <tr data-order_id="<?=$order["order_id"]?>">
+                        <td class="order-number"><?=$order["order_id"]?></td>
                         <td><?=$order["quantity"]?></td>
-                        <td><?=$order["paid"] === 0 ? "Pendente":"Pago" ?></td>
-                        <td><?=$order["order_date"]?></td>
+                        <td class="payment"><?=(int)$order["paid"] === 0 ? "Pendente":"Pago" ?></td>
+                        <td class="require-date"><?=$order["order_date"]?></td>
                         <td><?=strtotime($order["delivered_date"]) < 0 ? "Por entregar":"Entregue" ?></td>
                         <td><?=$order["price"]?>€</td>
-                        <th><i class="far fa-eye"></i></th>
-                        <td>X</td>
+                        <td>
+                            <a href="<?=BASE_PATH."orders/details/".$order["order_id"]?>">
+                                <button class="see-details">
+                                    <i class="far fa-eye"></i>
+                                </button>
+                            </a>
+                        </td>
+                        <td>
+                            <?php if (strtotime($order["delivered_date"]) < 0 ) { ?>
+                                <button class="cancel-order">
+                                    <i class="far fa-calendar-times"></i>
+                                </button>
+                            <?php } else { ?>
+                                Fechada
+                            <?php } ?>
+                        </td>
                     </tr>
                 <?php } ?>
             </table>
