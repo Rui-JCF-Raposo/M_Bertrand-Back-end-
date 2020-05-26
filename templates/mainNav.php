@@ -56,15 +56,9 @@
                     <hr class="menu-hr">
                     <li><a href="#">Ajuda</a></li>
                     <hr class="menu-hr">
-                    <li><a href="#">Novo Registo</a></li>
-                    <hr class="menu-hr">
                     <li><a href="<?=BASE_PATH."users/userData"?>">Dados Pessoais</a></li>
                     <hr class="menu-hr">
                     <li><a href="<?=BASE_PATH."orders"?>">Encomendas</a></li>
-                    <hr class="menu-hr">
-                    <li><a href="#">Trocas e Devoluçoes</a></li>
-                    <hr class="menu-hr">
-                    <li><a href="#">Cartão Leitor Bertrand</a></li>
                 </ul>
             </li>
             <li class="menu-ajuda">

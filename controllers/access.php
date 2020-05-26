@@ -14,14 +14,17 @@
     // Taking care of registration -------------
     if(isset($_POST["register_send"]) && $url_parts[3] === "register") {
 
-        $user_id= $model->create($_POST);
+        $user_id = $model->create($_POST);
         if(!$user_id) {
 
-            header("Location: ".BASE_PATH."register");
+            $register_failed = true;
+            //header("Location: ".BASE_PATH."register");
+            require("templates/accessMessage.php");
 
         } else {
 
             $user = $model->getUser($user_id);
+            //print_r($user); exit;
             $_SESSION["user"] = $user;
             header("Location: ".BASE_PATH."dashboard");
             
@@ -34,7 +37,10 @@
         $user = $model->validateLogin($_POST);
         if(!$user) {
             
-            header("Location: ".BASE_PATH."login");
+            $login_failed = true;
+            //header("Location: ".BASE_PATH."login");
+            require("templates/accessMessage.php");
+            exit;
         
         } else {
             

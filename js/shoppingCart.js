@@ -12,10 +12,15 @@ if(!scriptRunned) {
     if(
         window.location.href === "http://localhost/M_Bertrand-Back-end-/home" ||
         window.location.href === "http://localhost/M_Bertrand-Back-end-/dashboard" ||
-        window.location.href === "http://localhost/M_Bertrand-Back-end-/wishlists" 
+        window.location.href === "http://localhost/M_Bertrand-Back-end-/wishlists" ||
+        window.location.href === "http://localhost/M_Bertrand-Back-end-/orders"
     ) {
         pathPreFix = "";
     } 
+
+    if( window.location.href.includes("http://localhost/M_Bertrand-Back-end-/orders/details")) {
+        pathPreFix = "../../"
+    }
 
     function getBooks() {
         fetch(pathPreFix + "controllers/shoppingcart.php?getSession", {method: "GET"})
@@ -24,6 +29,7 @@ if(!scriptRunned) {
                 books = data;
                 addShopcartFooter();
             })
+            .catch(err => console.log(err))
     }
 
     getBooks();

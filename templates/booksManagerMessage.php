@@ -46,7 +46,7 @@
             <h2>Erro ao remover categoria</h2>
         <?php } ?>
         <?php if(isset($category_contains_books) && $category_contains_books) { ?>
-            <h2>Atenção, a categoria contém livros</h2>
+            <h2>Erro, a categoria contém livros</h2>
         <?php } ?>
         </div>
         <div>

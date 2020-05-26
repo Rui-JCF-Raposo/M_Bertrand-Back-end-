@@ -115,7 +115,7 @@
 
             $query = $this->db->prepare("
                 SELECT 
-                    o.order_id, od.price, o.active, od.book_id, od.quantity, b.title, b.cover
+                    o.order_id, o.user_id, od.price, o.active, od.book_id, od.quantity, b.title, b.cover
                 FROM 
                     orders AS o
                 INNER JOIN 
@@ -150,11 +150,172 @@
                 WHERE user_id = ? AND order_id = ?
             ");
 
-            $query->execute([
+            $result = $query->execute([
                 $_SESSION["user"]["user_id"],
                 $order_id
             ]);
 
+            return $result;
+
+        }
+
+        public function updateOrderQuantity($data) 
+        {
+
+            $data = $this->sanitizer($data);
+
+            if(
+                !empty($data["order_id"]) &&
+                !empty($data["book_id"]) &&
+                is_numeric($data["order_id"]) &&
+                is_numeric($data["quantity"]) && 
+                is_numeric($data["book_id"]) &&
+                $data["quantity"] >= 0
+            ){
+
+                $newTotal = $this->calculateBookQuantityPrice($data["book_id"], $data["quantity"]);
+
+                $query = $this->db->prepare("
+                    UPDATE orders_details
+                    SET quantity = ?, price = ?
+                    WHERE order_id = ? AND book_id = ?
+                ");
+
+                $result = $query->execute([
+                    $data["quantity"],
+                    $newTotal,
+                    $data["order_id"],
+                    $data["book_id"]
+                ]);
+
+                if($result) { 
+                    return  $newTotal;
+                } else {
+                    return false;
+                }
+
+            } else {
+                return false;
+            }
+
+        }
+
+        public function calculateBookQuantityPrice($book_id, $quantity) 
+        {
+            
+            $books = $this->getBooks();
+            foreach($books as $book) {
+                if($book["book_id"] === $book_id) {
+                    $total = $book["price"] * $quantity;
+                }
+            }
+
+            if($total) {
+                return $total;
+            } else {
+                return false;
+            }
+
+        }
+
+        public function calculateTotalOrderPrice($order_id) 
+        {
+
+            if(empty($order_id) || !is_numeric($order_id)) {
+                return false;
+            }
+        
+
+            $query = $this->db->prepare("
+                SELECT price
+                FROM orders_details
+                WHERE order_id = ?
+            ");
+
+            $result = $query->execute([$order_id]);
+
+            if(!$result) {
+                return false;
+            }
+
+            $data = $query->fetchAll(PDO::FETCH_ASSOC);
+
+            $total = 0;
+            foreach($data as $item) {
+                $total += $item["price"];
+            }
+
+            return $total;
+
+        }
+
+        public function updateOrderPrice($order_id, $price)
+        {
+            
+            if(empty($order_id) || !is_numeric($order_id)) {
+                return false;
+            }
+            
+            $query = $this->db->prepare("
+                UPDATE orders
+                SET price = ?
+                WHERE order_id = ?
+            ");
+            
+            $result = $query->execute([$price, $order_id]);
+
+            return $result;
+
+        }
+
+        public function deleteBookFromOrder($data) 
+        {
+
+            $data = $this->sanitizer($data);
+
+            if(
+                !empty($data["order_id"]) &&
+                !empty($data["book_id"]) &&
+                is_numeric($data["order_id"]) &&
+                is_numeric($data["book_id"]) 
+            ) {
+
+
+                $query = $this->db->prepare("
+                    DELETE FROM orders_details
+                    WHERE order_id = ? AND book_id = ?  
+                ");
+
+                $result = $query->execute([$data["order_id"], $data["book_id"]]);
+
+                if($result) {
+                    $new_price = $this->calculateTotalOrderPrice($data["order_id"]);
+                    $this->updateOrderPrice($data["order_id"],$new_price);
+                } 
+
+                return $result;
+            
+
+            } else {
+                return false;
+            }
+
+        }
+
+        public function deleteOrder($order_id) {
+            
+            if(empty($order_id) || !is_numeric($order_id)) {
+                return false;
+            }
+
+            $query = $this->db->prepare("
+                DELETE FROM orders
+                WHERE order_id = ?
+            ");
+
+            $result = $query->execute([$order_id]);
+            return $result;
+        
         }
 
     }

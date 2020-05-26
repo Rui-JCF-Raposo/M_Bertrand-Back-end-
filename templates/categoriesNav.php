@@ -1,9 +1,3 @@
-<?php 
-     
-    $categoryActiveSate = "active-category";
-
-?>
-
 <aside id="categories" class="categories-col-10">
 
     <div class="books-by-lang">
@@ -14,7 +8,7 @@
             <?php foreach($categories as $category) { if((int)$category["active"] === 1) {?>
                 <li>
                     <a 
-                        href="<?=BASE_PATH."books/".$category["category_name"]?>" 
+                        href="<?=BASE_PATH."books/".urlencode($category["category_name"])?>" 
                         class="<?= $url_parts[3] == $category["category_name"] ? "active-category":"" ?>">
                         <?=ucfirst($category["category_name"])?>
                     </a>

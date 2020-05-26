@@ -42,14 +42,9 @@
                     <hr class="menu-hr">
                     <li><a href="<?= BASE_PATH . "admin" ?>">Área Adminstrativa</a></li>
                     <hr class="menu-hr">
-                    <li><a href="<?= BASE_PATH . "home  " ?>">Área Pública</a></li>
+                    <li><a href="<?= BASE_PATH . "home" ?>">Área Pública</a></li>
                     <hr class="menu-hr">
-                    <li><a href="#">Dados Pessoais</a></li>
-                    <hr class="menu-hr">
-
-                    <li><a href="#">Trocas e Devoluçoes</a></li>
-                    <hr class="menu-hr">
-                    <li><a href="#">Cartão Leitor Bertrand</a></li>
+                    <li><a href="<?= BASE_PATH . "users/userData" ?>">Dados Pessoais</a></li>
                 </ul>
             </li>
             <li class="menu-ajuda">

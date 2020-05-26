@@ -17,18 +17,25 @@
                 mb_strlen($data["password"]) >= 6 
             ) {
 
+                if(empty($data["readerCardNumber"])) {
+                    $data["readerCardNumber"] = NULL;
+                } 
+
                 $query = $this->db->prepare("
                     INSERT INTO users
-                    (name, email, password, card_number, active)
-                    VALUES(?, ?, ?, ?, 1)
+                    (name, email, password, card_number, admin, active)
+                    VALUES(?, ?, ?, ?, 0, 1)
                 ");
 
                 $query->execute([
                     $data["userName"],
                     $data["email"],
                     password_hash($data["password"], PASSWORD_DEFAULT),
-                    (int)$data["readerCardNumber"]
+                    $data["readerCardNumber"]
                 ]);
+                
+
+
 
                 $user_id = $this->db->lastInsertId();
 
@@ -61,7 +68,7 @@
         {
             
             $query = $this->db->prepare("
-                SELECT user_id, name, email, card_number
+                SELECT user_id, name, email, card_number, admin
                 FROM users 
                 WHERE user_id = ?
             ");

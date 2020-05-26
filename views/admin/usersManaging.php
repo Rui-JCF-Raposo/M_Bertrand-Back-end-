@@ -13,8 +13,7 @@
         <h1>Users Managing</h1>
 
         <section id="users-info">
-            <?php foreach($users as $user) { 
-            ?>
+            <?php foreach($users as $user) { if((int)$user["admin"] !== 1) { ?>
                 <div class="user-box" data-userId="<?=$user["user_id"]?>">
                     <div>
                         <h2><?=$user["name"]?> <span><?=(int)$user["admin"] === 1 ? "(Administrador)":"" ?></span></h2>
@@ -35,7 +34,7 @@
                         </form>
                     </div>
                 </div>
-            <?php } ?>
+            <?php } } ?>
         </section>
 
     

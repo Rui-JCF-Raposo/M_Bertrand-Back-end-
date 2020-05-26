@@ -55,12 +55,24 @@
             <div class="news">
                 <div id="news-anchor"></div>
                 <h1>NOVIDADES</h1>
-                <div class="new-books"></div>
+                <div class="new-books">
+                    <?php for($i = 0; $i < 4; $i++) { 
+                            $book = $books[$i];
+                            require("templates/book.php");
+                        }
+                    ?>
+                </div>
             </div> <!-- end homepage news -->
             <div class="pre-release">
                 <div id="pre-releases-anchor"></div>
                 <h1>PRÉ-LANÇAMENTOS</h1>
-                <div class="pre-releases"></div>
+                <div class="pre-releases">
+                    <?php for($i = 4; $i < 8; $i++) { 
+                            $book = $books[$i];
+                            require("templates/book.php");
+                        }
+                    ?>
+                </div>
             </div> <!-- end homepage pre-releases -->
             <div class="events">
                 <div id="events-anchor"></div>

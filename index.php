@@ -5,8 +5,9 @@
 
     $url_parts = explode("/", $_SERVER["REQUEST_URI"]);
     define("BASE_PATH", dirname($_SERVER["SCRIPT_NAME"])."/");
+    
     //print_r($url_parts); exit;
-
+    //print_r($_SESSION["user"]); exit;
     // print_r($url_parts);
     
     /*

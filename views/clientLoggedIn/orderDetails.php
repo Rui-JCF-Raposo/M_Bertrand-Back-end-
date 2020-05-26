@@ -1,10 +1,3 @@
-<?php 
-
-
-
-
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,13 +40,13 @@
                                 </div>
                                 <div class="table-book-edit">
                                 <?php if(!empty($order["title"])) { ?>
-                                    <a href="">
+                                    <div class="remove-order-book" data-book_id="<?=$order["book_id"]?>" data-order_id="<?=$order["order_id"]?>">
                                         <span>REMOVER DA ENCOMENDA</span>
-                                    </a>
+                                    </div>
                                 <?php } else { ?>
-                                    <a href="">
+                                    <div>
                                         <span>OBTER INFORMAÇÃO (295 000 000)</span>
-                                    </a>
+                                    </div>
                                 <?php }  ?>
                                 </div>
                             <div>
@@ -61,15 +54,11 @@
                         <td class="od-quantity">
                             <div class="checkOut-controls">
                                 <?php if(!empty($order["title"])) { ?>
-                                    <a href="">
-                                        <img class="minus-quantity" src="../../icons/clientLoggenIn_Icons/shopCart/minus.svg" alt="minus icon">
-                                    </a>
+                                    <img class="less-quantity change-quantity" src="../../icons/clientLoggenIn_Icons/shopCart/minus.svg" alt="minus icon">
                                 <?php } ?>
-                                <span class="book-box-quanitity"><?=$order["quantity"]?></span>
+                                <span class="book-box-quanitity" data-order_id="<?=$order["order_id"]?>" data-book_id="<?=$order["book_id"]?>"><?=$order["quantity"]?></span>
                                 <?php if(!empty($order["title"])) { ?>
-                                    <a href="">
-                                        <img class="more-quantity" src="../../icons/clientLoggenIn_Icons/shopCart/add.svg" alt="plus icon">
-                                    </a>
+                                    <img class="add-quantity change-quantity" src="../../icons/clientLoggenIn_Icons/shopCart/add.svg" alt="plus icon">
                                 <?php } ?>
                             </div>
                         </td>
