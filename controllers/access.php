@@ -43,7 +43,7 @@
             exit;
         
         } else {
-            
+            $_SESSION["total_users"] = count($model->getUsers());
             $_SESSION["user"] = $user;
             header("Location: ".BASE_PATH."dashboard");
         
