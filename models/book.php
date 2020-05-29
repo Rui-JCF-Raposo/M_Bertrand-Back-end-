@@ -235,4 +235,39 @@
 
         }
 
+        public function searchBook($data) 
+        {
+
+            
+            $data = strip_tags(trim($data));
+
+            if(empty($data)) {
+                return false;
+            }
+
+            $query = $this->db->prepare("
+                SELECT *
+                FROM books
+                WHERE 
+                    title LIKE ? OR
+                    author LIKE ? OR
+                    isbn LIKE ?
+            ");
+
+            $query->execute([
+                "%".$data."%",
+                "%".$data."%",
+                "%".$data."%"
+            ]);
+
+            $data = $query->fetchAll(PDO::FETCH_ASSOC);
+
+            return $data;
+
+
+
+
+
+        }
+
     }

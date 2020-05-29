@@ -66,27 +66,39 @@
   .brand span {
     color: var(--main-orange);
   }
-  
+
   .search-col-70 {
+      width: 60%;
+      height: 45px;
+  }
+  
+  .search-col-70 form {
     display: flex;
     align-items: center;
-    flex: 1 60%;
+    height: 100%;
   }
   
   .search-col-70 img {
     width: 35px;
-    background-color: var(--main-gray);
-    height: 49px;
+    height: 100%;
     padding-right: 10px;
   }
   
   .search-col-70 input {
     width: 90%;
-    padding: 15px;
+    height: 100%;
+    padding: 0 15px;
     background-color: var(--main-gray);
     color: #888888;
     font-size: 1.6rem;
     border: none;
+  }
+
+  .search-col-70 button {
+        height: 100%;
+        background-color: var(--main-gray);
+        border: none;
+        cursor: pointer;
   }
   
   .nav-menu-col-20 {
@@ -522,11 +534,7 @@
   
   .new-books,
   .pre-releases,
-  #health-books,
-  #it-books,
-  #psychology-books,
-  #ebooks-div,
-  #text-books {
+  #books-container {
     display: flex;
     flex-flow: row wrap;
     justify-content: flex-start;
@@ -534,11 +542,7 @@
     margin-top: 50px;
   }
   
-  #health-books,
-  #it-books,
-  #psychology-books,
-  #ebooks-div,
-  #text-books {
+  #books-container {
       margin-top: 8%;
       margin-left: -1%;
   }

@@ -31,7 +31,7 @@
                             <div>
                                 <input type="text" name="userEmail" placeholder="email...">
                                 <input type="password" name="password" placeholder="password...">
-                                <p class="invalid-message invalid-data login-invalid">Os dados inseridos estão incorretos</p>
+                                <!-- <p class="invalid-message invalid-data login-invalid">Os dados inseridos estão incorretos</p> -->
                             </div>
                             <div>
                                 <input type="hidden" name="login_send">

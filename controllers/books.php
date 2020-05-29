@@ -9,6 +9,11 @@
     require("models/wishlist.php");
     $model = new Wishlist();
 
+
+    if(isset($_GET["search"])) {
+        $books_found = $model->searchBook($_GET["search"]);
+    }
+
     // Checking if url containes /book/id for get book by id
     if(isset($url_parts[3]) &&  filter_var($url_parts[3], FILTER_VALIDATE_INT)) {
         $book_id = $url_parts[3];
