@@ -31,6 +31,7 @@
 
             if($rowsAffected > 0 && $result_2) {
                 $book_created = true;
+                $_SESSION["total_books"] = count($bookModel->getBooks());
             } else if($rowsAffected === 0) {
                 $book_repetition = true;
             } else if(empty($rowsAffected)) {
@@ -52,6 +53,7 @@
             $result = $bookModel->removeBook($_POST["rm-book"]);
             if($result) {
                 $book_removed = true;
+                $_SESSION["total_books"] = count($bookModel->getBooks());
             } else {
                 $book_removed = false;
             }

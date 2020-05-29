@@ -15,8 +15,12 @@
     </div>
     <!--end brand col -->
     <div class="search-col-70">
-        <input type="text" name="search" placeholder="Pesquisar">
-        <img src="<?= $pathFix ?>icons/search.svg" alt="search icon">
+        <form method="GET" action="<?=BASE_PATH."books/search"?>">
+            <input type="text" name="search" placeholder="Pesquisar">
+            <button type="submit">
+                <img src="<?= $pathFix ?>icons/search.svg" alt="search icon">
+            </button>
+        </form>
     </div> <!-- end search col -->
     <div class="nav-menu-col-20">
         <ul>
