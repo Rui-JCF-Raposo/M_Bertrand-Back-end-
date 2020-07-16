@@ -613,7 +613,7 @@
       text-decoration: none;
   }
   
-  .add-to-shoppcart {
+  .add-to-shoppcart{
     display: none;
     position: absolute;
     bottom: 0;
@@ -628,6 +628,117 @@
     animation-name: bookEffect;
     animation-duration: .2s;
     animation-fill-mode: forwards;
+  }
+
+  .edit-book {
+    position: absolute;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    background-color: #333;
+    padding: 5px;
+    cursor: pointer;
+    transition: background-color 0.1s ease;
+    border-bottom-right-radius: 3px;
+  }
+
+  .edit-book:hover {
+    background-color: #FFF;
+  }
+
+  .edit-book svg {
+    font-size: 30px;
+    color: var(--main-orange);
+  }
+
+  .edit-book-modal {
+    width: 400px !important;
+    height: 300px;
+    position: absolute;
+    top: 200px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0 auto;
+    z-index: 10;
+    width: 60%;
+    background-color: var(--main-gray);
+    padding: 30px;
+    border-radius: 3px;
+    box-shadow: 0px 8px 10px rgba(57, 57, 57, 0.338);
+  }
+
+  .edit-book-modal div {
+    margin-bottom: 10px;
+    font-weight: lighter;
+    font-size: 1.4rem;
+  }
+
+  .edit-book-modal h2 {
+    font-size: 2.1rem;
+    font-weight: normal;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgb(155, 155, 155);
+  }
+
+  .edit-book-field {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .edit-book-modal button {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    background-color: var(--main-orange);
+    border: none;
+    border-radius: 2px;
+    color: var(--main-gray);
+    transition: background-color 0.1s ease;
+  }
+
+  .edit-book-modal button:hover {
+    background-color: green;
+    cursor: pointer;
+  }
+
+  .edit-book-modal .edit-icon {
+    transition: color 0.1s ease;
+  }
+
+  .edit-book-modal .edit-icon:hover {
+    color: rgb(88, 122, 20);
+    cursor: pointer;
+  }
+
+  .edit-book-modal span:first-child {
+    font-weight: 500;
+  }
+
+  .edit-book-modal .close-book-edit {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    font-size: 30px;
+    color: rgb(170, 3, 3);
+    transition: color 0.1s ease;
+  }
+
+  .edit-book-modal .close-book-edit:hover {
+    color:rgb(212, 1, 1);
+    cursor: pointer;
+  }
+
+  .edit-book-pencil {
+    cursor: pointer;
+    background-color: transparent;
+  }
+
+  .edit-book-pencil svg {
+    position: relative;
+    z-index: -1;
   }
   
   .add-to-list { 

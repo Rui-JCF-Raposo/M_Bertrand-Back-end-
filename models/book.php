@@ -264,9 +264,40 @@
 
             return $data;
 
+        }
+
+        public function editBook($data) 
+        {
+
+            $data = $this->sanitizer($data);
+
+            if(
+                !empty($data["title"]) &&
+                !empty($data["author"]) &&
+                !empty($data["price"]) &&
+                is_numeric($data["book_id"]) &&
+                is_numeric($data["price"])
+            ) {
+
+                $query = $this->db->prepare("
+                    UPDATE books
+                    SET title = ?, author = ?, price = ?
+                    WHERE book_id = ?
+                ");
+
+                $result = $query->execute([
+                    $data["title"],
+                    $data["author"],
+                    $data["price"],
+                    $data["book_id"]
+                ]);
+            
+                return $result;
 
 
-
+            } else {
+                return false;
+            }
 
         }
 

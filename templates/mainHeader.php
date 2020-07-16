@@ -70,9 +70,6 @@ if(isset($url_parts[4])) {
         <link rel="stylesheet" href="<?= $pathFix ?>css/admin.css">
         <script src="<?= $pathFix ?>js/admin.js" defer></script>
     <?php } ?>
-    <?php if ($controller === "orders" || $controller === "users") { ?>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
-    <?php } ?>
     <?php if ($controller === "orders") { ?>
         <link rel="stylesheet" href="<?= $pathFix ?>css/checkOut.css">
         <script src="<?=$pathFix?>js/orders.js" defer></script>
@@ -80,6 +77,7 @@ if(isset($url_parts[4])) {
         <script src="<?=$pathFix?>js/userData.js" defer></script>
     <?php } ?>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
     <script src="<?= $pathFix ?>js/shoppingCart.js" defer></script>
     <script src="<?= $pathFix ?>js/clientList.js" defer></script>
     <script src="<?= $pathFix ?>js/app.js" defer></script>

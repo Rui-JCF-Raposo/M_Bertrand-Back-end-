@@ -31,6 +31,14 @@
 
     $category = $url_parts[3];
 
+    if(isset($url_parts[3]) && $url_parts[3] === "edit") {
+        if($_SERVER["REQUEST_METHOD"] === "PUT") {
+            $data = json_decode(file_get_contents("php://input"), true);
+            $result = $model->editBook($data);
+            echo $result; exit;
+        }
+    }
+
     require("views/categories/category.php");
 
 

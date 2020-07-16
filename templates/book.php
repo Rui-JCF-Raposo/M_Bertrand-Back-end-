@@ -18,6 +18,9 @@
             <img class="book-image" src="<?=$coverPrefix.$book["cover"]?>" alt="book cover">
         <?php if(isset($_SESSION["user"])) { ?>
             <div class="add-to-shoppcart">CESTO</div>
+            <?php if((int)$_SESSION["user"]["admin"] === 1) { ?>
+                <div class="edit-book" data-book_id="<?= $book["book_id"]?>"><i class="fas fa-pencil-alt"></i></div>
+            <?php } ?>
             <div class="add-to-list">LISTA</div>
         <?php } else { ?>
             <a href="<?=BASE_PATH."login"?>" class="add-to-shoppcart">CESTO</a>

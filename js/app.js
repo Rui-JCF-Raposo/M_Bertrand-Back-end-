@@ -13,55 +13,6 @@ let clientLoggedIn = false;
 const googleBooksApiKey = "AIzaSyDI1KEH8Z6g1FhtCn_0KULtZG_oaLUS3M4";
 
 /*---------------------------------------------------------------*/
-/*--------FUNCTION TO GET BOOKS FROM GOOGLE BOOKS API------------*/
-/*---------------------------------------------------------------*/
-// function getBooks(url, quantity, htmlOutput) {
-//   fetch(url)
-//     .then(response => response.json())
-//     .then(function (data) {
-//       //Loop to import books to homepage "Novidades" section
-//       let bookOutput = "";
-//       console.log("data -> ", data)
-//       for (var i = 0; i < quantity; i++) {
-//         bookOutput += `
-//           <div class="book-box" data-id="${data.items[i].id}">
-//             <div class="book-img-wrapper">
-//               <img class="book-image" src="${data.items[i].volumeInfo.imageLinks.thumbnail}">
-//               <div class="add-to-shoppcart">CESTO</div>
-//               <div class="add-to-list">LISTA</div>
-//               <div class="book-price">${(Math.random() * 30).toFixed(2) + " €"}</div>
-//             </div>
-//             <div class="product-info">
-//               <h2 class="book-title">${data.items[i].volumeInfo.title}</h2>
-//               <p class="book-authors">escrito por: <strong>${data.items[i].volumeInfo.authors[0]}</strong></p>
-//             </div>
-//           </div>
-//         `;
-//         let book = { 
-//           title: data.items[i].volumeInfo.title, 
-//           authors: data.items[i].volumeInfo.authors, 
-//           cover: data.items[i].volumeInfo.imageLinks.thumbnail, 
-//           id: data.items[i].id,
-//         }
-
-//         if(!checkRepetitionsInDB(book)) {
-//           booksDataBase.push(book); 
-//         }
-//       }
-//       htmlOutput.innerHTML = bookOutput;
-
-//       sessionStorage.setItem("books", JSON.stringify(booksDataBase));
-//     });
-// }
-
-// function checkRepetitionsInDB (book) {
-//   for(let i = 0; i < booksDataBase.length; i++) {
-//     if(booksDataBase[i].id == book.id) {
-//       return true;
-//     }
-//   }
-// }
-/*---------------------------------------------------------------*/
 /*---------------------HOMEPAGE SLIDER LOGIC---------------------*/
 /*---------------------------------------------------------------*/
 const sliderContainer = document.querySelector(".slider-container");
@@ -105,40 +56,6 @@ const englishBooksDiv = document.getElementById("english-books");
 const frenchBooksDiv = document.getElementById("french-books");
 const ebooksDiv = document.getElementById("ebooks-div");
 const textBooksDiv = document.getElementById("text-books");
-
-// if(!newBooksDiv || !preReleasesDiv) {
-//   clientLoggedIn = true;
-// } else {
-//   clientLoggedIn = false;
-// }
-
-// if(!clientLoggedIn) {
-//   getBooks("https://www.googleapis.com/books/v1/volumes?q=subject:fiction&key=" + googleBooksApiKey, 8, newBooksDiv);
-// }
-
-// if(spanishBooksDiv !=  null) {
-//   getBooks("https://www.googleapis.com/books/v1/volumes?q=subject:arte&key=" + googleBooksApiKey, 8, spanishBooksDiv);
-// }
-
-// if(englishBooksDiv != null) {
-//   getBooks("https://www.googleapis.com/books/v1/volumes?q=subject:literature&key=" + googleBooksApiKey, 8, englishBooksDiv);
-// }
-
-// if(frenchBooksDiv != null) {
-//   getBooks("https://www.googleapis.com/books/v1/volumes?q=subject:france&key=" + googleBooksApiKey, 8, frenchBooksDiv);
-// }
-
-// if(ebooksDiv != null) {
-//   getBooks("https://www.googleapis.com/books/v1/volumes?q=subject:terror&key=" + googleBooksApiKey, 8, ebooksDiv);
-// }
-
-// if(textBooksDiv !=  null) {
-//   getBooks("https://www.googleapis.com/books/v1/volumes?q=subject:textbooks&key=" + googleBooksApiKey, 8, textBooksDiv);
-// }
-
-
-
-//
 
 /*---------------------------------------------------------------*/
 /*---------------RESPONSIVE CATEGORIES SECTION-------------------*/
@@ -239,16 +156,91 @@ createNewListBtns.forEach(function (createBtn) {
 });
 
 
+/*------------------------------------------------------------*/
+/*------------------------EDIT BOOK --------------------------*/
+/*------------------------------------------------------------*/
+const editBooks = document.querySelectorAll(".edit-book");
+const closeEditBook = document.querySelector(".close-book-edit");
+const editBookModal = document.querySelector(".edit-book-modal");
+const editBookPencils = document.querySelectorAll(".edit-book-pencil");
+const saveEdition = document.querySelector(".save-edit");
 
-// function makeBooksStorage() {
-//   getBooks("https://www.googleapis.com/books/v1/volumes?q=subject:fiction&key=" + googleBooksApiKey, 8, "");
-//   getBooks("https://www.googleapis.com/books/v1/volumes?q=subject:arte&key=" + googleBooksApiKey, 8, "");
-//   getBooks("https://www.googleapis.com/books/v1/volumes?q=subject:literature&key=" + googleBooksApiKey, 8, "");
-//   getBooks("https://www.googleapis.com/books/v1/volumes?q=subject:france&key=" + googleBooksApiKey, 8, "");
-//   getBooks("https://www.googleapis.com/books/v1/volumes?q=subject:terror&key=" + googleBooksApiKey, 8, "");
-//   getBooks("https://www.googleapis.com/books/v1/volumes?q=subject:textbooks&key=" + googleBooksApiKey, 8, "");
-// }
-// makeBooksStorage();
+editBooks.forEach((editBook) => {
+    editBook.addEventListener("click", () => {
+        console.log("Edit book Clicked!");
+        const bookId = editBook.dataset.book_id;
+        fetch("http://localhost/M_Bertrand-Back-end-/books/"+bookId)
+            .then(res => res.json())
+            .then(data => {
+                const title =  document.querySelector(".edit-book-modal .title");
+                const author =  document.querySelector(".edit-book-modal .author");
+                const price =  document.querySelector(".edit-book-modal .price");
+
+                title.textContent = data.title;
+                author.textContent = data.author;
+                price.textContent = data.price;
+                editBookModal.dataset.book_id = bookId;
+
+            })
+            .then(() => {
+                editBookModal.classList.remove("hide");
+            });
+    });
+});
+
+closeEditBook.addEventListener("click", () => {
+    console.log("works");
+    editBookModal.classList.add("hide");
+});
+
+editBookPencils.forEach((edit) => {
+    edit.addEventListener("click", (e) => {
+        let fieldData = e.target.previousElementSibling.children[1].textContent;
+        let fieldName = e.target.previousElementSibling.children[1];
+        const bookId = editBookModal.dataset.book_id;
+        let inputName;
+        
+        switch(fieldName.className) {
+            case "title": inputName = "título"; break;
+            case "author": inputName = "autor"; break;
+            case "price": inputName = "preço"; break;
+        }
+
+        const newValue = prompt("Insira um novo " + inputName);
+        
+        fieldName.textContent = newValue;
+
+    });
+});
+
+
+saveEdition.addEventListener("click", () => {
+
+    const title = document.querySelector(".edit-book-modal .title").textContent;
+    const author = document.querySelector(".edit-book-modal .author").textContent;
+    const price = document.querySelector(".edit-book-modal .price").textContent;
+    const bookId = editBookModal.dataset.book_id;
+
+    const data = {
+        book_id: bookId,
+        title,
+        author,
+        price
+    }
+
+    fetch("/M_Bertrand-Back-end-/books/edit", {
+        headers: {
+            "Content-Type": "application/json"
+        },
+        method: "PUT",
+        body: JSON.stringify(data)
+    })
+        .then(() => {
+            editBookModal.classList.add("hide")
+            window.location.reload();
+            return false;
+        });
+});
 
   //Fazer um pedido de acesso aos livros Google Books API
   // Procurar por nome de livro -> https://www.googleapis.com/books/v1/volumes?q=search+terms
