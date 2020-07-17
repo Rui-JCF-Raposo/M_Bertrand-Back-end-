@@ -49,9 +49,11 @@
                             </td>
                             <td>
                                 <?php if (strtotime($order["delivered_date"]) < 0 ) { ?>
-                                    <button class="order-done" data-order_id="<?=$order["order_id"]?>">
-                                        <i class="fas fa-check order-done"></i>
-                                    </button>
+                                    <form method="POST" action="<?=BASE_PATH."orders/".$order["order_id"]."/finalize"?>">
+                                        <button type="submit" class="order-done" data-order_id="<?=$order["order_id"]?>">
+                                            <i class="fas fa-check order-done"></i>
+                                        </button>
+                                    </form>
                                 <?php } else { ?>
                                     Fechada
                                 <?php } ?>
@@ -69,7 +71,7 @@
                         </button>
                     </form>
                 </div>
-                <div><span class="current-page"><?=isset($pageOffset) ? $pageOffset:1?></span><span>/</span><span class="total-pages"><?=$totalOrders?></span></div>
+                <div><span class="current-page"><?=$pageNumber?></span><span>/</span><span class="total-pages"><?=$totalOrders?></span></div>
                 <div>
                     <form method="POST" action="<?= BASE_PATH."admin/ordersManaging"?>" class="page-forward">
                         <input type="hidden" name="pageUp">

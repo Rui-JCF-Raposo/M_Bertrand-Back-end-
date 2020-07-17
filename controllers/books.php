@@ -22,6 +22,7 @@
     } 
     
     $books = $model->getBooks();
+    $_SESSION["total_books"] = count($books);
     $categories = $model->getCategories();
 
     

@@ -100,7 +100,7 @@
             $order_id = $url_parts[3];
             $result = $orderModel->finalizeOrder($order_id);
             if($result) {
-                header("HTTP/1.1 202 Accepted");
+                Header("Location: ".BASE_PATH."admin/ordersManaging");
                 echo "Order Finalized";
                 exit;
             } else {

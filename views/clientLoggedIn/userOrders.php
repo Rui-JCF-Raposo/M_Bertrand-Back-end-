@@ -35,7 +35,7 @@
                             <td><?=$order["quantity"]?></td>
                             <td class="payment"><?=(int)$order["paid"] === 0 ? "Pendente":"Pago" ?></td>
                             <td class="require-date"><?=$order["order_date"]?></td>
-                            <td><?=strtotime($order["delivered_date"]) < 0 ? "Por entregar":"Entregue" ?></td>
+                            <td><?=strtotime($order["delivered_date"]) < 0 ? "Por entregar":$order["delivered_date"] ?></td>
                             <td><?=$order["price"]?>€</td>
                             <td>
                                 <a href="<?=BASE_PATH."orders/details/".$order["order_id"]?>">

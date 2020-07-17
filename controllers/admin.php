@@ -5,6 +5,7 @@
         die("403 Forbidden");
     }
 
+
     if(isset($url_parts[3])) {
 
         if($url_parts[3] === "booksManaging") {
@@ -194,31 +195,40 @@
             /*  Logic to apply orders managing pagination ------------- */
 
             $totalOrders = $ordersModel->countAllOrders();
-            $totalOrders = ceil($totalOrders / 7);
+            $totalOrders = ceil($totalOrders / 5);
             
-
-            if(!isset($pageOffset) && isset($_SESSION["ordersManaging_page"])) {
-                $pageOffset = $_SESSION["ordersManaging_page"];
+            
+            if(!isset($_SESSION["page_number"])) {
+                $pageOffset = 1;
+                $pageNumber = 1;
+                $_SESSION["page_number"] = $pageNumber;
+                $_SESSION["page_offset"] = $pageOffset;
+            } else {
+                $pageOffset =  $_SESSION["page_offset"];
+                $pageNumber =  $_SESSION["page_number"];
             }
 
             if(isset($_POST["pageUp"])) { 
-                if(isset($_SESSION["ordersManaging_page"])) {
-                    $pageOffset = $_SESSION["ordersManaging_page"];
-                    if($pageOffset < $totalOrders) {
-                        $pageOffset++;
-                        $_SESSION["ordersManaging_page"] = $pageOffset;
+                if(isset($pageNumber)) {
+                    if($pageNumber < $totalOrders) {
+                        $pageOffset = $pageNumber * 5;
+                        $pageNumber++;
+                        $_SESSION["page_number"] = $pageNumber;
+                        $_SESSION["page_offset"] = $pageOffset;
                     }
                 }
             } else if(isset($_POST["pageDown"])) {
-                if(isset($_SESSION["ordersManaging_page"])) {
-                    $pageOffset = $_SESSION["ordersManaging_page"];
-                    if($pageOffset > 1) {
-                        $pageOffset--;
-                        $_SESSION["ordersManaging_page"] = $pageOffset;
+                if(isset($pageNumber)) {
+                    if($pageNumber > 1) {
+                        $pageOffset -= 5;
+                        $pageNumber--;
+                        $_SESSION["page_number"] = $pageNumber;
+                        $_SESSION["page_offset"] = $pageOffset;
                     }
                 }
             }
             $orders = $ordersModel->getAllOrders($pageOffset);
+            //echo count($orders); exit;
             require("views/admin/ordersManaging.php");
 
             /*  -------------------------------------------------------- */

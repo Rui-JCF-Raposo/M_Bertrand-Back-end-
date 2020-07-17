@@ -14,9 +14,9 @@
                     o.order_id, o.paid, o.order_date, o.delivered_date, o.price,
                     od.quantity, COUNT(od.quantity) AS total_quantity
                 FROM ORDERS AS o
-                INNER JOIN orders_details AS od USING(order_id)
+                LEFT JOIN orders_details AS od USING(order_id)
                 GROUP BY order_id
-                LIMIT 7
+                LIMIT 5
                 OFFSET ?
             ");
             $query->execute([$pageOffset]);
@@ -28,8 +28,8 @@
         public function countAllOrders() 
         {
             $query = $this->db->prepare("
-                SELECT book_id
-                FROM orders_details
+                SELECT order_id
+                FROM orders
             ");
 
             $query->execute();
@@ -125,13 +125,13 @@
             $query = $this->db->prepare("
                 SELECT 
                     o.order_id, o.paid, o.order_date, o.delivered_date, o.price, o.active, od.book_id,
-                    SUM(od.quantity) AS quantity
+                    SUM(od.quantity) AS quantity, o.active
                 FROM 
                     orders AS o
                 LEFT JOIN 
                     orders_details AS od USING(order_id)
                 WHERE 
-                    user_id = ? AND o.active = 1
+                    user_id = ?
                 GROUP BY o.order_id
             ");
 

@@ -44,14 +44,14 @@ if(formsArray) {
 
 }
 
+
 const ordersDone = document.querySelectorAll(".order-done");
 
 ordersDone.forEach((orderDone) => {
     orderDone.addEventListener("click", (e) => {
         const affirmative = confirm("Tem a certeza que pertende encerrar a encomenda?");
-        if(!affirmative) {return false};
-        const order_id = e.target.dataset.order_id;
-        fetch("/M_Bertrand-Back-end-/orders/"+order_id+"/finalize")
+        if(!affirmative) {e.preventDefault()};
     });
 });
+
 
