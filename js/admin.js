@@ -12,25 +12,46 @@ const formsArray = [
     removeCategoryForm
 ];
 
-formsArray.forEach((form) => {
+if(formsArray) {
+
+    formsArray.forEach((form) => {
 
 
-    form.addEventListener("submit", (e) => {
-
-        let $resourceName;
-
-        switch(form.id) {
-            case "add-book-form": resourceName = "adicionar o Livro"; break; 
-            case "remove-book-form": resourceName = "remover o Livro"; break; 
-            case "add-category-form": resourceName = "adicionar a Categoria"; break; 
-            case "remove-category-form": resourceName = "remover a Categoria"; break; 
+        if(!form) {
+            return;
         }
-
-        const affirmative = confirm("Têm a certeza que pretende " + resourceName);
         
-        if(!affirmative) {
-            e.preventDefault();
-        }
+        form.addEventListener("submit", (e) => {
 
+            let $resourceName;
+
+            switch(form.id) {
+                case "add-book-form": resourceName = "adicionar o Livro"; break; 
+                case "remove-book-form": resourceName = "remover o Livro"; break; 
+                case "add-category-form": resourceName = "adicionar a Categoria"; break; 
+                case "remove-category-form": resourceName = "remover a Categoria"; break; 
+            }
+
+            const affirmative = confirm("Têm a certeza que pretende " + resourceName);
+            
+            if(!affirmative) {
+                e.preventDefault();
+            }
+
+        });
+    });
+
+
+}
+
+const ordersDone = document.querySelectorAll(".order-done");
+
+ordersDone.forEach((orderDone) => {
+    orderDone.addEventListener("click", (e) => {
+        const affirmative = confirm("Tem a certeza que pertende encerrar a encomenda?");
+        if(!affirmative) {return false};
+        const order_id = e.target.dataset.order_id;
+        fetch("/M_Bertrand-Back-end-/orders/"+order_id+"/finalize")
     });
 });
+

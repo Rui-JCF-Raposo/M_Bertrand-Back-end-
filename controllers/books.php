@@ -40,6 +40,10 @@
     }
 
     require("views/categories/category.php");
+    
+    if(isset($_SESSION["user"]) && (int)$_SESSION["user"]["admin"] == 1) {
+        require("./templates/editBookModal.php"); 
+    }
 
 
 

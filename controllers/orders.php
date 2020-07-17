@@ -90,5 +90,24 @@
         exit;
 
     }
+
+    if(isset($url_parts[2]) && isset($url_parts[3]) && isset($url_parts[4])) {
+        if(
+            $url_parts[2] === "orders" &&
+            is_numeric($url_parts[3]) &&
+            $url_parts[4] === "finalize"
+        ) {
+            $order_id = $url_parts[3];
+            $result = $orderModel->finalizeOrder($order_id);
+            if($result) {
+                header("HTTP/1.1 202 Accepted");
+                echo "Order Finalized";
+                exit;
+            } else {
+                header("HTTP/1.1 400 Bad Request");
+                echo "An error ocurred when attempt to finalize this order";
+            }
+        }
+    }
         
     require("views/clientLoggedIn/userOrders.php");

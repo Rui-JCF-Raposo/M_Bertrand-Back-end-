@@ -70,7 +70,7 @@ if(isset($url_parts[4])) {
         <link rel="stylesheet" href="<?= $pathFix ?>css/admin.css">
         <script src="<?= $pathFix ?>js/admin.js" defer></script>
     <?php } ?>
-    <?php if ($controller === "orders") { ?>
+    <?php if ($controller === "orders" || $controller === "admin") { ?>
         <link rel="stylesheet" href="<?= $pathFix ?>css/checkOut.css">
         <script src="<?=$pathFix?>js/orders.js" defer></script>
     <?php } else if ($controller === "users") { ?>

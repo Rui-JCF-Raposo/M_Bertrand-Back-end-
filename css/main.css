@@ -1087,7 +1087,8 @@
     }
 
     .see-details svg,
-    .cancel-order svg {
+    .cancel-order svg,
+    .order-done svg{
         position: relative;
         font-size: 1.4rem;
         z-index: -1;
@@ -1101,12 +1102,23 @@
         z-index: 1;
     }
 
+    .order-done {
+      position: relative;
+      cursor: pointer;
+      padding: 2px;
+      z-index: 1;
+    }
+
     .see-details {
         color: rgb(38, 72, 99);
     }
 
     .cancel-order {
         color: rgb(142, 1, 1);
+    }
+
+    .order-done {
+      color: green;
     }
 
     #orders-main h2,
@@ -1151,6 +1163,27 @@
         background-color: var(--main-orange);
         color: var(--main-gray);
         cursor: pointer;
+    }
+
+    .orders-nav {
+      display: block;
+      margin: -25px auto;
+      width: 150px;
+      display: flex;
+      justify-content: space-evenly;
+      font-size: 1rem;
+    }
+
+    .orders-nav svg {
+      font-size: 1.7rem;
+    }
+
+    .orders-nav svg:hover {
+      color: steelblue;
+    }
+
+    .orders-nav span {
+      font-size: 1.7rem;
     }
 
     

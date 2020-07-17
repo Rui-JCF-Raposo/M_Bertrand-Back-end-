@@ -4,6 +4,41 @@
     class Order extends Book {
 
 
+        public function getAllOrders($pageOffset) 
+        {
+
+            $this->db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+
+            $query = $this->db->prepare("
+                SELECT 
+                    o.order_id, o.paid, o.order_date, o.delivered_date, o.price,
+                    od.quantity, COUNT(od.quantity) AS total_quantity
+                FROM ORDERS AS o
+                INNER JOIN orders_details AS od USING(order_id)
+                GROUP BY order_id
+                LIMIT 7
+                OFFSET ?
+            ");
+            $query->execute([$pageOffset]);
+            $data = $query->fetchAll(PDO::FETCH_ASSOC);
+            return $data;
+
+        }
+
+        public function countAllOrders() 
+        {
+            $query = $this->db->prepare("
+                SELECT book_id
+                FROM orders_details
+            ");
+
+            $query->execute();
+
+            return $query->rowCount();
+
+        }
+        
+
         public function createOrder($user_id, $books) 
         {
 
@@ -135,6 +170,35 @@
 
             return $data;
 
+        }
+
+        public function getOrderOnlyById($order_id) 
+        {
+            
+            if(empty($order_id) || !is_numeric($order_id)) {
+                return false;
+            }
+
+            $query = $this->db->prepare("
+                SELECT 
+                    o.order_id, o.user_id, od.price, o.active, od.book_id, od.quantity, b.title, b.cover
+                FROM 
+                    orders AS o
+                INNER JOIN 
+                    orders_details AS od USING(order_id)
+                LEFT JOIN
+                    books as b USING(book_id)
+                WHERE 
+                    o.order_id = ?
+            ");
+
+            $query->execute([
+                $order_id
+            ]);
+
+            $data = $query->fetchAll(PDO::FETCH_ASSOC);
+
+            return $data;
         }
         
         public function cancelOrder($order_id)
@@ -316,6 +380,25 @@
             $result = $query->execute([$order_id]);
             return $result;
         
+        }
+
+        public function finalizeOrder($order_id) 
+        {
+
+            if(empty($order_id) || !is_numeric($order_id) || $order_id === 0) {
+                return false;
+            }
+            
+            $query = $this->db->prepare("
+                UPDATE orders
+                SET paid = 1, delivered_date = NOW(), active = 0
+                WHERE order_id = ?
+            ");
+
+            $result = $query->execute([$order_id]);
+
+            return $result;
+
         }
 
     }

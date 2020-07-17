@@ -13,6 +13,9 @@
         } else if($url_parts[3] === "usersManaging") {
             require("models/user.php");
             $userModel = new User();
+        } else if($url_parts[3] === "ordersManaging") {
+            require("models/order.php");
+            $ordersModel = new Order();
         }
     }
 
@@ -179,13 +182,53 @@
         
         }
 
+
         if($section === "ordersManaging") {
+            if(isset($url_parts[4]) && is_numeric($url_parts[4])) {
+                $order_id = $url_parts[4];
+                $order_details = $ordersModel->getOrderOnlyById($order_id);
+                require("views/admin/adminOrdersDetails.php");
+                exit;
+            }
+
+            /*  Logic to apply orders managing pagination ------------- */
+
+            $totalOrders = $ordersModel->countAllOrders();
+            $totalOrders = ceil($totalOrders / 7);
+            
+
+            if(!isset($pageOffset) && isset($_SESSION["ordersManaging_page"])) {
+                $pageOffset = $_SESSION["ordersManaging_page"];
+            }
+
+            if(isset($_POST["pageUp"])) { 
+                if(isset($_SESSION["ordersManaging_page"])) {
+                    $pageOffset = $_SESSION["ordersManaging_page"];
+                    if($pageOffset < $totalOrders) {
+                        $pageOffset++;
+                        $_SESSION["ordersManaging_page"] = $pageOffset;
+                    }
+                }
+            } else if(isset($_POST["pageDown"])) {
+                if(isset($_SESSION["ordersManaging_page"])) {
+                    $pageOffset = $_SESSION["ordersManaging_page"];
+                    if($pageOffset > 1) {
+                        $pageOffset--;
+                        $_SESSION["ordersManaging_page"] = $pageOffset;
+                    }
+                }
+            }
+            $orders = $ordersModel->getAllOrders($pageOffset);
             require("views/admin/ordersManaging.php");
+
+            /*  -------------------------------------------------------- */
         }
         
     } else {
         require("views/admin/adminDashboard.php");
     }
+
+    
 
 
 

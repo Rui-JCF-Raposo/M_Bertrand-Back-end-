@@ -27,7 +27,6 @@
     }
 
     require("./controllers/".$controller.".php");
-    require("./templates/editBookModal.php"); exit;
 
 
   

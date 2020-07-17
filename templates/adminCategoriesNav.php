@@ -1,19 +1,20 @@
 <?php 
 
-    if(isset($url_parts[3])) {
-        
-        $booksActiveSate = "";
-        $usersActiveSate = "";
-        $ordersActiveSate = "";
 
+if(isset($url_parts[3])) {
     
-        $category = $url_parts[3];
+    $booksActiveSate = "";
+    $usersActiveSate = "";
+    $ordersActiveSate = "";
     
-        switch($category) {
-            case "booksManaging": $booksActiveSate = "active-category"; break;
-            case "usersManaging": $usersActiveSate = "active-category"; break;
-            case "ordersManaging": $ordersActiveSate = "active-category"; break;
-        }
+    
+    $category = $url_parts[3];
+    
+    switch($category) {
+        case "booksManaging": $booksActiveSate = "active-category"; break;
+        case "usersManaging": $usersActiveSate = "active-category"; break;
+        case "ordersManaging": $ordersActiveSate = "active-category"; break;
+    }
 
     }
 
@@ -29,6 +30,8 @@
             <li><a href="<?=BASE_PATH."admin/booksManaging"?>" class="<?=$booksActiveSate?>">Livros</a></li>
             <hr class="categories-hr">
             <li><a href="<?=BASE_PATH."admin/usersManaging"?>" class="<?=$usersActiveSate?>">Utilizadores</a></li>
+            <hr class="categories-hr">
+            <li><a href="<?=BASE_PATH."admin/ordersManaging"?>" class="<?=$ordersActiveSate?>">Encomendas</a></li>
         </ul>
     </div>
 

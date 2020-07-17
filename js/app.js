@@ -159,88 +159,93 @@ createNewListBtns.forEach(function (createBtn) {
 /*------------------------------------------------------------*/
 /*------------------------EDIT BOOK --------------------------*/
 /*------------------------------------------------------------*/
+const editBookModal = document.querySelector(".edit-book-modal");
 const editBooks = document.querySelectorAll(".edit-book");
 const closeEditBook = document.querySelector(".close-book-edit");
-const editBookModal = document.querySelector(".edit-book-modal");
 const editBookPencils = document.querySelectorAll(".edit-book-pencil");
 const saveEdition = document.querySelector(".save-edit");
 
-editBooks.forEach((editBook) => {
-    editBook.addEventListener("click", () => {
-        console.log("Edit book Clicked!");
-        const bookId = editBook.dataset.book_id;
-        fetch("http://localhost/M_Bertrand-Back-end-/books/"+bookId)
-            .then(res => res.json())
-            .then(data => {
-                const title =  document.querySelector(".edit-book-modal .title");
-                const author =  document.querySelector(".edit-book-modal .author");
-                const price =  document.querySelector(".edit-book-modal .price");
+if(editBookModal) {
+    editBooks.forEach((editBook) => {
+        editBook.addEventListener("click", () => {
+            console.log("Edit book Clicked!");
+            const bookId = editBook.dataset.book_id;
+            fetch("http://localhost/M_Bertrand-Back-end-/books/"+bookId)
+                .then(res => res.json())
+                .then(data => {
+                    const title =  document.querySelector(".edit-book-modal .title");
+                    const author =  document.querySelector(".edit-book-modal .author");
+                    const price =  document.querySelector(".edit-book-modal .price");
 
-                title.textContent = data.title;
-                author.textContent = data.author;
-                price.textContent = data.price;
-                editBookModal.dataset.book_id = bookId;
+                    title.textContent = data.title;
+                    author.textContent = data.author;
+                    price.textContent = data.price;
+                    editBookModal.dataset.book_id = bookId;
 
-            })
-            .then(() => {
-                editBookModal.classList.remove("hide");
-            });
+                })
+                .then(() => {
+                    editBookModal.classList.remove("hide");
+                });
+        });
     });
-});
 
-closeEditBook.addEventListener("click", () => {
-    console.log("works");
-    editBookModal.classList.add("hide");
-});
+    closeEditBook.addEventListener("click", () => {
+        console.log("works");
+        editBookModal.classList.add("hide");
+    });
 
-editBookPencils.forEach((edit) => {
-    edit.addEventListener("click", (e) => {
-        let fieldData = e.target.previousElementSibling.children[1].textContent;
-        let fieldName = e.target.previousElementSibling.children[1];
+    editBookPencils.forEach((edit) => {
+        edit.addEventListener("click", (e) => {
+            let fieldData = e.target.previousElementSibling.children[1].textContent;
+            let fieldName = e.target.previousElementSibling.children[1];
+            const bookId = editBookModal.dataset.book_id;
+            let inputName;
+            
+            switch(fieldName.className) {
+                case "title": inputName = "título"; break;
+                case "author": inputName = "autor"; break;
+                case "price": inputName = "preço"; break;
+            }
+
+            const newValue = prompt("Insira um novo " + inputName);
+            
+            fieldName.textContent = newValue;
+
+        });
+    });
+
+
+    saveEdition.addEventListener("click", () => {
+
+        const title = document.querySelector(".edit-book-modal .title").textContent;
+        const author = document.querySelector(".edit-book-modal .author").textContent;
+        const price = document.querySelector(".edit-book-modal .price").textContent;
         const bookId = editBookModal.dataset.book_id;
-        let inputName;
-        
-        switch(fieldName.className) {
-            case "title": inputName = "título"; break;
-            case "author": inputName = "autor"; break;
-            case "price": inputName = "preço"; break;
+
+        const data = {
+            book_id: bookId,
+            title,
+            author,
+            price
         }
 
-        const newValue = prompt("Insira um novo " + inputName);
-        
-        fieldName.textContent = newValue;
-
+        fetch("/M_Bertrand-Back-end-/books/edit", {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            method: "PUT",
+            body: JSON.stringify(data)
+        })
+            .then(() => {
+                editBookModal.classList.add("hide")
+                window.location.reload();
+                return false;
+            });
     });
-});
 
 
-saveEdition.addEventListener("click", () => {
 
-    const title = document.querySelector(".edit-book-modal .title").textContent;
-    const author = document.querySelector(".edit-book-modal .author").textContent;
-    const price = document.querySelector(".edit-book-modal .price").textContent;
-    const bookId = editBookModal.dataset.book_id;
-
-    const data = {
-        book_id: bookId,
-        title,
-        author,
-        price
-    }
-
-    fetch("/M_Bertrand-Back-end-/books/edit", {
-        headers: {
-            "Content-Type": "application/json"
-        },
-        method: "PUT",
-        body: JSON.stringify(data)
-    })
-        .then(() => {
-            editBookModal.classList.add("hide")
-            window.location.reload();
-            return false;
-        });
-});
+}
 
   //Fazer um pedido de acesso aos livros Google Books API
   // Procurar por nome de livro -> https://www.googleapis.com/books/v1/volumes?q=search+terms
