@@ -34,10 +34,63 @@
 
             $query->execute();
 
-            return $query->rowCount();
+            $data = $query->rowCount();
+            return $data;
 
-        }
+        } 
         
+        public function countDeliveredOrders() 
+        {
+            $query = $this->db->prepare("
+                SELECT order_id, paid 
+                FROM orders
+                WHERE paid = 1
+            ");
+
+            $query->execute();
+
+            $data = $query->rowCount();
+            return $data;
+        }
+
+        public function countPendingOrders() 
+        {
+            $query = $this->db->prepare("
+                SELECT order_id, paid 
+                FROM orders
+                WHERE paid = 0 AND active = 1
+            ");
+
+            $query->execute();
+
+            $data = $query->rowCount();
+            return $data;
+        }
+
+        public function countTotalProfits() 
+        {
+            $query = $this->db->prepare("
+                SELECT SUM(price) AS total_profits
+                FROM orders
+            ");
+
+            $query->execute();
+            $data = $query->fetch(PDO::FETCH_ASSOC);
+            return $data["total_profits"];
+
+        } 
+
+        public function countBooksSold() 
+        {
+            $query = $this->db->prepare("
+                SELECT SUM(quantity) AS books_sold
+                FROM orders_details
+            ");
+
+            $query->execute();
+            $data = $query->fetch(PDO::FETCH_ASSOC);
+            return $data["books_sold"];
+        }
 
         public function createOrder($user_id, $books) 
         {

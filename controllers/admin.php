@@ -228,13 +228,21 @@
                 }
             }
             $orders = $ordersModel->getAllOrders($pageOffset);
-            //echo count($orders); exit;
             require("views/admin/ordersManaging.php");
 
             /*  -------------------------------------------------------- */
         }
         
     } else {
+        require("models/order.php");
+        $ordersModel = new Order();
+
+        $total_orders = $ordersModel->countAllOrders();
+        $orders_delivered = $ordersModel->countDeliveredOrders();
+        $pending_orders = $ordersModel->countPendingOrders();
+        $total_profits = $ordersModel->countTotalProfits();
+        $books_sold = $ordersModel->countBooksSold();
+
         require("views/admin/adminDashboard.php");
     }
 
